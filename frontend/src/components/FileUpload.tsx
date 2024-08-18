@@ -3,6 +3,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../firebaseConfig';
 import {v4} from 'uuid';
+import { useAuth } from '../hooks/useAuth';
+
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -11,12 +13,16 @@ const FileUpload = () => {
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const user = useAuth();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
     }
   };
+
+
+
 
   const handleUpload = () => {
     if (!file) return;
@@ -45,12 +51,17 @@ const FileUpload = () => {
 
   return (
     <div>
-      <input type="file" accept=".pdf" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <h2>Upload a PDF</h2>
+      <input type="file" accept=".pdf" onChange={handleChange} disabled={!user} />
+      <button onClick={handleUpload} disabled={!user}>
+        Upload
+      </button>
       {progress > 0 && <progress value={progress} max="100" />}
-      {url && <img src={url} alt="Uploaded" />}
+      {!user && <p>You must be logged in to upload a file.</p>}
     </div>
   );
 };
+
+
 
 export default FileUpload;

@@ -7,6 +7,7 @@ import firebaseConfig from '../firebaseConfig';
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css'; // Optional, for global styles
+import './styles/global.css' // Optional, for global styles
 import App from './App'; // Import your main App component
 
 // Find the root element in the HTML file
