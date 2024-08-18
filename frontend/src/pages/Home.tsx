@@ -5,6 +5,8 @@ const Home: React.FC = () => {
         <div>
             <h1>Welcome to the Home Page</h1>
             <Link to="/signup">Sign Up</Link>
+
+            <Link to="/upload">Upload</Link>
             
         </div>
     );
