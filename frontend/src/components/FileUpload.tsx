@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
-import firebaseConfig from '../firebaseConfig'; 
+import firebaseConfig from '../firebaseConfig';
+import {v4} from 'uuid';
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -20,7 +21,7 @@ const FileUpload = () => {
   const handleUpload = () => {
     if (!file) return;
 
-    const storageRef = ref(storage, `pdfs/${file.name}`);
+    const storageRef = ref(storage, `pdfs/${file.name + v4()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
