@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import FileUpload from '../components/FileUpload';
 
 const UserDash: React.FC = () => {
   const { user, loading } = useAuth(); // Destructure loading state as well
@@ -16,7 +17,7 @@ const UserDash: React.FC = () => {
   return (
     <div>
       <h1>User Dashboard</h1>
-      <Link to="/upload">Upload</Link>
+      <FileUpload />
     </div>
   );
 };

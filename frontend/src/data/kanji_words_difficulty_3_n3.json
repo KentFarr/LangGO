@@ -1,0 +1,6466 @@
+[
+    {
+        "word": "愛",
+        "difficulty": 3
+    },
+    {
+        "word": "挨拶",
+        "difficulty": 3
+    },
+    {
+        "word": "愛情",
+        "difficulty": 3
+    },
+    {
+        "word": "合図",
+        "difficulty": 3
+    },
+    {
+        "word": "愛する",
+        "difficulty": 3
+    },
+    {
+        "word": "相手",
+        "difficulty": 3
+    },
+    {
+        "word": "明かり",
+        "difficulty": 3
+    },
+    {
+        "word": "空き",
+        "difficulty": 3
+    },
+    {
+        "word": "明らか",
+        "difficulty": 3
+    },
+    {
+        "word": "諦める",
+        "difficulty": 3
+    },
+    {
+        "word": "飽きる",
+        "difficulty": 3
+    },
+    {
+        "word": "握手",
+        "difficulty": 3
+    },
+    {
+        "word": "悪魔",
+        "difficulty": 3
+    },
+    {
+        "word": "明ける",
+        "difficulty": 3
+    },
+    {
+        "word": "預ける",
+        "difficulty": 3
+    },
+    {
+        "word": "汗",
+        "difficulty": 3
+    },
+    {
+        "word": "与える",
+        "difficulty": 3
+    },
+    {
+        "word": "暖かい",
+        "difficulty": 3
+    },
+    {
+        "word": "辺り",
+        "difficulty": 3
+    },
+    {
+        "word": "当たる",
+        "difficulty": 3
+    },
+    {
+        "word": "扱う",
+        "difficulty": 3
+    },
+    {
+        "word": "集まり",
+        "difficulty": 3
+    },
+    {
+        "word": "当てる",
+        "difficulty": 3
+    },
+    {
+        "word": "跡",
+        "difficulty": 3
+    },
+    {
+        "word": "穴",
+        "difficulty": 3
+    },
+    {
+        "word": "浴びる",
+        "difficulty": 3
+    },
+    {
+        "word": "油",
+        "difficulty": 3
+    },
+    {
+        "word": "余り",
+        "difficulty": 3
+    },
+    {
+        "word": "誤り",
+        "difficulty": 3
+    },
+    {
+        "word": "粗",
+        "difficulty": 3
+    },
+    {
+        "word": "嵐",
+        "difficulty": 3
+    },
+    {
+        "word": "新た",
+        "difficulty": 3
+    },
+    {
+        "word": "表す",
+        "difficulty": 3
+    },
+    {
+        "word": "現す",
+        "difficulty": 3
+    },
+    {
+        "word": "現れ",
+        "difficulty": 3
+    },
+    {
+        "word": "現れる",
+        "difficulty": 3
+    },
+    {
+        "word": "有る",
+        "difficulty": 3
+    },
+    {
+        "word": "或",
+        "difficulty": 3
+    },
+    {
+        "word": "泡",
+        "difficulty": 3
+    },
+    {
+        "word": "合わせる",
+        "difficulty": 3
+    },
+    {
+        "word": "哀れ",
+        "difficulty": 3
+    },
+    {
+        "word": "案",
+        "difficulty": 3
+    },
+    {
+        "word": "暗記",
+        "difficulty": 3
+    },
+    {
+        "word": "安定",
+        "difficulty": 3
+    },
+    {
+        "word": "案内",
+        "difficulty": 3
+    },
+    {
+        "word": "胃",
+        "difficulty": 3
+    },
+    {
+        "word": "いえ",
+        "difficulty": 3
+    },
+    {
+        "word": "委員",
+        "difficulty": 3
+    },
+    {
+        "word": "言う",
+        "difficulty": 3
+    },
+    {
+        "word": "意外",
+        "difficulty": 3
+    },
+    {
+        "word": "行き",
+        "difficulty": 3
+    },
+    {
+        "word": "行き",
+        "difficulty": 3
+    },
+    {
+        "word": "息",
+        "difficulty": 3
+    },
+    {
+        "word": "勢い",
+        "difficulty": 3
+    },
+    {
+        "word": "生き物",
+        "difficulty": 3
+    },
+    {
+        "word": "幾つ",
+        "difficulty": 3
+    },
+    {
+        "word": "幾ら",
+        "difficulty": 3
+    },
+    {
+        "word": "医師",
+        "difficulty": 3
+    },
+    {
+        "word": "意思",
+        "difficulty": 3
+    },
+    {
+        "word": "意志",
+        "difficulty": 3
+    },
+    {
+        "word": "維持",
+        "difficulty": 3
+    },
+    {
+        "word": "意識",
+        "difficulty": 3
+    },
+    {
+        "word": "異常",
+        "difficulty": 3
+    },
+    {
+        "word": "椅子",
+        "difficulty": 3
+    },
+    {
+        "word": "泉",
+        "difficulty": 3
+    },
+    {
+        "word": "以前",
+        "difficulty": 3
+    },
+    {
+        "word": "板",
+        "difficulty": 3
+    },
+    {
+        "word": "偉大",
+        "difficulty": 3
+    },
+    {
+        "word": "抱く",
+        "difficulty": 3
+    },
+    {
+        "word": "頂く",
+        "difficulty": 3
+    },
+    {
+        "word": "痛み",
+        "difficulty": 3
+    },
+    {
+        "word": "至る",
+        "difficulty": 3
+    },
+    {
+        "word": "位置",
+        "difficulty": 3
+    },
+    {
+        "word": "一時",
+        "difficulty": 3
+    },
+    {
+        "word": "一度に",
+        "difficulty": 3
+    },
+    {
+        "word": "市場",
+        "difficulty": 3
+    },
+    {
+        "word": "一番",
+        "difficulty": 3
+    },
+    {
+        "word": "一家",
+        "difficulty": 3
+    },
+    {
+        "word": "一種",
+        "difficulty": 3
+    },
+    {
+        "word": "一瞬",
+        "difficulty": 3
+    },
+    {
+        "word": "一生",
+        "difficulty": 3
+    },
+    {
+        "word": "一層",
+        "difficulty": 3
+    },
+    {
+        "word": "一体",
+        "difficulty": 3
+    },
+    {
+        "word": "一致",
+        "difficulty": 3
+    },
+    {
+        "word": "一般",
+        "difficulty": 3
+    },
+    {
+        "word": "一方",
+        "difficulty": 3
+    },
+    {
+        "word": "いつも",
+        "difficulty": 3
+    },
+    {
+        "word": "移動",
+        "difficulty": 3
+    },
+    {
+        "word": "従兄弟",
+        "difficulty": 3
+    },
+    {
+        "word": "稲",
+        "difficulty": 3
+    },
+    {
+        "word": "居眠り",
+        "difficulty": 3
+    },
+    {
+        "word": "命",
+        "difficulty": 3
+    },
+    {
+        "word": "違反",
+        "difficulty": 3
+    },
+    {
+        "word": "衣服",
+        "difficulty": 3
+    },
+    {
+        "word": "居間",
+        "difficulty": 3
+    },
+    {
+        "word": "今に",
+        "difficulty": 3
+    },
+    {
+        "word": "今にも",
+        "difficulty": 3
+    },
+    {
+        "word": "否",
+        "difficulty": 3
+    },
+    {
+        "word": "以来",
+        "difficulty": 3
+    },
+    {
+        "word": "依頼",
+        "difficulty": 3
+    },
+    {
+        "word": "医療",
+        "difficulty": 3
+    },
+    {
+        "word": "岩",
+        "difficulty": 3
+    },
+    {
+        "word": "祝い",
+        "difficulty": 3
+    },
+    {
+        "word": "祝う",
+        "difficulty": 3
+    },
+    {
+        "word": "言わば",
+        "difficulty": 3
+    },
+    {
+        "word": "印刷",
+        "difficulty": 3
+    },
+    {
+        "word": "印象",
+        "difficulty": 3
+    },
+    {
+        "word": "引退",
+        "difficulty": 3
+    },
+    {
+        "word": "引用",
+        "difficulty": 3
+    },
+    {
+        "word": "上",
+        "difficulty": 3
+    },
+    {
+        "word": "魚",
+        "difficulty": 3
+    },
+    {
+        "word": "伺う",
+        "difficulty": 3
+    },
+    {
+        "word": "受け取る",
+        "difficulty": 3
+    },
+    {
+        "word": "動かす",
+        "difficulty": 3
+    },
+    {
+        "word": "兎",
+        "difficulty": 3
+    },
+    {
+        "word": "牛",
+        "difficulty": 3
+    },
+    {
+        "word": "失う",
+        "difficulty": 3
+    },
+    {
+        "word": "後",
+        "difficulty": 3
+    },
+    {
+        "word": "嘘",
+        "difficulty": 3
+    },
+    {
+        "word": "疑う",
+        "difficulty": 3
+    },
+    {
+        "word": "内",
+        "difficulty": 3
+    },
+    {
+        "word": "宇宙",
+        "difficulty": 3
+    },
+    {
+        "word": "撃つ",
+        "difficulty": 3
+    },
+    {
+        "word": "移す",
+        "difficulty": 3
+    },
+    {
+        "word": "訴える",
+        "difficulty": 3
+    },
+    {
+        "word": "奪う",
+        "difficulty": 3
+    },
+    {
+        "word": "馬",
+        "difficulty": 3
+    },
+    {
+        "word": "うまい",
+        "difficulty": 3
+    },
+    {
+        "word": "生まれ",
+        "difficulty": 3
+    },
+    {
+        "word": "梅",
+        "difficulty": 3
+    },
+    {
+        "word": "裏切る",
+        "difficulty": 3
+    },
+    {
+        "word": "嬉しい",
+        "difficulty": 3
+    },
+    {
+        "word": "売れる",
+        "difficulty": 3
+    },
+    {
+        "word": "噂",
+        "difficulty": 3
+    },
+    {
+        "word": "うん",
+        "difficulty": 3
+    },
+    {
+        "word": "運",
+        "difficulty": 3
+    },
+    {
+        "word": "運転",
+        "difficulty": 3
+    },
+    {
+        "word": "運動",
+        "difficulty": 3
+    },
+    {
+        "word": "柄",
+        "difficulty": 3
+    },
+    {
+        "word": "永遠",
+        "difficulty": 3
+    },
+    {
+        "word": "永久",
+        "difficulty": 3
+    },
+    {
+        "word": "影響",
+        "difficulty": 3
+    },
+    {
+        "word": "営業",
+        "difficulty": 3
+    },
+    {
+        "word": "衛星",
+        "difficulty": 3
+    },
+    {
+        "word": "栄養",
+        "difficulty": 3
+    },
+    {
+        "word": "笑顔",
+        "difficulty": 3
+    },
+    {
+        "word": "描く",
+        "difficulty": 3
+    },
+    {
+        "word": "餌",
+        "difficulty": 3
+    },
+    {
+        "word": "得る",
+        "difficulty": 3
+    },
+    {
+        "word": "得る",
+        "difficulty": 3
+    },
+    {
+        "word": "円",
+        "difficulty": 3
+    },
+    {
+        "word": "延期",
+        "difficulty": 3
+    },
+    {
+        "word": "演技",
+        "difficulty": 3
+    },
+    {
+        "word": "援助",
+        "difficulty": 3
+    },
+    {
+        "word": "演説",
+        "difficulty": 3
+    },
+    {
+        "word": "演奏",
+        "difficulty": 3
+    },
+    {
+        "word": "遠慮",
+        "difficulty": 3
+    },
+    {
+        "word": "御",
+        "difficulty": 3
+    },
+    {
+        "word": "老い",
+        "difficulty": 3
+    },
+    {
+        "word": "追い付く",
+        "difficulty": 3
+    },
+    {
+        "word": "王",
+        "difficulty": 3
+    },
+    {
+        "word": "追う",
+        "difficulty": 3
+    },
+    {
+        "word": "王様",
+        "difficulty": 3
+    },
+    {
+        "word": "王子",
+        "difficulty": 3
+    },
+    {
+        "word": "応じる",
+        "difficulty": 3
+    },
+    {
+        "word": "横断",
+        "difficulty": 3
+    },
+    {
+        "word": "終える",
+        "difficulty": 3
+    },
+    {
+        "word": "大いに",
+        "difficulty": 3
+    },
+    {
+        "word": "覆う",
+        "difficulty": 3
+    },
+    {
+        "word": "大家",
+        "difficulty": 3
+    },
+    {
+        "word": "丘",
+        "difficulty": 3
+    },
+    {
+        "word": "沖",
+        "difficulty": 3
+    },
+    {
+        "word": "奥",
+        "difficulty": 3
+    },
+    {
+        "word": "贈る",
+        "difficulty": 3
+    },
+    {
+        "word": "起こる",
+        "difficulty": 3
+    },
+    {
+        "word": "幼い",
+        "difficulty": 3
+    },
+    {
+        "word": "収める",
+        "difficulty": 3
+    },
+    {
+        "word": "汚染",
+        "difficulty": 3
+    },
+    {
+        "word": "恐れる",
+        "difficulty": 3
+    },
+    {
+        "word": "恐ろしい",
+        "difficulty": 3
+    },
+    {
+        "word": "お互い",
+        "difficulty": 3
+    },
+    {
+        "word": "穏やか",
+        "difficulty": 3
+    },
+    {
+        "word": "男の人",
+        "difficulty": 3
+    },
+    {
+        "word": "劣る",
+        "difficulty": 3
+    },
+    {
+        "word": "お腹",
+        "difficulty": 3
+    },
+    {
+        "word": "鬼",
+        "difficulty": 3
+    },
+    {
+        "word": "帯",
+        "difficulty": 3
+    },
+    {
+        "word": "お昼",
+        "difficulty": 3
+    },
+    {
+        "word": "溺れる",
+        "difficulty": 3
+    },
+    {
+        "word": "お目に掛かる",
+        "difficulty": 3
+    },
+    {
+        "word": "思い出",
+        "difficulty": 3
+    },
+    {
+        "word": "主に",
+        "difficulty": 3
+    },
+    {
+        "word": "思わず",
+        "difficulty": 3
+    },
+    {
+        "word": "泳ぎ",
+        "difficulty": 3
+    },
+    {
+        "word": "及ぼす",
+        "difficulty": 3
+    },
+    {
+        "word": "居る",
+        "difficulty": 3
+    },
+    {
+        "word": "下す",
+        "difficulty": 3
+    },
+    {
+        "word": "降ろす",
+        "difficulty": 3
+    },
+    {
+        "word": "終",
+        "difficulty": 3
+    },
+    {
+        "word": "音",
+        "difficulty": 3
+    },
+    {
+        "word": "恩",
+        "difficulty": 3
+    },
+    {
+        "word": "温暖",
+        "difficulty": 3
+    },
+    {
+        "word": "温度",
+        "difficulty": 3
+    },
+    {
+        "word": "可",
+        "difficulty": 3
+    },
+    {
+        "word": "課",
+        "difficulty": 3
+    },
+    {
+        "word": "会",
+        "difficulty": 3
+    },
+    {
+        "word": "回",
+        "difficulty": 3
+    },
+    {
+        "word": "害",
+        "difficulty": 3
+    },
+    {
+        "word": "会員",
+        "difficulty": 3
+    },
+    {
+        "word": "絵画",
+        "difficulty": 3
+    },
+    {
+        "word": "海外",
+        "difficulty": 3
+    },
+    {
+        "word": "会計",
+        "difficulty": 3
+    },
+    {
+        "word": "解決",
+        "difficulty": 3
+    },
+    {
+        "word": "会合",
+        "difficulty": 3
+    },
+    {
+        "word": "外交",
+        "difficulty": 3
+    },
+    {
+        "word": "開始",
+        "difficulty": 3
+    },
+    {
+        "word": "解釈",
+        "difficulty": 3
+    },
+    {
+        "word": "外出",
+        "difficulty": 3
+    },
+    {
+        "word": "改善",
+        "difficulty": 3
+    },
+    {
+        "word": "快適",
+        "difficulty": 3
+    },
+    {
+        "word": "回復",
+        "difficulty": 3
+    },
+    {
+        "word": "飼う",
+        "difficulty": 3
+    },
+    {
+        "word": "替える",
+        "difficulty": 3
+    },
+    {
+        "word": "換える",
+        "difficulty": 3
+    },
+    {
+        "word": "香り",
+        "difficulty": 3
+    },
+    {
+        "word": "画家",
+        "difficulty": 3
+    },
+    {
+        "word": "抱える",
+        "difficulty": 3
+    },
+    {
+        "word": "価格",
+        "difficulty": 3
+    },
+    {
+        "word": "化学",
+        "difficulty": 3
+    },
+    {
+        "word": "輝く",
+        "difficulty": 3
+    },
+    {
+        "word": "係",
+        "difficulty": 3
+    },
+    {
+        "word": "掛かる",
+        "difficulty": 3
+    },
+    {
+        "word": "罹る",
+        "difficulty": 3
+    },
+    {
+        "word": "鍵",
+        "difficulty": 3
+    },
+    {
+        "word": "限る",
+        "difficulty": 3
+    },
+    {
+        "word": "描く",
+        "difficulty": 3
+    },
+    {
+        "word": "家具",
+        "difficulty": 3
+    },
+    {
+        "word": "学",
+        "difficulty": 3
+    },
+    {
+        "word": "額",
+        "difficulty": 3
+    },
+    {
+        "word": "覚悟",
+        "difficulty": 3
+    },
+    {
+        "word": "確実",
+        "difficulty": 3
+    },
+    {
+        "word": "学者",
+        "difficulty": 3
+    },
+    {
+        "word": "学習",
+        "difficulty": 3
+    },
+    {
+        "word": "隠す",
+        "difficulty": 3
+    },
+    {
+        "word": "拡大",
+        "difficulty": 3
+    },
+    {
+        "word": "確認",
+        "difficulty": 3
+    },
+    {
+        "word": "学問",
+        "difficulty": 3
+    },
+    {
+        "word": "隠れる",
+        "difficulty": 3
+    },
+    {
+        "word": "影",
+        "difficulty": 3
+    },
+    {
+        "word": "陰",
+        "difficulty": 3
+    },
+    {
+        "word": "欠ける",
+        "difficulty": 3
+    },
+    {
+        "word": "加減",
+        "difficulty": 3
+    },
+    {
+        "word": "過去",
+        "difficulty": 3
+    },
+    {
+        "word": "籠",
+        "difficulty": 3
+    },
+    {
+        "word": "囲む",
+        "difficulty": 3
+    },
+    {
+        "word": "火災",
+        "difficulty": 3
+    },
+    {
+        "word": "貸し",
+        "difficulty": 3
+    },
+    {
+        "word": "菓子",
+        "difficulty": 3
+    },
+    {
+        "word": "家事",
+        "difficulty": 3
+    },
+    {
+        "word": "賢い",
+        "difficulty": 3
+    },
+    {
+        "word": "歌手",
+        "difficulty": 3
+    },
+    {
+        "word": "数",
+        "difficulty": 3
+    },
+    {
+        "word": "稼ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "数える",
+        "difficulty": 3
+    },
+    {
+        "word": "型",
+        "difficulty": 3
+    },
+    {
+        "word": "肩",
+        "difficulty": 3
+    },
+    {
+        "word": "硬い",
+        "difficulty": 3
+    },
+    {
+        "word": "方々",
+        "difficulty": 3
+    },
+    {
+        "word": "刀",
+        "difficulty": 3
+    },
+    {
+        "word": "語る",
+        "difficulty": 3
+    },
+    {
+        "word": "勝ち",
+        "difficulty": 3
+    },
+    {
+        "word": "価値",
+        "difficulty": 3
+    },
+    {
+        "word": "活気",
+        "difficulty": 3
+    },
+    {
+        "word": "学期",
+        "difficulty": 3
+    },
+    {
+        "word": "格好",
+        "difficulty": 3
+    },
+    {
+        "word": "活動",
+        "difficulty": 3
+    },
+    {
+        "word": "活用",
+        "difficulty": 3
+    },
+    {
+        "word": "悲しむ",
+        "difficulty": 3
+    },
+    {
+        "word": "必ずしも",
+        "difficulty": 3
+    },
+    {
+        "word": "金",
+        "difficulty": 3
+    },
+    {
+        "word": "金持ち",
+        "difficulty": 3
+    },
+    {
+        "word": "可能",
+        "difficulty": 3
+    },
+    {
+        "word": "株",
+        "difficulty": 3
+    },
+    {
+        "word": "被る",
+        "difficulty": 3
+    },
+    {
+        "word": "構う",
+        "difficulty": 3
+    },
+    {
+        "word": "我慢",
+        "difficulty": 3
+    },
+    {
+        "word": "上",
+        "difficulty": 3
+    },
+    {
+        "word": "神",
+        "difficulty": 3
+    },
+    {
+        "word": "雷",
+        "difficulty": 3
+    },
+    {
+        "word": "髪の毛",
+        "difficulty": 3
+    },
+    {
+        "word": "科目",
+        "difficulty": 3
+    },
+    {
+        "word": "火曜",
+        "difficulty": 3
+    },
+    {
+        "word": "空",
+        "difficulty": 3
+    },
+    {
+        "word": "柄",
+        "difficulty": 3
+    },
+    {
+        "word": "刈る",
+        "difficulty": 3
+    },
+    {
+        "word": "彼等",
+        "difficulty": 3
+    },
+    {
+        "word": "川",
+        "difficulty": 3
+    },
+    {
+        "word": "河",
+        "difficulty": 3
+    },
+    {
+        "word": "皮",
+        "difficulty": 3
+    },
+    {
+        "word": "革",
+        "difficulty": 3
+    },
+    {
+        "word": "缶",
+        "difficulty": 3
+    },
+    {
+        "word": "勘",
+        "difficulty": 3
+    },
+    {
+        "word": "考え",
+        "difficulty": 3
+    },
+    {
+        "word": "感覚",
+        "difficulty": 3
+    },
+    {
+        "word": "観客",
+        "difficulty": 3
+    },
+    {
+        "word": "環境",
+        "difficulty": 3
+    },
+    {
+        "word": "歓迎",
+        "difficulty": 3
+    },
+    {
+        "word": "観光",
+        "difficulty": 3
+    },
+    {
+        "word": "観察",
+        "difficulty": 3
+    },
+    {
+        "word": "感じ",
+        "difficulty": 3
+    },
+    {
+        "word": "感謝",
+        "difficulty": 3
+    },
+    {
+        "word": "患者",
+        "difficulty": 3
+    },
+    {
+        "word": "勘定",
+        "difficulty": 3
+    },
+    {
+        "word": "感情",
+        "difficulty": 3
+    },
+    {
+        "word": "感じる",
+        "difficulty": 3
+    },
+    {
+        "word": "感心",
+        "difficulty": 3
+    },
+    {
+        "word": "関心",
+        "difficulty": 3
+    },
+    {
+        "word": "関する",
+        "difficulty": 3
+    },
+    {
+        "word": "完成",
+        "difficulty": 3
+    },
+    {
+        "word": "完全",
+        "difficulty": 3
+    },
+    {
+        "word": "感動",
+        "difficulty": 3
+    },
+    {
+        "word": "監督",
+        "difficulty": 3
+    },
+    {
+        "word": "管理",
+        "difficulty": 3
+    },
+    {
+        "word": "完了",
+        "difficulty": 3
+    },
+    {
+        "word": "関連",
+        "difficulty": 3
+    },
+    {
+        "word": "議員",
+        "difficulty": 3
+    },
+    {
+        "word": "記憶",
+        "difficulty": 3
+    },
+    {
+        "word": "気温",
+        "difficulty": 3
+    },
+    {
+        "word": "機械",
+        "difficulty": 3
+    },
+    {
+        "word": "議会",
+        "difficulty": 3
+    },
+    {
+        "word": "期間",
+        "difficulty": 3
+    },
+    {
+        "word": "機関",
+        "difficulty": 3
+    },
+    {
+        "word": "企業",
+        "difficulty": 3
+    },
+    {
+        "word": "効く",
+        "difficulty": 3
+    },
+    {
+        "word": "機嫌",
+        "difficulty": 3
+    },
+    {
+        "word": "気候",
+        "difficulty": 3
+    },
+    {
+        "word": "岸",
+        "difficulty": 3
+    },
+    {
+        "word": "生地",
+        "difficulty": 3
+    },
+    {
+        "word": "記事",
+        "difficulty": 3
+    },
+    {
+        "word": "技師",
+        "difficulty": 3
+    },
+    {
+        "word": "記者",
+        "difficulty": 3
+    },
+    {
+        "word": "傷",
+        "difficulty": 3
+    },
+    {
+        "word": "期待",
+        "difficulty": 3
+    },
+    {
+        "word": "帰宅",
+        "difficulty": 3
+    },
+    {
+        "word": "貴重",
+        "difficulty": 3
+    },
+    {
+        "word": "議長",
+        "difficulty": 3
+    },
+    {
+        "word": "気付く",
+        "difficulty": 3
+    },
+    {
+        "word": "気に入る",
+        "difficulty": 3
+    },
+    {
+        "word": "記入",
+        "difficulty": 3
+    },
+    {
+        "word": "記念",
+        "difficulty": 3
+    },
+    {
+        "word": "機能",
+        "difficulty": 3
+    },
+    {
+        "word": "気の毒",
+        "difficulty": 3
+    },
+    {
+        "word": "寄付",
+        "difficulty": 3
+    },
+    {
+        "word": "希望",
+        "difficulty": 3
+    },
+    {
+        "word": "基本",
+        "difficulty": 3
+    },
+    {
+        "word": "決まり",
+        "difficulty": 3
+    },
+    {
+        "word": "気味",
+        "difficulty": 3
+    },
+    {
+        "word": "奇妙",
+        "difficulty": 3
+    },
+    {
+        "word": "義務",
+        "difficulty": 3
+    },
+    {
+        "word": "疑問",
+        "difficulty": 3
+    },
+    {
+        "word": "逆",
+        "difficulty": 3
+    },
+    {
+        "word": "九",
+        "difficulty": 3
+    },
+    {
+        "word": "旧",
+        "difficulty": 3
+    },
+    {
+        "word": "級",
+        "difficulty": 3
+    },
+    {
+        "word": "球",
+        "difficulty": 3
+    },
+    {
+        "word": "休暇",
+        "difficulty": 3
+    },
+    {
+        "word": "休憩",
+        "difficulty": 3
+    },
+    {
+        "word": "急激",
+        "difficulty": 3
+    },
+    {
+        "word": "吸収",
+        "difficulty": 3
+    },
+    {
+        "word": "救助",
+        "difficulty": 3
+    },
+    {
+        "word": "急速",
+        "difficulty": 3
+    },
+    {
+        "word": "急に",
+        "difficulty": 3
+    },
+    {
+        "word": "給料",
+        "difficulty": 3
+    },
+    {
+        "word": "器用",
+        "difficulty": 3
+    },
+    {
+        "word": "教科書",
+        "difficulty": 3
+    },
+    {
+        "word": "競技",
+        "difficulty": 3
+    },
+    {
+        "word": "行儀",
+        "difficulty": 3
+    },
+    {
+        "word": "供給",
+        "difficulty": 3
+    },
+    {
+        "word": "教師",
+        "difficulty": 3
+    },
+    {
+        "word": "教授",
+        "difficulty": 3
+    },
+    {
+        "word": "強調",
+        "difficulty": 3
+    },
+    {
+        "word": "共通",
+        "difficulty": 3
+    },
+    {
+        "word": "共同",
+        "difficulty": 3
+    },
+    {
+        "word": "恐怖",
+        "difficulty": 3
+    },
+    {
+        "word": "協力",
+        "difficulty": 3
+    },
+    {
+        "word": "強力",
+        "difficulty": 3
+    },
+    {
+        "word": "許可",
+        "difficulty": 3
+    },
+    {
+        "word": "局",
+        "difficulty": 3
+    },
+    {
+        "word": "巨大",
+        "difficulty": 3
+    },
+    {
+        "word": "嫌う",
+        "difficulty": 3
+    },
+    {
+        "word": "霧",
+        "difficulty": 3
+    },
+    {
+        "word": "切れ",
+        "difficulty": 3
+    },
+    {
+        "word": "切れる",
+        "difficulty": 3
+    },
+    {
+        "word": "記録",
+        "difficulty": 3
+    },
+    {
+        "word": "議論",
+        "difficulty": 3
+    },
+    {
+        "word": "金",
+        "difficulty": 3
+    },
+    {
+        "word": "銀",
+        "difficulty": 3
+    },
+    {
+        "word": "禁煙",
+        "difficulty": 3
+    },
+    {
+        "word": "金額",
+        "difficulty": 3
+    },
+    {
+        "word": "金庫",
+        "difficulty": 3
+    },
+    {
+        "word": "禁止",
+        "difficulty": 3
+    },
+    {
+        "word": "金銭",
+        "difficulty": 3
+    },
+    {
+        "word": "金属",
+        "difficulty": 3
+    },
+    {
+        "word": "近代",
+        "difficulty": 3
+    },
+    {
+        "word": "緊張",
+        "difficulty": 3
+    },
+    {
+        "word": "筋肉",
+        "difficulty": 3
+    },
+    {
+        "word": "金融",
+        "difficulty": 3
+    },
+    {
+        "word": "金曜",
+        "difficulty": 3
+    },
+    {
+        "word": "九",
+        "difficulty": 3
+    },
+    {
+        "word": "句",
+        "difficulty": 3
+    },
+    {
+        "word": "食う",
+        "difficulty": 3
+    },
+    {
+        "word": "偶然",
+        "difficulty": 3
+    },
+    {
+        "word": "臭い",
+        "difficulty": 3
+    },
+    {
+        "word": "鎖",
+        "difficulty": 3
+    },
+    {
+        "word": "腐る",
+        "difficulty": 3
+    },
+    {
+        "word": "癖",
+        "difficulty": 3
+    },
+    {
+        "word": "管",
+        "difficulty": 3
+    },
+    {
+        "word": "具体",
+        "difficulty": 3
+    },
+    {
+        "word": "下さる",
+        "difficulty": 3
+    },
+    {
+        "word": "下り",
+        "difficulty": 3
+    },
+    {
+        "word": "苦痛",
+        "difficulty": 3
+    },
+    {
+        "word": "区別",
+        "difficulty": 3
+    },
+    {
+        "word": "組",
+        "difficulty": 3
+    },
+    {
+        "word": "組合",
+        "difficulty": 3
+    },
+    {
+        "word": "組む",
+        "difficulty": 3
+    },
+    {
+        "word": "曇",
+        "difficulty": 3
+    },
+    {
+        "word": "位",
+        "difficulty": 3
+    },
+    {
+        "word": "暮らし",
+        "difficulty": 3
+    },
+    {
+        "word": "暮らす",
+        "difficulty": 3
+    },
+    {
+        "word": "繰り返す",
+        "difficulty": 3
+    },
+    {
+        "word": "狂う",
+        "difficulty": 3
+    },
+    {
+        "word": "苦しい",
+        "difficulty": 3
+    },
+    {
+        "word": "苦しむ",
+        "difficulty": 3
+    },
+    {
+        "word": "暮れ",
+        "difficulty": 3
+    },
+    {
+        "word": "苦労",
+        "difficulty": 3
+    },
+    {
+        "word": "加える",
+        "difficulty": 3
+    },
+    {
+        "word": "詳しい",
+        "difficulty": 3
+    },
+    {
+        "word": "加わる",
+        "difficulty": 3
+    },
+    {
+        "word": "訓",
+        "difficulty": 3
+    },
+    {
+        "word": "軍",
+        "difficulty": 3
+    },
+    {
+        "word": "軍隊",
+        "difficulty": 3
+    },
+    {
+        "word": "訓練",
+        "difficulty": 3
+    },
+    {
+        "word": "下",
+        "difficulty": 3
+    },
+    {
+        "word": "計",
+        "difficulty": 3
+    },
+    {
+        "word": "敬意",
+        "difficulty": 3
+    },
+    {
+        "word": "経営",
+        "difficulty": 3
+    },
+    {
+        "word": "計画",
+        "difficulty": 3
+    },
+    {
+        "word": "景気",
+        "difficulty": 3
+    },
+    {
+        "word": "経験",
+        "difficulty": 3
+    },
+    {
+        "word": "傾向",
+        "difficulty": 3
+    },
+    {
+        "word": "警告",
+        "difficulty": 3
+    },
+    {
+        "word": "計算",
+        "difficulty": 3
+    },
+    {
+        "word": "掲示",
+        "difficulty": 3
+    },
+    {
+        "word": "刑事",
+        "difficulty": 3
+    },
+    {
+        "word": "芸術",
+        "difficulty": 3
+    },
+    {
+        "word": "契約",
+        "difficulty": 3
+    },
+    {
+        "word": "経由",
+        "difficulty": 3
+    },
+    {
+        "word": "怪我",
+        "difficulty": 3
+    },
+    {
+        "word": "劇",
+        "difficulty": 3
+    },
+    {
+        "word": "劇場",
+        "difficulty": 3
+    },
+    {
+        "word": "化粧",
+        "difficulty": 3
+    },
+    {
+        "word": "結果",
+        "difficulty": 3
+    },
+    {
+        "word": "欠陥",
+        "difficulty": 3
+    },
+    {
+        "word": "結局",
+        "difficulty": 3
+    },
+    {
+        "word": "決心",
+        "difficulty": 3
+    },
+    {
+        "word": "欠席",
+        "difficulty": 3
+    },
+    {
+        "word": "決定",
+        "difficulty": 3
+    },
+    {
+        "word": "欠点",
+        "difficulty": 3
+    },
+    {
+        "word": "月曜",
+        "difficulty": 3
+    },
+    {
+        "word": "結論",
+        "difficulty": 3
+    },
+    {
+        "word": "煙",
+        "difficulty": 3
+    },
+    {
+        "word": "券",
+        "difficulty": 3
+    },
+    {
+        "word": "県",
+        "difficulty": 3
+    },
+    {
+        "word": "軒",
+        "difficulty": 3
+    },
+    {
+        "word": "喧嘩",
+        "difficulty": 3
+    },
+    {
+        "word": "見解",
+        "difficulty": 3
+    },
+    {
+        "word": "限界",
+        "difficulty": 3
+    },
+    {
+        "word": "現金",
+        "difficulty": 3
+    },
+    {
+        "word": "言語",
+        "difficulty": 3
+    },
+    {
+        "word": "健康",
+        "difficulty": 3
+    },
+    {
+        "word": "検査",
+        "difficulty": 3
+    },
+    {
+        "word": "現在",
+        "difficulty": 3
+    },
+    {
+        "word": "現実",
+        "difficulty": 3
+    },
+    {
+        "word": "現象",
+        "difficulty": 3
+    },
+    {
+        "word": "現状",
+        "difficulty": 3
+    },
+    {
+        "word": "建設",
+        "difficulty": 3
+    },
+    {
+        "word": "現代",
+        "difficulty": 3
+    },
+    {
+        "word": "建築",
+        "difficulty": 3
+    },
+    {
+        "word": "見当",
+        "difficulty": 3
+    },
+    {
+        "word": "検討",
+        "difficulty": 3
+    },
+    {
+        "word": "現場",
+        "difficulty": 3
+    },
+    {
+        "word": "憲法",
+        "difficulty": 3
+    },
+    {
+        "word": "権利",
+        "difficulty": 3
+    },
+    {
+        "word": "後",
+        "difficulty": 3
+    },
+    {
+        "word": "語",
+        "difficulty": 3
+    },
+    {
+        "word": "恋",
+        "difficulty": 3
+    },
+    {
+        "word": "濃い",
+        "difficulty": 3
+    },
+    {
+        "word": "恋人",
+        "difficulty": 3
+    },
+    {
+        "word": "幸運",
+        "difficulty": 3
+    },
+    {
+        "word": "講演",
+        "difficulty": 3
+    },
+    {
+        "word": "効果",
+        "difficulty": 3
+    },
+    {
+        "word": "硬貨",
+        "difficulty": 3
+    },
+    {
+        "word": "高価",
+        "difficulty": 3
+    },
+    {
+        "word": "豪華",
+        "difficulty": 3
+    },
+    {
+        "word": "合格",
+        "difficulty": 3
+    },
+    {
+        "word": "交換",
+        "difficulty": 3
+    },
+    {
+        "word": "航空",
+        "difficulty": 3
+    },
+    {
+        "word": "光景",
+        "difficulty": 3
+    },
+    {
+        "word": "合計",
+        "difficulty": 3
+    },
+    {
+        "word": "攻撃",
+        "difficulty": 3
+    },
+    {
+        "word": "貢献",
+        "difficulty": 3
+    },
+    {
+        "word": "広告",
+        "difficulty": 3
+    },
+    {
+        "word": "交際",
+        "difficulty": 3
+    },
+    {
+        "word": "後者",
+        "difficulty": 3
+    },
+    {
+        "word": "工場",
+        "difficulty": 3
+    },
+    {
+        "word": "構成",
+        "difficulty": 3
+    },
+    {
+        "word": "高速",
+        "difficulty": 3
+    },
+    {
+        "word": "行動",
+        "difficulty": 3
+    },
+    {
+        "word": "強盗",
+        "difficulty": 3
+    },
+    {
+        "word": "幸福",
+        "difficulty": 3
+    },
+    {
+        "word": "公平",
+        "difficulty": 3
+    },
+    {
+        "word": "候補",
+        "difficulty": 3
+    },
+    {
+        "word": "考慮",
+        "difficulty": 3
+    },
+    {
+        "word": "越える",
+        "difficulty": 3
+    },
+    {
+        "word": "氷",
+        "difficulty": 3
+    },
+    {
+        "word": "凍る",
+        "difficulty": 3
+    },
+    {
+        "word": "誤解",
+        "difficulty": 3
+    },
+    {
+        "word": "語学",
+        "difficulty": 3
+    },
+    {
+        "word": "呼吸",
+        "difficulty": 3
+    },
+    {
+        "word": "故郷",
+        "difficulty": 3
+    },
+    {
+        "word": "極",
+        "difficulty": 3
+    },
+    {
+        "word": "国語",
+        "difficulty": 3
+    },
+    {
+        "word": "黒板",
+        "difficulty": 3
+    },
+    {
+        "word": "克服",
+        "difficulty": 3
+    },
+    {
+        "word": "国民",
+        "difficulty": 3
+    },
+    {
+        "word": "穀物",
+        "difficulty": 3
+    },
+    {
+        "word": "ここ",
+        "difficulty": 3
+    },
+    {
+        "word": "腰",
+        "difficulty": 3
+    },
+    {
+        "word": "故障",
+        "difficulty": 3
+    },
+    {
+        "word": "個人",
+        "difficulty": 3
+    },
+    {
+        "word": "越す",
+        "difficulty": 3
+    },
+    {
+        "word": "国家",
+        "difficulty": 3
+    },
+    {
+        "word": "国会",
+        "difficulty": 3
+    },
+    {
+        "word": "国境",
+        "difficulty": 3
+    },
+    {
+        "word": "骨折",
+        "difficulty": 3
+    },
+    {
+        "word": "小包",
+        "difficulty": 3
+    },
+    {
+        "word": "事",
+        "difficulty": 3
+    },
+    {
+        "word": "異なる",
+        "difficulty": 3
+    },
+    {
+        "word": "諺",
+        "difficulty": 3
+    },
+    {
+        "word": "断る",
+        "difficulty": 3
+    },
+    {
+        "word": "粉",
+        "difficulty": 3
+    },
+    {
+        "word": "この",
+        "difficulty": 3
+    },
+    {
+        "word": "好み",
+        "difficulty": 3
+    },
+    {
+        "word": "好む",
+        "difficulty": 3
+    },
+    {
+        "word": "塵",
+        "difficulty": 3
+    },
+    {
+        "word": "小麦",
+        "difficulty": 3
+    },
+    {
+        "word": "小屋",
+        "difficulty": 3
+    },
+    {
+        "word": "頃",
+        "difficulty": 3
+    },
+    {
+        "word": "殺す",
+        "difficulty": 3
+    },
+    {
+        "word": "転ぶ",
+        "difficulty": 3
+    },
+    {
+        "word": "今回",
+        "difficulty": 3
+    },
+    {
+        "word": "今後",
+        "difficulty": 3
+    },
+    {
+        "word": "混雑",
+        "difficulty": 3
+    },
+    {
+        "word": "困難",
+        "difficulty": 3
+    },
+    {
+        "word": "今日",
+        "difficulty": 3
+    },
+    {
+        "word": "婚約",
+        "difficulty": 3
+    },
+    {
+        "word": "混乱",
+        "difficulty": 3
+    },
+    {
+        "word": "差",
+        "difficulty": 3
+    },
+    {
+        "word": "際",
+        "difficulty": 3
+    },
+    {
+        "word": "最高",
+        "difficulty": 3
+    },
+    {
+        "word": "財産",
+        "difficulty": 3
+    },
+    {
+        "word": "最終",
+        "difficulty": 3
+    },
+    {
+        "word": "最中",
+        "difficulty": 3
+    },
+    {
+        "word": "最低",
+        "difficulty": 3
+    },
+    {
+        "word": "才能",
+        "difficulty": 3
+    },
+    {
+        "word": "裁判",
+        "difficulty": 3
+    },
+    {
+        "word": "材料",
+        "difficulty": 3
+    },
+    {
+        "word": "幸い",
+        "difficulty": 3
+    },
+    {
+        "word": "境",
+        "difficulty": 3
+    },
+    {
+        "word": "逆らう",
+        "difficulty": 3
+    },
+    {
+        "word": "盛り",
+        "difficulty": 3
+    },
+    {
+        "word": "作業",
+        "difficulty": 3
+    },
+    {
+        "word": "昨",
+        "difficulty": 3
+    },
+    {
+        "word": "作品",
+        "difficulty": 3
+    },
+    {
+        "word": "作物",
+        "difficulty": 3
+    },
+    {
+        "word": "桜",
+        "difficulty": 3
+    },
+    {
+        "word": "酒",
+        "difficulty": 3
+    },
+    {
+        "word": "叫ぶ",
+        "difficulty": 3
+    },
+    {
+        "word": "避ける",
+        "difficulty": 3
+    },
+    {
+        "word": "支える",
+        "difficulty": 3
+    },
+    {
+        "word": "指す",
+        "difficulty": 3
+    },
+    {
+        "word": "座席",
+        "difficulty": 3
+    },
+    {
+        "word": "誘う",
+        "difficulty": 3
+    },
+    {
+        "word": "札",
+        "difficulty": 3
+    },
+    {
+        "word": "作家",
+        "difficulty": 3
+    },
+    {
+        "word": "作曲",
+        "difficulty": 3
+    },
+    {
+        "word": "砂漠",
+        "difficulty": 3
+    },
+    {
+        "word": "差別",
+        "difficulty": 3
+    },
+    {
+        "word": "作法",
+        "difficulty": 3
+    },
+    {
+        "word": "様々",
+        "difficulty": 3
+    },
+    {
+        "word": "覚ます",
+        "difficulty": 3
+    },
+    {
+        "word": "覚める",
+        "difficulty": 3
+    },
+    {
+        "word": "左右",
+        "difficulty": 3
+    },
+    {
+        "word": "皿",
+        "difficulty": 3
+    },
+    {
+        "word": "更に",
+        "difficulty": 3
+    },
+    {
+        "word": "去る",
+        "difficulty": 3
+    },
+    {
+        "word": "猿",
+        "difficulty": 3
+    },
+    {
+        "word": "騒ぎ",
+        "difficulty": 3
+    },
+    {
+        "word": "参加",
+        "difficulty": 3
+    },
+    {
+        "word": "参考",
+        "difficulty": 3
+    },
+    {
+        "word": "賛成",
+        "difficulty": 3
+    },
+    {
+        "word": "酸素",
+        "difficulty": 3
+    },
+    {
+        "word": "散歩",
+        "difficulty": 3
+    },
+    {
+        "word": "四",
+        "difficulty": 3
+    },
+    {
+        "word": "氏",
+        "difficulty": 3
+    },
+    {
+        "word": "詩",
+        "difficulty": 3
+    },
+    {
+        "word": "幸せ",
+        "difficulty": 3
+    },
+    {
+        "word": "ジェット機",
+        "difficulty": 3
+    },
+    {
+        "word": "直に",
+        "difficulty": 3
+    },
+    {
+        "word": "叱る",
+        "difficulty": 3
+    },
+    {
+        "word": "式",
+        "difficulty": 3
+    },
+    {
+        "word": "直",
+        "difficulty": 3
+    },
+    {
+        "word": "時期",
+        "difficulty": 3
+    },
+    {
+        "word": "支給",
+        "difficulty": 3
+    },
+    {
+        "word": "刺激",
+        "difficulty": 3
+    },
+    {
+        "word": "資源",
+        "difficulty": 3
+    },
+    {
+        "word": "事件",
+        "difficulty": 3
+    },
+    {
+        "word": "時刻",
+        "difficulty": 3
+    },
+    {
+        "word": "自殺",
+        "difficulty": 3
+    },
+    {
+        "word": "事実",
+        "difficulty": 3
+    },
+    {
+        "word": "支出",
+        "difficulty": 3
+    },
+    {
+        "word": "事情",
+        "difficulty": 3
+    },
+    {
+        "word": "詩人",
+        "difficulty": 3
+    },
+    {
+        "word": "自身",
+        "difficulty": 3
+    },
+    {
+        "word": "沈む",
+        "difficulty": 3
+    },
+    {
+        "word": "自然",
+        "difficulty": 3
+    },
+    {
+        "word": "思想",
+        "difficulty": 3
+    },
+    {
+        "word": "舌",
+        "difficulty": 3
+    },
+    {
+        "word": "次第",
+        "difficulty": 3
+    },
+    {
+        "word": "事態",
+        "difficulty": 3
+    },
+    {
+        "word": "従う",
+        "difficulty": 3
+    },
+    {
+        "word": "したがって",
+        "difficulty": 3
+    },
+    {
+        "word": "支度",
+        "difficulty": 3
+    },
+    {
+        "word": "親しい",
+        "difficulty": 3
+    },
+    {
+        "word": "七",
+        "difficulty": 3
+    },
+    {
+        "word": "質",
+        "difficulty": 3
+    },
+    {
+        "word": "失業",
+        "difficulty": 3
+    },
+    {
+        "word": "実験",
+        "difficulty": 3
+    },
+    {
+        "word": "実現",
+        "difficulty": 3
+    },
+    {
+        "word": "実行",
+        "difficulty": 3
+    },
+    {
+        "word": "実際",
+        "difficulty": 3
+    },
+    {
+        "word": "実施",
+        "difficulty": 3
+    },
+    {
+        "word": "実に",
+        "difficulty": 3
+    },
+    {
+        "word": "実は",
+        "difficulty": 3
+    },
+    {
+        "word": "失望",
+        "difficulty": 3
+    },
+    {
+        "word": "支店",
+        "difficulty": 3
+    },
+    {
+        "word": "指導",
+        "difficulty": 3
+    },
+    {
+        "word": "自動",
+        "difficulty": 3
+    },
+    {
+        "word": "品",
+        "difficulty": 3
+    },
+    {
+        "word": "支配",
+        "difficulty": 3
+    },
+    {
+        "word": "芝居",
+        "difficulty": 3
+    },
+    {
+        "word": "芝生",
+        "difficulty": 3
+    },
+    {
+        "word": "支払",
+        "difficulty": 3
+    },
+    {
+        "word": "支払う",
+        "difficulty": 3
+    },
+    {
+        "word": "死亡",
+        "difficulty": 3
+    },
+    {
+        "word": "資本",
+        "difficulty": 3
+    },
+    {
+        "word": "しまい",
+        "difficulty": 3
+    },
+    {
+        "word": "姉妹",
+        "difficulty": 3
+    },
+    {
+        "word": "しまう",
+        "difficulty": 3
+    },
+    {
+        "word": "しまった",
+        "difficulty": 3
+    },
+    {
+        "word": "自慢",
+        "difficulty": 3
+    },
+    {
+        "word": "事務",
+        "difficulty": 3
+    },
+    {
+        "word": "示す",
+        "difficulty": 3
+    },
+    {
+        "word": "占める",
+        "difficulty": 3
+    },
+    {
+        "word": "下",
+        "difficulty": 3
+    },
+    {
+        "word": "霜",
+        "difficulty": 3
+    },
+    {
+        "word": "借金",
+        "difficulty": 3
+    },
+    {
+        "word": "邪魔",
+        "difficulty": 3
+    },
+    {
+        "word": "週",
+        "difficulty": 3
+    },
+    {
+        "word": "州",
+        "difficulty": 3
+    },
+    {
+        "word": "十",
+        "difficulty": 3
+    },
+    {
+        "word": "銃",
+        "difficulty": 3
+    },
+    {
+        "word": "周囲",
+        "difficulty": 3
+    },
+    {
+        "word": "収穫",
+        "difficulty": 3
+    },
+    {
+        "word": "週間",
+        "difficulty": 3
+    },
+    {
+        "word": "宗教",
+        "difficulty": 3
+    },
+    {
+        "word": "重視",
+        "difficulty": 3
+    },
+    {
+        "word": "就職",
+        "difficulty": 3
+    },
+    {
+        "word": "修正",
+        "difficulty": 3
+    },
+    {
+        "word": "渋滞",
+        "difficulty": 3
+    },
+    {
+        "word": "重大",
+        "difficulty": 3
+    },
+    {
+        "word": "住宅",
+        "difficulty": 3
+    },
+    {
+        "word": "集団",
+        "difficulty": 3
+    },
+    {
+        "word": "集中",
+        "difficulty": 3
+    },
+    {
+        "word": "収入",
+        "difficulty": 3
+    },
+    {
+        "word": "住民",
+        "difficulty": 3
+    },
+    {
+        "word": "重要",
+        "difficulty": 3
+    },
+    {
+        "word": "修理",
+        "difficulty": 3
+    },
+    {
+        "word": "主義",
+        "difficulty": 3
+    },
+    {
+        "word": "宿泊",
+        "difficulty": 3
+    },
+    {
+        "word": "手術",
+        "difficulty": 3
+    },
+    {
+        "word": "首相",
+        "difficulty": 3
+    },
+    {
+        "word": "手段",
+        "difficulty": 3
+    },
+    {
+        "word": "主張",
+        "difficulty": 3
+    },
+    {
+        "word": "出身",
+        "difficulty": 3
+    },
+    {
+        "word": "出席",
+        "difficulty": 3
+    },
+    {
+        "word": "出発",
+        "difficulty": 3
+    },
+    {
+        "word": "出版",
+        "difficulty": 3
+    },
+    {
+        "word": "首都",
+        "difficulty": 3
+    },
+    {
+        "word": "主婦",
+        "difficulty": 3
+    },
+    {
+        "word": "主要",
+        "difficulty": 3
+    },
+    {
+        "word": "需要",
+        "difficulty": 3
+    },
+    {
+        "word": "種類",
+        "difficulty": 3
+    },
+    {
+        "word": "順",
+        "difficulty": 3
+    },
+    {
+        "word": "瞬間",
+        "difficulty": 3
+    },
+    {
+        "word": "順調",
+        "difficulty": 3
+    },
+    {
+        "word": "順番",
+        "difficulty": 3
+    },
+    {
+        "word": "準備",
+        "difficulty": 3
+    },
+    {
+        "word": "使用",
+        "difficulty": 3
+    },
+    {
+        "word": "小",
+        "difficulty": 3
+    },
+    {
+        "word": "章",
+        "difficulty": 3
+    },
+    {
+        "word": "賞",
+        "difficulty": 3
+    },
+    {
+        "word": "上",
+        "difficulty": 3
+    },
+    {
+        "word": "障害",
+        "difficulty": 3
+    },
+    {
+        "word": "奨学金",
+        "difficulty": 3
+    },
+    {
+        "word": "乗客",
+        "difficulty": 3
+    },
+    {
+        "word": "上京",
+        "difficulty": 3
+    },
+    {
+        "word": "状況",
+        "difficulty": 3
+    },
+    {
+        "word": "条件",
+        "difficulty": 3
+    },
+    {
+        "word": "正午",
+        "difficulty": 3
+    },
+    {
+        "word": "正直",
+        "difficulty": 3
+    },
+    {
+        "word": "常識",
+        "difficulty": 3
+    },
+    {
+        "word": "少女",
+        "difficulty": 3
+    },
+    {
+        "word": "少々",
+        "difficulty": 3
+    },
+    {
+        "word": "症状",
+        "difficulty": 3
+    },
+    {
+        "word": "生じる",
+        "difficulty": 3
+    },
+    {
+        "word": "招待",
+        "difficulty": 3
+    },
+    {
+        "word": "状態",
+        "difficulty": 3
+    },
+    {
+        "word": "上達",
+        "difficulty": 3
+    },
+    {
+        "word": "冗談",
+        "difficulty": 3
+    },
+    {
+        "word": "承知",
+        "difficulty": 3
+    },
+    {
+        "word": "上等",
+        "difficulty": 3
+    },
+    {
+        "word": "衝突",
+        "difficulty": 3
+    },
+    {
+        "word": "商人",
+        "difficulty": 3
+    },
+    {
+        "word": "承認",
+        "difficulty": 3
+    },
+    {
+        "word": "少年",
+        "difficulty": 3
+    },
+    {
+        "word": "商売",
+        "difficulty": 3
+    },
+    {
+        "word": "消費",
+        "difficulty": 3
+    },
+    {
+        "word": "商品",
+        "difficulty": 3
+    },
+    {
+        "word": "消防",
+        "difficulty": 3
+    },
+    {
+        "word": "情報",
+        "difficulty": 3
+    },
+    {
+        "word": "証明",
+        "difficulty": 3
+    },
+    {
+        "word": "女王",
+        "difficulty": 3
+    },
+    {
+        "word": "職",
+        "difficulty": 3
+    },
+    {
+        "word": "職業",
+        "difficulty": 3
+    },
+    {
+        "word": "食事",
+        "difficulty": 3
+    },
+    {
+        "word": "食卓",
+        "difficulty": 3
+    },
+    {
+        "word": "食品",
+        "difficulty": 3
+    },
+    {
+        "word": "植物",
+        "difficulty": 3
+    },
+    {
+        "word": "食物",
+        "difficulty": 3
+    },
+    {
+        "word": "食欲",
+        "difficulty": 3
+    },
+    {
+        "word": "食料",
+        "difficulty": 3
+    },
+    {
+        "word": "食糧",
+        "difficulty": 3
+    },
+    {
+        "word": "書斎",
+        "difficulty": 3
+    },
+    {
+        "word": "女子",
+        "difficulty": 3
+    },
+    {
+        "word": "助手",
+        "difficulty": 3
+    },
+    {
+        "word": "徐々に",
+        "difficulty": 3
+    },
+    {
+        "word": "署名",
+        "difficulty": 3
+    },
+    {
+        "word": "書物",
+        "difficulty": 3
+    },
+    {
+        "word": "女優",
+        "difficulty": 3
+    },
+    {
+        "word": "処理",
+        "difficulty": 3
+    },
+    {
+        "word": "書類",
+        "difficulty": 3
+    },
+    {
+        "word": "知らせ",
+        "difficulty": 3
+    },
+    {
+        "word": "尻",
+        "difficulty": 3
+    },
+    {
+        "word": "印",
+        "difficulty": 3
+    },
+    {
+        "word": "城",
+        "difficulty": 3
+    },
+    {
+        "word": "進学",
+        "difficulty": 3
+    },
+    {
+        "word": "神経",
+        "difficulty": 3
+    },
+    {
+        "word": "真剣",
+        "difficulty": 3
+    },
+    {
+        "word": "信仰",
+        "difficulty": 3
+    },
+    {
+        "word": "信号",
+        "difficulty": 3
+    },
+    {
+        "word": "人工",
+        "difficulty": 3
+    },
+    {
+        "word": "深刻",
+        "difficulty": 3
+    },
+    {
+        "word": "診察",
+        "difficulty": 3
+    },
+    {
+        "word": "人種",
+        "difficulty": 3
+    },
+    {
+        "word": "信じる",
+        "difficulty": 3
+    },
+    {
+        "word": "人生",
+        "difficulty": 3
+    },
+    {
+        "word": "親戚",
+        "difficulty": 3
+    },
+    {
+        "word": "新鮮",
+        "difficulty": 3
+    },
+    {
+        "word": "心臓",
+        "difficulty": 3
+    },
+    {
+        "word": "身体",
+        "difficulty": 3
+    },
+    {
+        "word": "身長",
+        "difficulty": 3
+    },
+    {
+        "word": "慎重",
+        "difficulty": 3
+    },
+    {
+        "word": "心配",
+        "difficulty": 3
+    },
+    {
+        "word": "審判",
+        "difficulty": 3
+    },
+    {
+        "word": "人物",
+        "difficulty": 3
+    },
+    {
+        "word": "進歩",
+        "difficulty": 3
+    },
+    {
+        "word": "親友",
+        "difficulty": 3
+    },
+    {
+        "word": "信用",
+        "difficulty": 3
+    },
+    {
+        "word": "信頼",
+        "difficulty": 3
+    },
+    {
+        "word": "心理",
+        "difficulty": 3
+    },
+    {
+        "word": "人類",
+        "difficulty": 3
+    },
+    {
+        "word": "巣",
+        "difficulty": 3
+    },
+    {
+        "word": "図",
+        "difficulty": 3
+    },
+    {
+        "word": "水準",
+        "difficulty": 3
+    },
+    {
+        "word": "推薦",
+        "difficulty": 3
+    },
+    {
+        "word": "随分",
+        "difficulty": 3
+    },
+    {
+        "word": "睡眠",
+        "difficulty": 3
+    },
+    {
+        "word": "数",
+        "difficulty": 3
+    },
+    {
+        "word": "数字",
+        "difficulty": 3
+    },
+    {
+        "word": "末",
+        "difficulty": 3
+    },
+    {
+        "word": "姿",
+        "difficulty": 3
+    },
+    {
+        "word": "空く",
+        "difficulty": 3
+    },
+    {
+        "word": "救う",
+        "difficulty": 3
+    },
+    {
+        "word": "優れる",
+        "difficulty": 3
+    },
+    {
+        "word": "少しも",
+        "difficulty": 3
+    },
+    {
+        "word": "過ごす",
+        "difficulty": 3
+    },
+    {
+        "word": "筋",
+        "difficulty": 3
+    },
+    {
+        "word": "進める",
+        "difficulty": 3
+    },
+    {
+        "word": "勧める",
+        "difficulty": 3
+    },
+    {
+        "word": "頭痛",
+        "difficulty": 3
+    },
+    {
+        "word": "既に",
+        "difficulty": 3
+    },
+    {
+        "word": "素晴らしい",
+        "difficulty": 3
+    },
+    {
+        "word": "全て",
+        "difficulty": 3
+    },
+    {
+        "word": "済ませる",
+        "difficulty": 3
+    },
+    {
+        "word": "角",
+        "difficulty": 3
+    },
+    {
+        "word": "すみません",
+        "difficulty": 3
+    },
+    {
+        "word": "為る",
+        "difficulty": 3
+    },
+    {
+        "word": "すると",
+        "difficulty": 3
+    },
+    {
+        "word": "鋭い",
+        "difficulty": 3
+    },
+    {
+        "word": "背",
+        "difficulty": 3
+    },
+    {
+        "word": "正",
+        "difficulty": 3
+    },
+    {
+        "word": "生",
+        "difficulty": 3
+    },
+    {
+        "word": "性",
+        "difficulty": 3
+    },
+    {
+        "word": "所為",
+        "difficulty": 3
+    },
+    {
+        "word": "税",
+        "difficulty": 3
+    },
+    {
+        "word": "性格",
+        "difficulty": 3
+    },
+    {
+        "word": "正確",
+        "difficulty": 3
+    },
+    {
+        "word": "世紀",
+        "difficulty": 3
+    },
+    {
+        "word": "請求",
+        "difficulty": 3
+    },
+    {
+        "word": "税金",
+        "difficulty": 3
+    },
+    {
+        "word": "清潔",
+        "difficulty": 3
+    },
+    {
+        "word": "制限",
+        "difficulty": 3
+    },
+    {
+        "word": "成功",
+        "difficulty": 3
+    },
+    {
+        "word": "生産",
+        "difficulty": 3
+    },
+    {
+        "word": "正式",
+        "difficulty": 3
+    },
+    {
+        "word": "精神",
+        "difficulty": 3
+    },
+    {
+        "word": "成人",
+        "difficulty": 3
+    },
+    {
+        "word": "精々",
+        "difficulty": 3
+    },
+    {
+        "word": "成績",
+        "difficulty": 3
+    },
+    {
+        "word": "製造",
+        "difficulty": 3
+    },
+    {
+        "word": "贅沢",
+        "difficulty": 3
+    },
+    {
+        "word": "成長",
+        "difficulty": 3
+    },
+    {
+        "word": "制度",
+        "difficulty": 3
+    },
+    {
+        "word": "青年",
+        "difficulty": 3
+    },
+    {
+        "word": "製品",
+        "difficulty": 3
+    },
+    {
+        "word": "政府",
+        "difficulty": 3
+    },
+    {
+        "word": "生物",
+        "difficulty": 3
+    },
+    {
+        "word": "生命",
+        "difficulty": 3
+    },
+    {
+        "word": "整理",
+        "difficulty": 3
+    },
+    {
+        "word": "咳",
+        "difficulty": 3
+    },
+    {
+        "word": "石炭",
+        "difficulty": 3
+    },
+    {
+        "word": "責任",
+        "difficulty": 3
+    },
+    {
+        "word": "石油",
+        "difficulty": 3
+    },
+    {
+        "word": "世間",
+        "difficulty": 3
+    },
+    {
+        "word": "説",
+        "difficulty": 3
+    },
+    {
+        "word": "積極的",
+        "difficulty": 3
+    },
+    {
+        "word": "設計",
+        "difficulty": 3
+    },
+    {
+        "word": "絶対",
+        "difficulty": 3
+    },
+    {
+        "word": "設備",
+        "difficulty": 3
+    },
+    {
+        "word": "絶滅",
+        "difficulty": 3
+    },
+    {
+        "word": "節約",
+        "difficulty": 3
+    },
+    {
+        "word": "是非",
+        "difficulty": 3
+    },
+    {
+        "word": "責める",
+        "difficulty": 3
+    },
+    {
+        "word": "世話",
+        "difficulty": 3
+    },
+    {
+        "word": "善",
+        "difficulty": 3
+    },
+    {
+        "word": "全",
+        "difficulty": 3
+    },
+    {
+        "word": "全員",
+        "difficulty": 3
+    },
+    {
+        "word": "専攻",
+        "difficulty": 3
+    },
+    {
+        "word": "全国",
+        "difficulty": 3
+    },
+    {
+        "word": "先日",
+        "difficulty": 3
+    },
+    {
+        "word": "前者",
+        "difficulty": 3
+    },
+    {
+        "word": "選手",
+        "difficulty": 3
+    },
+    {
+        "word": "前進",
+        "difficulty": 3
+    },
+    {
+        "word": "全然",
+        "difficulty": 3
+    },
+    {
+        "word": "全体",
+        "difficulty": 3
+    },
+    {
+        "word": "選択",
+        "difficulty": 3
+    },
+    {
+        "word": "そう",
+        "difficulty": 3
+    },
+    {
+        "word": "象",
+        "difficulty": 3
+    },
+    {
+        "word": "騒音",
+        "difficulty": 3
+    },
+    {
+        "word": "増加",
+        "difficulty": 3
+    },
+    {
+        "word": "操作",
+        "difficulty": 3
+    },
+    {
+        "word": "掃除",
+        "difficulty": 3
+    },
+    {
+        "word": "想像",
+        "difficulty": 3
+    },
+    {
+        "word": "相続",
+        "difficulty": 3
+    },
+    {
+        "word": "相談",
+        "difficulty": 3
+    },
+    {
+        "word": "装置",
+        "difficulty": 3
+    },
+    {
+        "word": "相当",
+        "difficulty": 3
+    },
+    {
+        "word": "速度",
+        "difficulty": 3
+    },
+    {
+        "word": "そこ",
+        "difficulty": 3
+    },
+    {
+        "word": "底",
+        "difficulty": 3
+    },
+    {
+        "word": "組織",
+        "difficulty": 3
+    },
+    {
+        "word": "注ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "育つ",
+        "difficulty": 3
+    },
+    {
+        "word": "袖",
+        "difficulty": 3
+    },
+    {
+        "word": "備える",
+        "difficulty": 3
+    },
+    {
+        "word": "その",
+        "difficulty": 3
+    },
+    {
+        "word": "側",
+        "difficulty": 3
+    },
+    {
+        "word": "粗末",
+        "difficulty": 3
+    },
+    {
+        "word": "それ",
+        "difficulty": 3
+    },
+    {
+        "word": "損",
+        "difficulty": 3
+    },
+    {
+        "word": "損害",
+        "difficulty": 3
+    },
+    {
+        "word": "尊敬",
+        "difficulty": 3
+    },
+    {
+        "word": "存在",
+        "difficulty": 3
+    },
+    {
+        "word": "尊重",
+        "difficulty": 3
+    },
+    {
+        "word": "田",
+        "difficulty": 3
+    },
+    {
+        "word": "他",
+        "difficulty": 3
+    },
+    {
+        "word": "対",
+        "difficulty": 3
+    },
+    {
+        "word": "大",
+        "difficulty": 3
+    },
+    {
+        "word": "台",
+        "difficulty": 3
+    },
+    {
+        "word": "題",
+        "difficulty": 3
+    },
+    {
+        "word": "体育",
+        "difficulty": 3
+    },
+    {
+        "word": "体温",
+        "difficulty": 3
+    },
+    {
+        "word": "大会",
+        "difficulty": 3
+    },
+    {
+        "word": "大気",
+        "difficulty": 3
+    },
+    {
+        "word": "代金",
+        "difficulty": 3
+    },
+    {
+        "word": "退屈",
+        "difficulty": 3
+    },
+    {
+        "word": "滞在",
+        "difficulty": 3
+    },
+    {
+        "word": "大使",
+        "difficulty": 3
+    },
+    {
+        "word": "大した",
+        "difficulty": 3
+    },
+    {
+        "word": "対象",
+        "difficulty": 3
+    },
+    {
+        "word": "大臣",
+        "difficulty": 3
+    },
+    {
+        "word": "対する",
+        "difficulty": 3
+    },
+    {
+        "word": "大戦",
+        "difficulty": 3
+    },
+    {
+        "word": "大抵",
+        "difficulty": 3
+    },
+    {
+        "word": "態度",
+        "difficulty": 3
+    },
+    {
+        "word": "大統領",
+        "difficulty": 3
+    },
+    {
+        "word": "大半",
+        "difficulty": 3
+    },
+    {
+        "word": "代表",
+        "difficulty": 3
+    },
+    {
+        "word": "大部分",
+        "difficulty": 3
+    },
+    {
+        "word": "大変",
+        "difficulty": 3
+    },
+    {
+        "word": "逮捕",
+        "difficulty": 3
+    },
+    {
+        "word": "太陽",
+        "difficulty": 3
+    },
+    {
+        "word": "平ら",
+        "difficulty": 3
+    },
+    {
+        "word": "代理",
+        "difficulty": 3
+    },
+    {
+        "word": "大陸",
+        "difficulty": 3
+    },
+    {
+        "word": "倒す",
+        "difficulty": 3
+    },
+    {
+        "word": "だが",
+        "difficulty": 3
+    },
+    {
+        "word": "互い",
+        "difficulty": 3
+    },
+    {
+        "word": "宝",
+        "difficulty": 3
+    },
+    {
+        "word": "だから",
+        "difficulty": 3
+    },
+    {
+        "word": "宅",
+        "difficulty": 3
+    },
+    {
+        "word": "確かめる",
+        "difficulty": 3
+    },
+    {
+        "word": "多少",
+        "difficulty": 3
+    },
+    {
+        "word": "助ける",
+        "difficulty": 3
+    },
+    {
+        "word": "唯",
+        "difficulty": 3
+    },
+    {
+        "word": "戦い",
+        "difficulty": 3
+    },
+    {
+        "word": "戦う",
+        "difficulty": 3
+    },
+    {
+        "word": "叩く",
+        "difficulty": 3
+    },
+    {
+        "word": "直ちに",
+        "difficulty": 3
+    },
+    {
+        "word": "立ち上がる",
+        "difficulty": 3
+    },
+    {
+        "word": "立場",
+        "difficulty": 3
+    },
+    {
+        "word": "経つ",
+        "difficulty": 3
+    },
+    {
+        "word": "達する",
+        "difficulty": 3
+    },
+    {
+        "word": "唯",
+        "difficulty": 3
+    },
+    {
+        "word": "縦",
+        "difficulty": 3
+    },
+    {
+        "word": "谷",
+        "difficulty": 3
+    },
+    {
+        "word": "他人",
+        "difficulty": 3
+    },
+    {
+        "word": "種",
+        "difficulty": 3
+    },
+    {
+        "word": "束",
+        "difficulty": 3
+    },
+    {
+        "word": "度",
+        "difficulty": 3
+    },
+    {
+        "word": "旅",
+        "difficulty": 3
+    },
+    {
+        "word": "多分",
+        "difficulty": 3
+    },
+    {
+        "word": "玉",
+        "difficulty": 3
+    },
+    {
+        "word": "球",
+        "difficulty": 3
+    },
+    {
+        "word": "弾",
+        "difficulty": 3
+    },
+    {
+        "word": "偶",
+        "difficulty": 3
+    },
+    {
+        "word": "偶々",
+        "difficulty": 3
+    },
+    {
+        "word": "黙る",
+        "difficulty": 3
+    },
+    {
+        "word": "駄目",
+        "difficulty": 3
+    },
+    {
+        "word": "試し",
+        "difficulty": 3
+    },
+    {
+        "word": "試す",
+        "difficulty": 3
+    },
+    {
+        "word": "便り",
+        "difficulty": 3
+    },
+    {
+        "word": "頼る",
+        "difficulty": 3
+    },
+    {
+        "word": "誰か",
+        "difficulty": 3
+    },
+    {
+        "word": "段",
+        "difficulty": 3
+    },
+    {
+        "word": "単位",
+        "difficulty": 3
+    },
+    {
+        "word": "単語",
+        "difficulty": 3
+    },
+    {
+        "word": "男子",
+        "difficulty": 3
+    },
+    {
+        "word": "単純",
+        "difficulty": 3
+    },
+    {
+        "word": "誕生",
+        "difficulty": 3
+    },
+    {
+        "word": "団体",
+        "difficulty": 3
+    },
+    {
+        "word": "担当",
+        "difficulty": 3
+    },
+    {
+        "word": "単なる",
+        "difficulty": 3
+    },
+    {
+        "word": "単に",
+        "difficulty": 3
+    },
+    {
+        "word": "地",
+        "difficulty": 3
+    },
+    {
+        "word": "地位",
+        "difficulty": 3
+    },
+    {
+        "word": "地域",
+        "difficulty": 3
+    },
+    {
+        "word": "知恵",
+        "difficulty": 3
+    },
+    {
+        "word": "地下",
+        "difficulty": 3
+    },
+    {
+        "word": "違い",
+        "difficulty": 3
+    },
+    {
+        "word": "違いない",
+        "difficulty": 3
+    },
+    {
+        "word": "近頃",
+        "difficulty": 3
+    },
+    {
+        "word": "地球",
+        "difficulty": 3
+    },
+    {
+        "word": "地区",
+        "difficulty": 3
+    },
+    {
+        "word": "遅刻",
+        "difficulty": 3
+    },
+    {
+        "word": "知事",
+        "difficulty": 3
+    },
+    {
+        "word": "知識",
+        "difficulty": 3
+    },
+    {
+        "word": "父親",
+        "difficulty": 3
+    },
+    {
+        "word": "知能",
+        "difficulty": 3
+    },
+    {
+        "word": "地平線",
+        "difficulty": 3
+    },
+    {
+        "word": "地方",
+        "difficulty": 3
+    },
+    {
+        "word": "茶",
+        "difficulty": 3
+    },
+    {
+        "word": "中",
+        "difficulty": 3
+    },
+    {
+        "word": "注",
+        "difficulty": 3
+    },
+    {
+        "word": "中央",
+        "difficulty": 3
+    },
+    {
+        "word": "中学",
+        "difficulty": 3
+    },
+    {
+        "word": "中古",
+        "difficulty": 3
+    },
+    {
+        "word": "中止",
+        "difficulty": 3
+    },
+    {
+        "word": "駐車",
+        "difficulty": 3
+    },
+    {
+        "word": "昼食",
+        "difficulty": 3
+    },
+    {
+        "word": "中心",
+        "difficulty": 3
+    },
+    {
+        "word": "注目",
+        "difficulty": 3
+    },
+    {
+        "word": "注文",
+        "difficulty": 3
+    },
+    {
+        "word": "長期",
+        "difficulty": 3
+    },
+    {
+        "word": "調査",
+        "difficulty": 3
+    },
+    {
+        "word": "調子",
+        "difficulty": 3
+    },
+    {
+        "word": "頂上",
+        "difficulty": 3
+    },
+    {
+        "word": "貯金",
+        "difficulty": 3
+    },
+    {
+        "word": "直接",
+        "difficulty": 3
+    },
+    {
+        "word": "著者",
+        "difficulty": 3
+    },
+    {
+        "word": "遂に",
+        "difficulty": 3
+    },
+    {
+        "word": "通過",
+        "difficulty": 3
+    },
+    {
+        "word": "通学",
+        "difficulty": 3
+    },
+    {
+        "word": "通行",
+        "difficulty": 3
+    },
+    {
+        "word": "通じる",
+        "difficulty": 3
+    },
+    {
+        "word": "通信",
+        "difficulty": 3
+    },
+    {
+        "word": "捕まる",
+        "difficulty": 3
+    },
+    {
+        "word": "掴む",
+        "difficulty": 3
+    },
+    {
+        "word": "疲れ",
+        "difficulty": 3
+    },
+    {
+        "word": "月",
+        "difficulty": 3
+    },
+    {
+        "word": "付き合い",
+        "difficulty": 3
+    },
+    {
+        "word": "次々",
+        "difficulty": 3
+    },
+    {
+        "word": "就く",
+        "difficulty": 3
+    },
+    {
+        "word": "注ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "付ける",
+        "difficulty": 3
+    },
+    {
+        "word": "土",
+        "difficulty": 3
+    },
+    {
+        "word": "続き",
+        "difficulty": 3
+    },
+    {
+        "word": "包み",
+        "difficulty": 3
+    },
+    {
+        "word": "勤め",
+        "difficulty": 3
+    },
+    {
+        "word": "務め",
+        "difficulty": 3
+    },
+    {
+        "word": "繋ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "常に",
+        "difficulty": 3
+    },
+    {
+        "word": "翼",
+        "difficulty": 3
+    },
+    {
+        "word": "罪",
+        "difficulty": 3
+    },
+    {
+        "word": "詰める",
+        "difficulty": 3
+    },
+    {
+        "word": "積もる",
+        "difficulty": 3
+    },
+    {
+        "word": "梅雨",
+        "difficulty": 3
+    },
+    {
+        "word": "辛い",
+        "difficulty": 3
+    },
+    {
+        "word": "釣",
+        "difficulty": 3
+    },
+    {
+        "word": "連れ",
+        "difficulty": 3
+    },
+    {
+        "word": "出会い",
+        "difficulty": 3
+    },
+    {
+        "word": "出会う",
+        "difficulty": 3
+    },
+    {
+        "word": "提案",
+        "difficulty": 3
+    },
+    {
+        "word": "定期",
+        "difficulty": 3
+    },
+    {
+        "word": "抵抗",
+        "difficulty": 3
+    },
+    {
+        "word": "提出",
+        "difficulty": 3
+    },
+    {
+        "word": "程度",
+        "difficulty": 3
+    },
+    {
+        "word": "停留所",
+        "difficulty": 3
+    },
+    {
+        "word": "敵",
+        "difficulty": 3
+    },
+    {
+        "word": "出来事",
+        "difficulty": 3
+    },
+    {
+        "word": "適する",
+        "difficulty": 3
+    },
+    {
+        "word": "適切",
+        "difficulty": 3
+    },
+    {
+        "word": "適度",
+        "difficulty": 3
+    },
+    {
+        "word": "適用",
+        "difficulty": 3
+    },
+    {
+        "word": "できる",
+        "difficulty": 3
+    },
+    {
+        "word": "出来るだけ",
+        "difficulty": 3
+    },
+    {
+        "word": "手品",
+        "difficulty": 3
+    },
+    {
+        "word": "鉄",
+        "difficulty": 3
+    },
+    {
+        "word": "哲学",
+        "difficulty": 3
+    },
+    {
+        "word": "手伝い",
+        "difficulty": 3
+    },
+    {
+        "word": "徹底",
+        "difficulty": 3
+    },
+    {
+        "word": "鉄道",
+        "difficulty": 3
+    },
+    {
+        "word": "徹夜",
+        "difficulty": 3
+    },
+    {
+        "word": "では",
+        "difficulty": 3
+    },
+    {
+        "word": "手間",
+        "difficulty": 3
+    },
+    {
+        "word": "でも",
+        "difficulty": 3
+    },
+    {
+        "word": "典型",
+        "difficulty": 3
+    },
+    {
+        "word": "天候",
+        "difficulty": 3
+    },
+    {
+        "word": "電子",
+        "difficulty": 3
+    },
+    {
+        "word": "伝統",
+        "difficulty": 3
+    },
+    {
+        "word": "天然",
+        "difficulty": 3
+    },
+    {
+        "word": "度",
+        "difficulty": 3
+    },
+    {
+        "word": "問い",
+        "difficulty": 3
+    },
+    {
+        "word": "党",
+        "difficulty": 3
+    },
+    {
+        "word": "塔",
+        "difficulty": 3
+    },
+    {
+        "word": "どう",
+        "difficulty": 3
+    },
+    {
+        "word": "答案",
+        "difficulty": 3
+    },
+    {
+        "word": "同一",
+        "difficulty": 3
+    },
+    {
+        "word": "当時",
+        "difficulty": 3
+    },
+    {
+        "word": "動詞",
+        "difficulty": 3
+    },
+    {
+        "word": "同時",
+        "difficulty": 3
+    },
+    {
+        "word": "到着",
+        "difficulty": 3
+    },
+    {
+        "word": "道徳",
+        "difficulty": 3
+    },
+    {
+        "word": "投票",
+        "difficulty": 3
+    },
+    {
+        "word": "同様",
+        "difficulty": 3
+    },
+    {
+        "word": "同僚",
+        "difficulty": 3
+    },
+    {
+        "word": "道路",
+        "difficulty": 3
+    },
+    {
+        "word": "十",
+        "difficulty": 3
+    },
+    {
+        "word": "通す",
+        "difficulty": 3
+    },
+    {
+        "word": "通り",
+        "difficulty": 3
+    },
+    {
+        "word": "通り過ぎる",
+        "difficulty": 3
+    },
+    {
+        "word": "都会",
+        "difficulty": 3
+    },
+    {
+        "word": "時",
+        "difficulty": 3
+    },
+    {
+        "word": "解く",
+        "difficulty": 3
+    },
+    {
+        "word": "毒",
+        "difficulty": 3
+    },
+    {
+        "word": "得意",
+        "difficulty": 3
+    },
+    {
+        "word": "読書",
+        "difficulty": 3
+    },
+    {
+        "word": "独身",
+        "difficulty": 3
+    },
+    {
+        "word": "特徴",
+        "difficulty": 3
+    },
+    {
+        "word": "独特",
+        "difficulty": 3
+    },
+    {
+        "word": "独立",
+        "difficulty": 3
+    },
+    {
+        "word": "解ける",
+        "difficulty": 3
+    },
+    {
+        "word": "登山",
+        "difficulty": 3
+    },
+    {
+        "word": "都市",
+        "difficulty": 3
+    },
+    {
+        "word": "年月",
+        "difficulty": 3
+    },
+    {
+        "word": "図書",
+        "difficulty": 3
+    },
+    {
+        "word": "年寄",
+        "difficulty": 3
+    },
+    {
+        "word": "閉じる",
+        "difficulty": 3
+    },
+    {
+        "word": "途端",
+        "difficulty": 3
+    },
+    {
+        "word": "土地",
+        "difficulty": 3
+    },
+    {
+        "word": "突然",
+        "difficulty": 3
+    },
+    {
+        "word": "届く",
+        "difficulty": 3
+    },
+    {
+        "word": "飛ばす",
+        "difficulty": 3
+    },
+    {
+        "word": "飛び出す",
+        "difficulty": 3
+    },
+    {
+        "word": "留める",
+        "difficulty": 3
+    },
+    {
+        "word": "友",
+        "difficulty": 3
+    },
+    {
+        "word": "共に",
+        "difficulty": 3
+    },
+    {
+        "word": "土曜",
+        "difficulty": 3
+    },
+    {
+        "word": "虎",
+        "difficulty": 3
+    },
+    {
+        "word": "取り上げる",
+        "difficulty": 3
+    },
+    {
+        "word": "努力",
+        "difficulty": 3
+    },
+    {
+        "word": "どれ",
+        "difficulty": 3
+    },
+    {
+        "word": "取れる",
+        "difficulty": 3
+    },
+    {
+        "word": "泥",
+        "difficulty": 3
+    },
+    {
+        "word": "とん",
+        "difficulty": 3
+    },
+    {
+        "word": "名",
+        "difficulty": 3
+    },
+    {
+        "word": "内容",
+        "difficulty": 3
+    },
+    {
+        "word": "仲",
+        "difficulty": 3
+    },
+    {
+        "word": "流す",
+        "difficulty": 3
+    },
+    {
+        "word": "半ば",
+        "difficulty": 3
+    },
+    {
+        "word": "仲間",
+        "difficulty": 3
+    },
+    {
+        "word": "眺め",
+        "difficulty": 3
+    },
+    {
+        "word": "眺める",
+        "difficulty": 3
+    },
+    {
+        "word": "流れ",
+        "difficulty": 3
+    },
+    {
+        "word": "流れる",
+        "difficulty": 3
+    },
+    {
+        "word": "無し",
+        "difficulty": 3
+    },
+    {
+        "word": "謎",
+        "difficulty": 3
+    },
+    {
+        "word": "納得",
+        "difficulty": 3
+    },
+    {
+        "word": "等",
+        "difficulty": 3
+    },
+    {
+        "word": "七",
+        "difficulty": 3
+    },
+    {
+        "word": "何",
+        "difficulty": 3
+    },
+    {
+        "word": "何",
+        "difficulty": 3
+    },
+    {
+        "word": "何か",
+        "difficulty": 3
+    },
+    {
+        "word": "鍋",
+        "difficulty": 3
+    },
+    {
+        "word": "生",
+        "difficulty": 3
+    },
+    {
+        "word": "怠ける",
+        "difficulty": 3
+    },
+    {
+        "word": "波",
+        "difficulty": 3
+    },
+    {
+        "word": "涙",
+        "difficulty": 3
+    },
+    {
+        "word": "悩む",
+        "difficulty": 3
+    },
+    {
+        "word": "為る",
+        "difficulty": 3
+    },
+    {
+        "word": "成る",
+        "difficulty": 3
+    },
+    {
+        "word": "縄",
+        "difficulty": 3
+    },
+    {
+        "word": "何で",
+        "difficulty": 3
+    },
+    {
+        "word": "何でも",
+        "difficulty": 3
+    },
+    {
+        "word": "何とか",
+        "difficulty": 3
+    },
+    {
+        "word": "似合う",
+        "difficulty": 3
+    },
+    {
+        "word": "匂い",
+        "difficulty": 3
+    },
+    {
+        "word": "苦手",
+        "difficulty": 3
+    },
+    {
+        "word": "握る",
+        "difficulty": 3
+    },
+    {
+        "word": "日",
+        "difficulty": 3
+    },
+    {
+        "word": "日常",
+        "difficulty": 3
+    },
+    {
+        "word": "日曜",
+        "difficulty": 3
+    },
+    {
+        "word": "日光",
+        "difficulty": 3
+    },
+    {
+        "word": "日中",
+        "difficulty": 3
+    },
+    {
+        "word": "日本",
+        "difficulty": 3
+    },
+    {
+        "word": "日本",
+        "difficulty": 3
+    },
+    {
+        "word": "入院",
+        "difficulty": 3
+    },
+    {
+        "word": "入学",
+        "difficulty": 3
+    },
+    {
+        "word": "入場",
+        "difficulty": 3
+    },
+    {
+        "word": "人気",
+        "difficulty": 3
+    },
+    {
+        "word": "人間",
+        "difficulty": 3
+    },
+    {
+        "word": "抜く",
+        "difficulty": 3
+    },
+    {
+        "word": "抜ける",
+        "difficulty": 3
+    },
+    {
+        "word": "布",
+        "difficulty": 3
+    },
+    {
+        "word": "濡れる",
+        "difficulty": 3
+    },
+    {
+        "word": "ね",
+        "difficulty": 3
+    },
+    {
+        "word": "根",
+        "difficulty": 3
+    },
+    {
+        "word": "値",
+        "difficulty": 3
+    },
+    {
+        "word": "願い",
+        "difficulty": 3
+    },
+    {
+        "word": "願う",
+        "difficulty": 3
+    },
+    {
+        "word": "鼠",
+        "difficulty": 3
+    },
+    {
+        "word": "値段",
+        "difficulty": 3
+    },
+    {
+        "word": "熱心",
+        "difficulty": 3
+    },
+    {
+        "word": "熱帯",
+        "difficulty": 3
+    },
+    {
+        "word": "熱中",
+        "difficulty": 3
+    },
+    {
+        "word": "年間",
+        "difficulty": 3
+    },
+    {
+        "word": "年月",
+        "difficulty": 3
+    },
+    {
+        "word": "年中",
+        "difficulty": 3
+    },
+    {
+        "word": "年代",
+        "difficulty": 3
+    },
+    {
+        "word": "年齢",
+        "difficulty": 3
+    },
+    {
+        "word": "野",
+        "difficulty": 3
+    },
+    {
+        "word": "能",
+        "difficulty": 3
+    },
+    {
+        "word": "農家",
+        "difficulty": 3
+    },
+    {
+        "word": "農業",
+        "difficulty": 3
+    },
+    {
+        "word": "農民",
+        "difficulty": 3
+    },
+    {
+        "word": "能力",
+        "difficulty": 3
+    },
+    {
+        "word": "ノー",
+        "difficulty": 3
+    },
+    {
+        "word": "軒",
+        "difficulty": 3
+    },
+    {
+        "word": "残す",
+        "difficulty": 3
+    },
+    {
+        "word": "残り",
+        "difficulty": 3
+    },
+    {
+        "word": "乗せる",
+        "difficulty": 3
+    },
+    {
+        "word": "除く",
+        "difficulty": 3
+    },
+    {
+        "word": "望み",
+        "difficulty": 3
+    },
+    {
+        "word": "望む",
+        "difficulty": 3
+    },
+    {
+        "word": "後",
+        "difficulty": 3
+    },
+    {
+        "word": "喉",
+        "difficulty": 3
+    },
+    {
+        "word": "伸ばす",
+        "difficulty": 3
+    },
+    {
+        "word": "伸びる",
+        "difficulty": 3
+    },
+    {
+        "word": "述べる",
+        "difficulty": 3
+    },
+    {
+        "word": "嘲",
+        "difficulty": 3
+    },
+    {
+        "word": "場",
+        "difficulty": 3
+    },
+    {
+        "word": "はあ",
+        "difficulty": 3
+    },
+    {
+        "word": "はい",
+        "difficulty": 3
+    },
+    {
+        "word": "灰",
+        "difficulty": 3
+    },
+    {
+        "word": "梅雨",
+        "difficulty": 3
+    },
+    {
+        "word": "配達",
+        "difficulty": 3
+    },
+    {
+        "word": "俳優",
+        "difficulty": 3
+    },
+    {
+        "word": "墓",
+        "difficulty": 3
+    },
+    {
+        "word": "馬鹿",
+        "difficulty": 3
+    },
+    {
+        "word": "博士",
+        "difficulty": 3
+    },
+    {
+        "word": "計る",
+        "difficulty": 3
+    },
+    {
+        "word": "履く",
+        "difficulty": 3
+    },
+    {
+        "word": "吐く",
+        "difficulty": 3
+    },
+    {
+        "word": "拍手",
+        "difficulty": 3
+    },
+    {
+        "word": "莫大",
+        "difficulty": 3
+    },
+    {
+        "word": "爆発",
+        "difficulty": 3
+    },
+    {
+        "word": "博物館",
+        "difficulty": 3
+    },
+    {
+        "word": "激しい",
+        "difficulty": 3
+    },
+    {
+        "word": "破産",
+        "difficulty": 3
+    },
+    {
+        "word": "端",
+        "difficulty": 3
+    },
+    {
+        "word": "始まり",
+        "difficulty": 3
+    },
+    {
+        "word": "外す",
+        "difficulty": 3
+    },
+    {
+        "word": "旗",
+        "difficulty": 3
+    },
+    {
+        "word": "肌",
+        "difficulty": 3
+    },
+    {
+        "word": "裸",
+        "difficulty": 3
+    },
+    {
+        "word": "畑",
+        "difficulty": 3
+    },
+    {
+        "word": "二十",
+        "difficulty": 3
+    },
+    {
+        "word": "働き",
+        "difficulty": 3
+    },
+    {
+        "word": "発見",
+        "difficulty": 3
+    },
+    {
+        "word": "発行",
+        "difficulty": 3
+    },
+    {
+        "word": "発車",
+        "difficulty": 3
+    },
+    {
+        "word": "罰する",
+        "difficulty": 3
+    },
+    {
+        "word": "発達",
+        "difficulty": 3
+    },
+    {
+        "word": "発展",
+        "difficulty": 3
+    },
+    {
+        "word": "発表",
+        "difficulty": 3
+    },
+    {
+        "word": "発明",
+        "difficulty": 3
+    },
+    {
+        "word": "話し合う",
+        "difficulty": 3
+    },
+    {
+        "word": "離す",
+        "difficulty": 3
+    },
+    {
+        "word": "放す",
+        "difficulty": 3
+    },
+    {
+        "word": "離れる",
+        "difficulty": 3
+    },
+    {
+        "word": "羽",
+        "difficulty": 3
+    },
+    {
+        "word": "幅",
+        "difficulty": 3
+    },
+    {
+        "word": "母親",
+        "difficulty": 3
+    },
+    {
+        "word": "省く",
+        "difficulty": 3
+    },
+    {
+        "word": "場面",
+        "difficulty": 3
+    },
+    {
+        "word": "腹",
+        "difficulty": 3
+    },
+    {
+        "word": "原",
+        "difficulty": 3
+    },
+    {
+        "word": "針",
+        "difficulty": 3
+    },
+    {
+        "word": "張る",
+        "difficulty": 3
+    },
+    {
+        "word": "番",
+        "difficulty": 3
+    },
+    {
+        "word": "範囲",
+        "difficulty": 3
+    },
+    {
+        "word": "反抗",
+        "difficulty": 3
+    },
+    {
+        "word": "犯罪",
+        "difficulty": 3
+    },
+    {
+        "word": "判断",
+        "difficulty": 3
+    },
+    {
+        "word": "犯人",
+        "difficulty": 3
+    },
+    {
+        "word": "販売",
+        "difficulty": 3
+    },
+    {
+        "word": "灯",
+        "difficulty": 3
+    },
+    {
+        "word": "被害",
+        "difficulty": 3
+    },
+    {
+        "word": "比較",
+        "difficulty": 3
+    },
+    {
+        "word": "轢く",
+        "difficulty": 3
+    },
+    {
+        "word": "悲劇",
+        "difficulty": 3
+    },
+    {
+        "word": "飛行",
+        "difficulty": 3
+    },
+    {
+        "word": "膝",
+        "difficulty": 3
+    },
+    {
+        "word": "非常",
+        "difficulty": 3
+    },
+    {
+        "word": "美人",
+        "difficulty": 3
+    },
+    {
+        "word": "額",
+        "difficulty": 3
+    },
+    {
+        "word": "日付",
+        "difficulty": 3
+    },
+    {
+        "word": "必死",
+        "difficulty": 3
+    },
+    {
+        "word": "引っ張る",
+        "difficulty": 3
+    },
+    {
+        "word": "否定",
+        "difficulty": 3
+    },
+    {
+        "word": "一言",
+        "difficulty": 3
+    },
+    {
+        "word": "人込み",
+        "difficulty": 3
+    },
+    {
+        "word": "等しい",
+        "difficulty": 3
+    },
+    {
+        "word": "独り",
+        "difficulty": 3
+    },
+    {
+        "word": "一人一人",
+        "difficulty": 3
+    },
+    {
+        "word": "批判",
+        "difficulty": 3
+    },
+    {
+        "word": "批評",
+        "difficulty": 3
+    },
+    {
+        "word": "秘密",
+        "difficulty": 3
+    },
+    {
+        "word": "微妙",
+        "difficulty": 3
+    },
+    {
+        "word": "紐",
+        "difficulty": 3
+    },
+    {
+        "word": "費用",
+        "difficulty": 3
+    },
+    {
+        "word": "表",
+        "difficulty": 3
+    },
+    {
+        "word": "秒",
+        "difficulty": 3
+    },
+    {
+        "word": "評価",
+        "difficulty": 3
+    },
+    {
+        "word": "表現",
+        "difficulty": 3
+    },
+    {
+        "word": "表情",
+        "difficulty": 3
+    },
+    {
+        "word": "平等",
+        "difficulty": 3
+    },
+    {
+        "word": "評判",
+        "difficulty": 3
+    },
+    {
+        "word": "表面",
+        "difficulty": 3
+    },
+    {
+        "word": "広がる",
+        "difficulty": 3
+    },
+    {
+        "word": "品",
+        "difficulty": 3
+    },
+    {
+        "word": "瓶",
+        "difficulty": 3
+    },
+    {
+        "word": "便",
+        "difficulty": 3
+    },
+    {
+        "word": "不",
+        "difficulty": 3
+    },
+    {
+        "word": "不",
+        "difficulty": 3
+    },
+    {
+        "word": "無",
+        "difficulty": 3
+    },
+    {
+        "word": "分",
+        "difficulty": 3
+    },
+    {
+        "word": "不安",
+        "difficulty": 3
+    },
+    {
+        "word": "風景",
+        "difficulty": 3
+    },
+    {
+        "word": "夫婦",
+        "difficulty": 3
+    },
+    {
+        "word": "笛",
+        "difficulty": 3
+    },
+    {
+        "word": "不可",
+        "difficulty": 3
+    },
+    {
+        "word": "武器",
+        "difficulty": 3
+    },
+    {
+        "word": "服装",
+        "difficulty": 3
+    },
+    {
+        "word": "含む",
+        "difficulty": 3
+    },
+    {
+        "word": "袋",
+        "difficulty": 3
+    },
+    {
+        "word": "不幸",
+        "difficulty": 3
+    },
+    {
+        "word": "節",
+        "difficulty": 3
+    },
+    {
+        "word": "無事",
+        "difficulty": 3
+    },
+    {
+        "word": "不思議",
+        "difficulty": 3
+    },
+    {
+        "word": "不自由",
+        "difficulty": 3
+    },
+    {
+        "word": "夫人",
+        "difficulty": 3
+    },
+    {
+        "word": "婦人",
+        "difficulty": 3
+    },
+    {
+        "word": "不正",
+        "difficulty": 3
+    },
+    {
+        "word": "防ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "不足",
+        "difficulty": 3
+    },
+    {
+        "word": "舞台",
+        "difficulty": 3
+    },
+    {
+        "word": "双子",
+        "difficulty": 3
+    },
+    {
+        "word": "再び",
+        "difficulty": 3
+    },
+    {
+        "word": "普段",
+        "difficulty": 3
+    },
+    {
+        "word": "縁",
+        "difficulty": 3
+    },
+    {
+        "word": "打つ",
+        "difficulty": 3
+    },
+    {
+        "word": "物価",
+        "difficulty": 3
+    },
+    {
+        "word": "物質",
+        "difficulty": 3
+    },
+    {
+        "word": "物理",
+        "difficulty": 3
+    },
+    {
+        "word": "筆",
+        "difficulty": 3
+    },
+    {
+        "word": "ふと",
+        "difficulty": 3
+    },
+    {
+        "word": "船",
+        "difficulty": 3
+    },
+    {
+        "word": "部分",
+        "difficulty": 3
+    },
+    {
+        "word": "不平",
+        "difficulty": 3
+    },
+    {
+        "word": "不満",
+        "difficulty": 3
+    },
+    {
+        "word": "不利",
+        "difficulty": 3
+    },
+    {
+        "word": "振る",
+        "difficulty": 3
+    },
+    {
+        "word": "震える",
+        "difficulty": 3
+    },
+    {
+        "word": "触れる",
+        "difficulty": 3
+    },
+    {
+        "word": "風呂",
+        "difficulty": 3
+    },
+    {
+        "word": "分",
+        "difficulty": 3
+    },
+    {
+        "word": "文",
+        "difficulty": 3
+    },
+    {
+        "word": "雰囲気",
+        "difficulty": 3
+    },
+    {
+        "word": "分析",
+        "difficulty": 3
+    },
+    {
+        "word": "文明",
+        "difficulty": 3
+    },
+    {
+        "word": "分野",
+        "difficulty": 3
+    },
+    {
+        "word": "塀",
+        "difficulty": 3
+    },
+    {
+        "word": "平均",
+        "difficulty": 3
+    },
+    {
+        "word": "平和",
+        "difficulty": 3
+    },
+    {
+        "word": "別に",
+        "difficulty": 3
+    },
+    {
+        "word": "減らす",
+        "difficulty": 3
+    },
+    {
+        "word": "減る",
+        "difficulty": 3
+    },
+    {
+        "word": "変化",
+        "difficulty": 3
+    },
+    {
+        "word": "勉強",
+        "difficulty": 3
+    },
+    {
+        "word": "変更",
+        "difficulty": 3
+    },
+    {
+        "word": "弁当",
+        "difficulty": 3
+    },
+    {
+        "word": "方",
+        "difficulty": 3
+    },
+    {
+        "word": "法",
+        "difficulty": 3
+    },
+    {
+        "word": "棒",
+        "difficulty": 3
+    },
+    {
+        "word": "冒険",
+        "difficulty": 3
+    },
+    {
+        "word": "方向",
+        "difficulty": 3
+    },
+    {
+        "word": "報告",
+        "difficulty": 3
+    },
+    {
+        "word": "宝石",
+        "difficulty": 3
+    },
+    {
+        "word": "放送",
+        "difficulty": 3
+    },
+    {
+        "word": "豊富",
+        "difficulty": 3
+    },
+    {
+        "word": "方法",
+        "difficulty": 3
+    },
+    {
+        "word": "方々",
+        "difficulty": 3
+    },
+    {
+        "word": "訪問",
+        "difficulty": 3
+    },
+    {
+        "word": "吠える",
+        "difficulty": 3
+    },
+    {
+        "word": "他",
+        "difficulty": 3
+    },
+    {
+        "word": "外",
+        "difficulty": 3
+    },
+    {
+        "word": "誇り",
+        "difficulty": 3
+    },
+    {
+        "word": "埃",
+        "difficulty": 3
+    },
+    {
+        "word": "保証",
+        "difficulty": 3
+    },
+    {
+        "word": "保存",
+        "difficulty": 3
+    },
+    {
+        "word": "程",
+        "difficulty": 3
+    },
+    {
+        "word": "歩道",
+        "difficulty": 3
+    },
+    {
+        "word": "仏",
+        "difficulty": 3
+    },
+    {
+        "word": "骨",
+        "difficulty": 3
+    },
+    {
+        "word": "炎",
+        "difficulty": 3
+    },
+    {
+        "word": "頬",
+        "difficulty": 3
+    },
+    {
+        "word": "頬",
+        "difficulty": 3
+    },
+    {
+        "word": "微笑む",
+        "difficulty": 3
+    },
+    {
+        "word": "褒める",
+        "difficulty": 3
+    },
+    {
+        "word": "濠",
+        "difficulty": 3
+    },
+    {
+        "word": "本当",
+        "difficulty": 3
+    },
+    {
+        "word": "本当",
+        "difficulty": 3
+    },
+    {
+        "word": "本人",
+        "difficulty": 3
+    },
+    {
+        "word": "本物",
+        "difficulty": 3
+    },
+    {
+        "word": "間",
+        "difficulty": 3
+    },
+    {
+        "word": "迷子",
+        "difficulty": 3
+    },
+    {
+        "word": "任せる",
+        "difficulty": 3
+    },
+    {
+        "word": "幕",
+        "difficulty": 3
+    },
+    {
+        "word": "負け",
+        "difficulty": 3
+    },
+    {
+        "word": "孫",
+        "difficulty": 3
+    },
+    {
+        "word": "真面目",
+        "difficulty": 3
+    },
+    {
+        "word": "増す",
+        "difficulty": 3
+    },
+    {
+        "word": "先ず",
+        "difficulty": 3
+    },
+    {
+        "word": "貧しい",
+        "difficulty": 3
+    },
+    {
+        "word": "又",
+        "difficulty": 3
+    },
+    {
+        "word": "未だ",
+        "difficulty": 3
+    },
+    {
+        "word": "街",
+        "difficulty": 3
+    },
+    {
+        "word": "間違い",
+        "difficulty": 3
+    },
+    {
+        "word": "松",
+        "difficulty": 3
+    },
+    {
+        "word": "真っ赤",
+        "difficulty": 3
+    },
+    {
+        "word": "真っ直ぐ",
+        "difficulty": 3
+    },
+    {
+        "word": "全く",
+        "difficulty": 3
+    },
+    {
+        "word": "祭",
+        "difficulty": 3
+    },
+    {
+        "word": "学ぶ",
+        "difficulty": 3
+    },
+    {
+        "word": "真似",
+        "difficulty": 3
+    },
+    {
+        "word": "招く",
+        "difficulty": 3
+    },
+    {
+        "word": "豆",
+        "difficulty": 3
+    },
+    {
+        "word": "守る",
+        "difficulty": 3
+    },
+    {
+        "word": "丸",
+        "difficulty": 3
+    },
+    {
+        "word": "円",
+        "difficulty": 3
+    },
+    {
+        "word": "丸い",
+        "difficulty": 3
+    },
+    {
+        "word": "回す",
+        "difficulty": 3
+    },
+    {
+        "word": "回り",
+        "difficulty": 3
+    },
+    {
+        "word": "万一",
+        "difficulty": 3
+    },
+    {
+        "word": "満足",
+        "difficulty": 3
+    },
+    {
+        "word": "身",
+        "difficulty": 3
+    },
+    {
+        "word": "実",
+        "difficulty": 3
+    },
+    {
+        "word": "見送り",
+        "difficulty": 3
+    },
+    {
+        "word": "味方",
+        "difficulty": 3
+    },
+    {
+        "word": "見事",
+        "difficulty": 3
+    },
+    {
+        "word": "満ちる",
+        "difficulty": 3
+    },
+    {
+        "word": "密",
+        "difficulty": 3
+    },
+    {
+        "word": "認める",
+        "difficulty": 3
+    },
+    {
+        "word": "皆",
+        "difficulty": 3
+    },
+    {
+        "word": "見舞い",
+        "difficulty": 3
+    },
+    {
+        "word": "土産",
+        "difficulty": 3
+    },
+    {
+        "word": "都",
+        "difficulty": 3
+    },
+    {
+        "word": "妙",
+        "difficulty": 3
+    },
+    {
+        "word": "明後日",
+        "difficulty": 3
+    },
+    {
+        "word": "未来",
+        "difficulty": 3
+    },
+    {
+        "word": "魅力",
+        "difficulty": 3
+    },
+    {
+        "word": "見る",
+        "difficulty": 3
+    },
+    {
+        "word": "無",
+        "difficulty": 3
+    },
+    {
+        "word": "向かい",
+        "difficulty": 3
+    },
+    {
+        "word": "迎え",
+        "difficulty": 3
+    },
+    {
+        "word": "向く",
+        "difficulty": 3
+    },
+    {
+        "word": "向ける",
+        "difficulty": 3
+    },
+    {
+        "word": "無視",
+        "difficulty": 3
+    },
+    {
+        "word": "虫歯",
+        "difficulty": 3
+    },
+    {
+        "word": "寧ろ",
+        "difficulty": 3
+    },
+    {
+        "word": "結ぶ",
+        "difficulty": 3
+    },
+    {
+        "word": "無駄",
+        "difficulty": 3
+    },
+    {
+        "word": "夢中",
+        "difficulty": 3
+    },
+    {
+        "word": "胸",
+        "difficulty": 3
+    },
+    {
+        "word": "無料",
+        "difficulty": 3
+    },
+    {
+        "word": "芽",
+        "difficulty": 3
+    },
+    {
+        "word": "明確",
+        "difficulty": 3
+    },
+    {
+        "word": "命じる",
+        "difficulty": 3
+    },
+    {
+        "word": "名人",
+        "difficulty": 3
+    },
+    {
+        "word": "命令",
+        "difficulty": 3
+    },
+    {
+        "word": "迷惑",
+        "difficulty": 3
+    },
+    {
+        "word": "飯",
+        "difficulty": 3
+    },
+    {
+        "word": "滅多に",
+        "difficulty": 3
+    },
+    {
+        "word": "面",
+        "difficulty": 3
+    },
+    {
+        "word": "綿",
+        "difficulty": 3
+    },
+    {
+        "word": "免許",
+        "difficulty": 3
+    },
+    {
+        "word": "面倒",
+        "difficulty": 3
+    },
+    {
+        "word": "申し込む",
+        "difficulty": 3
+    },
+    {
+        "word": "申し訳",
+        "difficulty": 3
+    },
+    {
+        "word": "毛布",
+        "difficulty": 3
+    },
+    {
+        "word": "燃える",
+        "difficulty": 3
+    },
+    {
+        "word": "目的",
+        "difficulty": 3
+    },
+    {
+        "word": "目標",
+        "difficulty": 3
+    },
+    {
+        "word": "木曜",
+        "difficulty": 3
+    },
+    {
+        "word": "文字",
+        "difficulty": 3
+    },
+    {
+        "word": "文字",
+        "difficulty": 3
+    },
+    {
+        "word": "持ち上げる",
+        "difficulty": 3
+    },
+    {
+        "word": "用いる",
+        "difficulty": 3
+    },
+    {
+        "word": "勿論",
+        "difficulty": 3
+    },
+    {
+        "word": "最も",
+        "difficulty": 3
+    },
+    {
+        "word": "尤も",
+        "difficulty": 3
+    },
+    {
+        "word": "元",
+        "difficulty": 3
+    },
+    {
+        "word": "基",
+        "difficulty": 3
+    },
+    {
+        "word": "素",
+        "difficulty": 3
+    },
+    {
+        "word": "戻す",
+        "difficulty": 3
+    },
+    {
+        "word": "基づく",
+        "difficulty": 3
+    },
+    {
+        "word": "求める",
+        "difficulty": 3
+    },
+    {
+        "word": "者",
+        "difficulty": 3
+    },
+    {
+        "word": "物音",
+        "difficulty": 3
+    },
+    {
+        "word": "物語",
+        "difficulty": 3
+    },
+    {
+        "word": "物事",
+        "difficulty": 3
+    },
+    {
+        "word": "模様",
+        "difficulty": 3
+    },
+    {
+        "word": "貰う",
+        "difficulty": 3
+    },
+    {
+        "word": "文句",
+        "difficulty": 3
+    },
+    {
+        "word": "役",
+        "difficulty": 3
+    },
+    {
+        "word": "約",
+        "difficulty": 3
+    },
+    {
+        "word": "訳",
+        "difficulty": 3
+    },
+    {
+        "word": "役割",
+        "difficulty": 3
+    },
+    {
+        "word": "家賃",
+        "difficulty": 3
+    },
+    {
+        "word": "厄介",
+        "difficulty": 3
+    },
+    {
+        "word": "宿",
+        "difficulty": 3
+    },
+    {
+        "word": "雇う",
+        "difficulty": 3
+    },
+    {
+        "word": "屋根",
+        "difficulty": 3
+    },
+    {
+        "word": "破る",
+        "difficulty": 3
+    },
+    {
+        "word": "辞める",
+        "difficulty": 3
+    },
+    {
+        "word": "唯一",
+        "difficulty": 3
+    },
+    {
+        "word": "勇気",
+        "difficulty": 3
+    },
+    {
+        "word": "有効",
+        "difficulty": 3
+    },
+    {
+        "word": "優秀",
+        "difficulty": 3
+    },
+    {
+        "word": "優勝",
+        "difficulty": 3
+    },
+    {
+        "word": "友情",
+        "difficulty": 3
+    },
+    {
+        "word": "友人",
+        "difficulty": 3
+    },
+    {
+        "word": "有能",
+        "difficulty": 3
+    },
+    {
+        "word": "郵便",
+        "difficulty": 3
+    },
+    {
+        "word": "夕べ",
+        "difficulty": 3
+    },
+    {
+        "word": "有利",
+        "difficulty": 3
+    },
+    {
+        "word": "床",
+        "difficulty": 3
+    },
+    {
+        "word": "愉快",
+        "difficulty": 3
+    },
+    {
+        "word": "輸出",
+        "difficulty": 3
+    },
+    {
+        "word": "譲る",
+        "difficulty": 3
+    },
+    {
+        "word": "豊か",
+        "difficulty": 3
+    },
+    {
+        "word": "輸入",
+        "difficulty": 3
+    },
+    {
+        "word": "許す",
+        "difficulty": 3
+    },
+    {
+        "word": "夜",
+        "difficulty": 3
+    },
+    {
+        "word": "夜明け",
+        "difficulty": 3
+    },
+    {
+        "word": "様",
+        "difficulty": 3
+    },
+    {
+        "word": "酔う",
+        "difficulty": 3
+    },
+    {
+        "word": "容易",
+        "difficulty": 3
+    },
+    {
+        "word": "陽気",
+        "difficulty": 3
+    },
+    {
+        "word": "要求",
+        "difficulty": 3
+    },
+    {
+        "word": "用心",
+        "difficulty": 3
+    },
+    {
+        "word": "様子",
+        "difficulty": 3
+    },
+    {
+        "word": "要するに",
+        "difficulty": 3
+    },
+    {
+        "word": "要素",
+        "difficulty": 3
+    },
+    {
+        "word": "要点",
+        "difficulty": 3
+    },
+    {
+        "word": "曜日",
+        "difficulty": 3
+    },
+    {
+        "word": "予期",
+        "difficulty": 3
+    },
+    {
+        "word": "横切る",
+        "difficulty": 3
+    },
+    {
+        "word": "予算",
+        "difficulty": 3
+    },
+    {
+        "word": "止す",
+        "difficulty": 3
+    },
+    {
+        "word": "予測",
+        "difficulty": 3
+    },
+    {
+        "word": "夜中",
+        "difficulty": 3
+    },
+    {
+        "word": "世の中",
+        "difficulty": 3
+    },
+    {
+        "word": "余分",
+        "difficulty": 3
+    },
+    {
+        "word": "予報",
+        "difficulty": 3
+    },
+    {
+        "word": "予防",
+        "difficulty": 3
+    },
+    {
+        "word": "読み",
+        "difficulty": 3
+    },
+    {
+        "word": "嫁",
+        "difficulty": 3
+    },
+    {
+        "word": "余裕",
+        "difficulty": 3
+    },
+    {
+        "word": "喜び",
+        "difficulty": 3
+    },
+    {
+        "word": "宜しい",
+        "difficulty": 3
+    },
+    {
+        "word": "よろしく",
+        "difficulty": 3
+    },
+    {
+        "word": "四",
+        "difficulty": 3
+    },
+    {
+        "word": "来",
+        "difficulty": 3
+    },
+    {
+        "word": "楽",
+        "difficulty": 3
+    },
+    {
+        "word": "利益",
+        "difficulty": 3
+    },
+    {
+        "word": "理解",
+        "difficulty": 3
+    },
+    {
+        "word": "陸",
+        "difficulty": 3
+    },
+    {
+        "word": "利口",
+        "difficulty": 3
+    },
+    {
+        "word": "離婚",
+        "difficulty": 3
+    },
+    {
+        "word": "理想",
+        "difficulty": 3
+    },
+    {
+        "word": "率",
+        "difficulty": 3
+    },
+    {
+        "word": "立派",
+        "difficulty": 3
+    },
+    {
+        "word": "留学",
+        "difficulty": 3
+    },
+    {
+        "word": "流行",
+        "difficulty": 3
+    },
+    {
+        "word": "量",
+        "difficulty": 3
+    },
+    {
+        "word": "両替",
+        "difficulty": 3
+    },
+    {
+        "word": "料金",
+        "difficulty": 3
+    },
+    {
+        "word": "例",
+        "difficulty": 3
+    },
+    {
+        "word": "礼",
+        "difficulty": 3
+    },
+    {
+        "word": "礼儀",
+        "difficulty": 3
+    },
+    {
+        "word": "冷静",
+        "difficulty": 3
+    },
+    {
+        "word": "列",
+        "difficulty": 3
+    },
+    {
+        "word": "列車",
+        "difficulty": 3
+    },
+    {
+        "word": "練習",
+        "difficulty": 3
+    },
+    {
+        "word": "連想",
+        "difficulty": 3
+    },
+    {
+        "word": "連続",
+        "difficulty": 3
+    },
+    {
+        "word": "老人",
+        "difficulty": 3
+    },
+    {
+        "word": "労働",
+        "difficulty": 3
+    },
+    {
+        "word": "論じる",
+        "difficulty": 3
+    },
+    {
+        "word": "論争",
+        "difficulty": 3
+    },
+    {
+        "word": "論文",
+        "difficulty": 3
+    },
+    {
+        "word": "輪",
+        "difficulty": 3
+    },
+    {
+        "word": "別れ",
+        "difficulty": 3
+    },
+    {
+        "word": "脇",
+        "difficulty": 3
+    },
+    {
+        "word": "分ける",
+        "difficulty": 3
+    },
+    {
+        "word": "僅か",
+        "difficulty": 3
+    },
+    {
+        "word": "綿",
+        "difficulty": 3
+    },
+    {
+        "word": "話題",
+        "difficulty": 3
+    },
+    {
+        "word": "笑い",
+        "difficulty": 3
+    },
+    {
+        "word": "割る",
+        "difficulty": 3
+    },
+    {
+        "word": "悪口",
+        "difficulty": 3
+    },
+    {
+        "word": "我々",
+        "difficulty": 3
+    },
+    {
+        "word": "湾",
+        "difficulty": 3
+    }
+]
