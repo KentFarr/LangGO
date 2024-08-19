@@ -5,6 +5,8 @@ import SignUp from './components/SignUp';
 import FileUpload from './components/FileUpload';
 import LogIn from './components/LogIn';
 import UserDash from './pages/UserDash';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
 
 const App: React.FC = () => {
   return (

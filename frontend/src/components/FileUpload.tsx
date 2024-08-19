@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { extractTextFromPDF } from '../utils/pdfUtils';
 import { countWordFrequency, getTopWords, allWords } from '../utils/wordUtils';
-import  generateMnemonicsAndWords  from '../utils/FlashGenerator'; // Import the mnemonic generation function
+import generateMnemonicsAndWords from '../utils/FlashGenerator'; // Import the mnemonic generation function
 import FlashcardComponent from './FlashCard'; // Import the FlashcardComponent
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [topWords, setTopWords] = useState<string[] | null>(null);
-  const [mnemonics, setMnemonics] = useState<string[] | null>(null);
-  const [additionalWords, setAdditionalWords] = useState<string[] | null>(null);
+  const [flashcards, setFlashcards] = useState<{ word: string; mnemonic: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,13 +31,29 @@ const FileUpload: React.FC = () => {
       const wordCounts = countWordFrequency(text, allWords);
       console.log('Word counts:', wordCounts);
       const top5Words = getTopWords(wordCounts);
-      setTopWords(top5Words);
       console.log('Top 5 words:', top5Words);
 
       // Step 3: Generate mnemonics and additional words using the top 5 words
       const { mnemonics, additionalWords } = await generateMnemonicsAndWords(top5Words);
-      setMnemonics(mnemonics);
-      setAdditionalWords(additionalWords);
+
+      console.log('Mnemonics:', mnemonics);
+      console.log('Additional Words:', additionalWords);
+
+      // Combine top5Words and mnemonics into flashcards
+      const flashcardsArray = top5Words.map((word, index) => ({
+        word,
+        mnemonic: mnemonics[index] || 'No mnemonic available',
+      }));
+
+      // Add additional words with their mnemonics
+      additionalWords.forEach((word: string, index: number) => {
+        flashcardsArray.push({
+          word: word,
+          mnemonic: mnemonics[top5Words.length + index] || 'No mnemonic available',
+        });
+      });
+
+      setFlashcards(flashcardsArray);
     } catch (error) {
       console.error('Error processing file:', error);
       setError('Failed to process the PDF.');
@@ -47,10 +61,6 @@ const FileUpload: React.FC = () => {
       setLoading(false); // Set loading to false
     }
   };
-  console.log("Top Words:", topWords);
-  console.log("Mnemonics:", mnemonics);
-  console.log("Additional Words:", additionalWords);
-
 
   return (
     <div>
@@ -62,26 +72,12 @@ const FileUpload: React.FC = () => {
 
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
-      {topWords && (
-        <div>
-          <h3>Top 5 Words:</h3>
-          <ul>
-            {topWords.map((word, index) => (
-              <li key={index}>{word}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {mnemonics && additionalWords && (
-        <FlashcardComponent
-          topWords={topWords || []}
-          mnemonics={mnemonics}
-          additionalWords={additionalWords}
-        />
+      {flashcards.length > 0 && (
+        <FlashcardComponent flashcards={flashcards} />
       )}
     </div>
   );
 };
 
 export default FileUpload;
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/global.css' // Optional, for global styles
 import App from './App'; // Import your main App component
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 // Find the root element in the HTML file
 const rootElement = document.getElementById('root');

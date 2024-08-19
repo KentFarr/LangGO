@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// fix the api key
+// Fix the API key
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -21,33 +21,60 @@ app.post('/generate-mnemonics', async (req, res) => {
   const { topWords } = req.body;
 
   const prompt = `
-  Create mnemonics for the following words: ${topWords.join(', ')}.
-  Also, provide 5 additional unique words related to the content.`;
+  make five flashcards with mnemonics for the following words: ${topWords.join(', ')}. 
+  Also, provide 5 additional words related to the content with mnemonics. 
+  Respond with a JSON format where each flashcard has the word and its mnemonic.`;
+
+  console.log("Received request from frontend: " + topWords);
 
   try {
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini', 
       messages: [
-        { role: 'system', content: 'You are a Generate Flashcards bot. Format each measage the same' },
+        { role: 'system', content: 'You are a Generate Flashcards bot. Format each message the same' },
         { role: 'user', content: prompt },
       ],
-      max_tokens: 500,
-      temperature: 0.7,
-      
-    } );
-    console.log("sent request to openai")
+      max_tokens: 1000,
+      temperature: 1,
+    });
 
-    const response = completion.choices[0].message?.content?.trim() || 'No response from AI';
-    const parts = response.split('\n').filter(line => line.trim() !== '');
+    // Log the full response for debugging purposes
+    console.log("Full response from OpenAI:", completion);
 
-    const mnemonics = parts.slice(0, topWords.length);
-    const additionalWords = parts.slice(topWords.length, topWords.length + 5);
+    // Check if the completion object contains choices and message
+    if (!completion || !completion.choices || !completion.choices[0].message) {
+      console.error('Unexpected response format:', completion);
+      return res.status(500).json({ error: 'Unexpected response format from OpenAI.' });
+    }
 
-    res.json({ mnemonics, additionalWords });
-    console.log("sent response to frontend" + mnemonics + additionalWords)
+    // Extract the response content and clean it up
+    let responseContent = completion.choices[0].message.content.trim();
+
+
+    // Remove any Markdown-style code block delimiters (e.g., ```json ... ```)
+    if (responseContent.startsWith("```json")) {
+      responseContent = responseContent.slice(7, -3).trim(); // Remove the leading ```json and trailing ```
+    } else if (responseContent.startsWith("```") && responseContent.endsWith("```")) {
+      responseContent = responseContent.slice(3, -3).trim(); // Remove the leading and trailing ```
+    }
+
+    console.log("Cleaned response content from OpenAI: " + responseContent);
+
+    // Parse the response content as JSON
+    let jsonResponse;
+    try {
+      jsonResponse = JSON.parse(responseContent);
+    } catch (error) {
+      console.error('Error parsing JSON response:', error);
+      return res.status(500).send('Failed to parse response from OpenAI');
+    }
+
+    // Send the parsed JSON response to the frontend
+    res.json(jsonResponse);
+
   } catch (error) {
     console.error('Error generating mnemonics:', error);
-    res.status(500).json({ error: 'Failed to generate mnemonics.' });
+    res.status(500).send('Failed to generate mnemonics');
   }
 });
 

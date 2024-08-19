@@ -1,43 +1,27 @@
-// FlashcardComponent.tsx
 import React from 'react';
 
-
-interface FlashcardComponentProps {
-  topWords: string[];
-  mnemonics: string[];
-  additionalWords: string[];
+interface Flashcard {
+  word: string;
+  mnemonic: string;
 }
 
-const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ topWords, mnemonics, additionalWords }) => {
-  const flashcards = topWords.map((word, index) => ({
-    word,
-    mnemonic: mnemonics[index] || 'No mnemonic available',
-  }));
+interface FlashcardComponentProps {
+  flashcards: Flashcard[]; // Expect an array of objects with both word and mnemonic
+}
 
-  additionalWords.forEach((word) => {
-    flashcards.push({ word, mnemonic: 'No mnemonic available' });
-  });
-  console.log("Top Words:", topWords);
-  console.log("Mnemonics:", mnemonics);
-  console.log("Additional Words:", additionalWords);
-  
+const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ flashcards }) => {
   return (
-    <div>
-      <h1>Flashcards</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">Flashcards</h1>
+      <div className="row">
         {flashcards.map((flashcard, index) => (
-          <div
-            key={index}
-            style={{
-              border: '1px solid #ccc',
-              padding: '1rem',
-              borderRadius: '8px',
-              width: '200px',
-              textAlign: 'center',
-            }}
-          >
-            <h3>{flashcard.word}</h3>
-            <p>{flashcard.mnemonic}</p>
+          <div key={index} className="col-md-4 mb-3">
+            <div className="card h-100">
+              <div className="card-body">
+                <h5 className="card-title">{flashcard.word}</h5>
+                <p className="card-text">{flashcard.mnemonic}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -46,6 +30,3 @@ const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ topWords, mnemo
 };
 
 export default FlashcardComponent;
-
-
-
