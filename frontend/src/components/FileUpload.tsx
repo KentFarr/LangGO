@@ -39,21 +39,13 @@ const FileUpload: React.FC = () => {
       console.log('Mnemonics:', mnemonics);
       console.log('Additional Words:', additionalWords);
 
-      // Combine top5Words and mnemonics into flashcards
-      const flashcardsArray = top5Words.map((word, index) => ({
-        word,
-        mnemonic: mnemonics[index] || 'No mnemonic available',
+      // Step 4: Combine mnemonics and words into flashcards
+      const flashcards = mnemonics.map((mnemonic: string, index: number) => ({
+        word: top5Words[index],
+        mnemonics,
       }));
-
-      // Add additional words with their mnemonics
-      additionalWords.forEach((word: string, index: number) => {
-        flashcardsArray.push({
-          word: word,
-          mnemonic: mnemonics[top5Words.length + index] || 'No mnemonic available',
-        });
-      });
-
-      setFlashcards(flashcardsArray);
+      
+      console.log('Flashcards:', flashcards);
     } catch (error) {
       console.error('Error processing file:', error);
       setError('Failed to process the PDF.');
