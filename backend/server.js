@@ -26,12 +26,12 @@ app.post('/generate-mnemonics', async (req, res) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', // Use 'gpt-4' if you have access
+      model: 'gpt-4o-mini', 
       messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'system', content: 'You are a Generate Flashcards bot. Format each measage the same' },
         { role: 'user', content: prompt },
       ],
-      max_tokens: 300,
+      max_tokens: 500,
       temperature: 0.7,
       
     } );
