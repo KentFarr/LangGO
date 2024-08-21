@@ -42,6 +42,7 @@ const FileUpload: React.FC = () => {
       // Step 4: Combine mnemonics and words into flashcards
       const flashcards = mnemonics.map((mnemonic: string, index: number) => ({
         word: top5Words[index],
+        additionalWords: additionalWords[index],
         mnemonics,
       }));
       
