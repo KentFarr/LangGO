@@ -22,11 +22,9 @@ const generateMnemonicsAndWords = async (topWords: string[]) => {
       throw new Error('Invalid response data');}
 
     // Extract mnemonics from flashcards and additional_words arrays
-    //const mnemonics = data.flashcards.map((flashcard: { mnemonic: string }) => flashcard.mnemonic);
-    //const words = data.flashcards.map((wordObj: { word: string }) => wordObj.word);
-
     const originalWords = data.flashcards;
     const relatedWords = data.relatedWords;
+    
     return {
       originalWords,
       relatedWords,
