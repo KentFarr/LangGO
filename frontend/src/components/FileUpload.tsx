@@ -34,17 +34,17 @@ const FileUpload: React.FC = () => {
       console.log('Top 5 words:', top5Words);
 
       // Step 3: Generate mnemonics and additional words using the top 5 words
-      const { mnemonics, additionalWords } = await generateMnemonicsAndWords(top5Words);
+      const {originalWords, relatedWords} = await generateMnemonicsAndWords(top5Words);
 
-      console.log('Mnemonics:', mnemonics);
-      console.log('Additional Words:', additionalWords);
+      console.log('original array', originalWords);
+      console.log('new word array:', relatedWords);
 
-      // Step 4: Combine mnemonics and words into flashcards
-      const flashcards = mnemonics.map((mnemonic: string, index: number) => ({
-        word: top5Words[index],
-        additionalWords: additionalWords[index],
-        mnemonics,
-      }));
+      // Combine the original words with the related words      
+      const finalCards = originalWords.concat(relatedWords);
+
+      // Step 4: Set the flashcards state
+      setFlashcards(finalCards);
+   
       
       console.log('Flashcards:', flashcards);
     } catch (error) {

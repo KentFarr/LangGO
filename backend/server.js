@@ -23,7 +23,8 @@ app.post('/generate-mnemonics', async (req, res) => {
   const prompt = `
   make five flashcards with mnemonics for the following words: ${topWords.join(', ')}. 
   Also, provide 5 additional words related to the content with mnemonics. 
-  Respond with a JSON format where each flashcard has the word and its mnemonic.`;
+  Respond with a JSON format where each flashcard has the word and its mnemonic.
+  Name the additional words "relatedWords" and provide the word and mnemonic for each.`;
 
   console.log("Received request from frontend: " + topWords);
 

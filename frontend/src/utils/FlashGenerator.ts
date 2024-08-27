@@ -18,17 +18,18 @@ const generateMnemonicsAndWords = async (topWords: string[]) => {
     console.log('Received data from backend:', data);
 
     // Validate and extract the data based on the actual response structure
-    if (!data.flashcards || !Array.isArray(data.flashcards) || !data.additional_words || !Array.isArray(data.additional_words)) {
-      throw new Error('Unexpected response format from backend.');
-    }
+    if (!data || !data.flashcards || !data.relatedWords) {
+      throw new Error('Invalid response data');}
 
     // Extract mnemonics from flashcards and additional_words arrays
-    const mnemonics = data.flashcards.map((flashcard: { mnemonic: string }) => flashcard.mnemonic);
-    const additionalWords = data.additional_words.map((wordObj: { word: string }) => wordObj.word);
+    //const mnemonics = data.flashcards.map((flashcard: { mnemonic: string }) => flashcard.mnemonic);
+    //const words = data.flashcards.map((wordObj: { word: string }) => wordObj.word);
 
+    const originalWords = data.flashcards;
+    const relatedWords = data.relatedWords;
     return {
-      mnemonics,
-      additionalWords,
+      originalWords,
+      relatedWords,
     };
   } catch (error) {
     console.error('Error generating mnemonics:', error);
