@@ -1,9 +1,25 @@
+import { getAuth } from 'firebase/auth';
+
 const generateMnemonicsAndWords = async (topWords: string[]) => {
   try {
-    const response = await fetch('http://localhost:5000/generate-mnemonics', {
+
+    
+    const auth = getAuth();
+    const user = auth.currentUser 
+    if (!user) {
+      console.error('User is not authenticated');
+      throw new Error('User is not authenticated');
+    } 
+
+    const token = await user.getIdToken();
+    console.log('User token:', token);  
+
+
+    const response = await fetch('http://localhost:5000/openai/generate-mnemonics', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ topWords }),
     });
