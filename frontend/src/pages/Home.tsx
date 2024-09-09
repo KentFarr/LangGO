@@ -29,6 +29,7 @@ const FooterSection = styled.footer`
     background: linear-gradient(90deg, #495E57, #2d2f33);
     color: #F5F7F8;
     padding: 20px 0;
+    text-align: center;
 `;
 
 // Hero Section

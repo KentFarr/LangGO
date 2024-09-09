@@ -38,8 +38,12 @@ const UserDash: React.FC = () => {
           <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> Welcome, {user.email}
         </h2>
         <FileUpload />
+        <footer className="text-center mt-5">
+          <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved </p>
+        </footer>
       </div>
     </GradientWrapper>
+    
   );
 };
 
