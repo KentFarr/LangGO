@@ -10,7 +10,7 @@ const FileUpload: React.FC = () => {
   const [flashcards, setFlashcards] = useState<{ word: string; mnemonic: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [difficultyLevel, setDifficultyLevel] = useState<number>(1); // Default to level 1
+  const [difficultyLevel, setDifficultyLevel] = useState<number>(5); // Default to level 1
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
