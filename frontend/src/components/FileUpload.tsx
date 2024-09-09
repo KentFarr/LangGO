@@ -10,7 +10,8 @@ const FileUpload: React.FC = () => {
   const [flashcards, setFlashcards] = useState<{ word: string; mnemonic: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [difficultyLevel, setDifficultyLevel] = useState<number>(5); // Default to level 1
+  const [difficultyLevel, setDifficultyLevel] = useState<number>(5); // Default to level 5
+  const [topWordsCount, setTopWordsCount] = useState<number>(5); // Default to top 5 words
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -20,33 +21,39 @@ const FileUpload: React.FC = () => {
 
   const handleUpload = async () => {
     if (!file) return;
-
+  
     setLoading(true); // Set loading to true
     setError(null);   // Reset any previous errors
-
+  
     try {
       // Step 1: Extract text from PDF
       const text = await extractTextFromPDF(file);
       console.log('Extracted text:', text);
-
+  
       // Step 2: Count word frequency based on selected difficulty level
       const wordCounts = countWordFrequency(text, allWords, difficultyLevel);
       console.log('Word counts:', wordCounts);
-      const top5Words = getTopWords(wordCounts);
-      console.log('Top 5 words:', top5Words);
-
-      // Step 3: Generate mnemonics and additional words using the top 5 words
-      const { originalWords, relatedWords } = await generateMnemonicsAndWords(top5Words);
-
+      const topWords = getTopWords(wordCounts, topWordsCount); // Pass user-selected top words count
+      console.log(`Top ${topWordsCount} words:`, topWords);
+  
+      // Step 3: Generate mnemonics and additional words using the top words
+      const { originalWords, relatedWords } = await generateMnemonicsAndWords(topWords);
+  
       console.log('original array', originalWords);
       console.log('new word array:', relatedWords);
-
-      // Combine the original words with the related words      
-      const finalCards = originalWords.concat(relatedWords);
-
-      // Step 4: Set the flashcards state
-      setFlashcards(finalCards);
-      console.log('Flashcards:', finalCards);
+  
+      // Combine the original words with the related words
+      const combinedWords = [...originalWords, ...relatedWords];
+  
+      // Step 4: Remove duplicates (based on the word property)
+      const uniqueFlashcards = combinedWords.filter(
+        (flashcard, index, self) =>
+          index === self.findIndex((f) => f.word === flashcard.word)
+      );
+  
+      // Step 5: Set the flashcards state
+      setFlashcards(uniqueFlashcards);
+      console.log('Unique flashcards:', uniqueFlashcards);
     } catch (error) {
       console.error('Error processing file:', error);
       setError('Failed to process the PDF.');
@@ -84,6 +91,20 @@ const FileUpload: React.FC = () => {
             <option value={4}>N4</option>
             <option value={5}>N5</option>
           </select>
+        </Col>
+      </Row>
+
+      <Row className="justify-content-center mt-4">
+        <Col md={6} className="text-center">
+          <label htmlFor="topWordsCount">Select Number of Top Words:</label>
+          <input
+            type="number"
+            id="topWordsCount"
+            value={topWordsCount}
+            onChange={(e) => setTopWordsCount(parseInt(e.target.value, 10))}
+            className="form-control mb-3"
+            min="1"
+          />
         </Col>
       </Row>
 
