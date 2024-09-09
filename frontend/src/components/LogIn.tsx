@@ -3,8 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../firebaseConfig'; // Adjust the path to your firebaseConfig file
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Alert, Row, Col, Nav } from 'react-bootstrap'; // Import Bootstrap components
-import NavBar from './NavBar';
+import { Container, Form, Button, Alert} from 'react-bootstrap'; // Import Bootstrap components
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -10,6 +10,7 @@ const FileUpload: React.FC = () => {
   const [flashcards, setFlashcards] = useState<{ word: string; mnemonic: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [difficultyLevel, setDifficultyLevel] = useState<number>(1); // Default to level 1
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -28,8 +29,8 @@ const FileUpload: React.FC = () => {
       const text = await extractTextFromPDF(file);
       console.log('Extracted text:', text);
 
-      // Step 2: Count word frequency and get top 5 words
-      const wordCounts = countWordFrequency(text, allWords);
+      // Step 2: Count word frequency based on selected difficulty level
+      const wordCounts = countWordFrequency(text, allWords, difficultyLevel);
       console.log('Word counts:', wordCounts);
       const top5Words = getTopWords(wordCounts);
       console.log('Top 5 words:', top5Words);
@@ -65,6 +66,24 @@ const FileUpload: React.FC = () => {
           </Button>
 
           {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+        </Col>
+      </Row>
+
+      <Row className="justify-content-center mt-4">
+        <Col md={6} className="text-center">
+          <label htmlFor="difficulty">Select Difficulty Level (1-5):</label>
+          <select
+            id="difficulty"
+            value={difficultyLevel}
+            onChange={(e) => setDifficultyLevel(parseInt(e.target.value, 10))}
+            className="form-select mb-3"
+          >
+            <option value={1}>N1</option>
+            <option value={2}>N2</option>
+            <option value={3}>N3</option>
+            <option value={4}>N4</option>
+            <option value={5}>N5</option>
+          </select>
         </Col>
       </Row>
 

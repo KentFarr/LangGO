@@ -29,7 +29,7 @@ const SignUp: React.FC = () => {
 
   return (    
     <Container className="d-flex justify-content-center mt-5">
-      <Form onSubmit={handleSignUp} style={{ width: '300px', padding: '20px', borderRadius: '8px', backgroundColor: '#F4CE14' }}> {/* Set a fixed width for centering */}
+      <Form onSubmit={handleSignUp} style={{ width: '300px', padding: '20px', borderRadius: '8px'}}> {/* Set a fixed width for centering */}
         <h2 className="mb-4 text-center">Sign up</h2> {/* Center the heading text */}
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email:</Form.Label>
