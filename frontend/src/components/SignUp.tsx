@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../firebaseConfig';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -25,31 +27,41 @@ const SignUp: React.FC = () => {
     }
   };
 
-  return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <div>
-          <label>Email:</label>
-          <input
+  return (    
+    <Container className="d-flex justify-content-center mt-5">
+      <Form onSubmit={handleSignUp} style={{ width: '300px', padding: '20px', borderRadius: '8px', backgroundColor: '#F4CE14' }}> {/* Set a fixed width for centering */}
+        <h2 className="mb-4 text-center">Sign up</h2> {/* Center the heading text */}
+        <Form.Group className="mb-3" controlId="formEmail">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
             type="email"
+            placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-        </div>
-        {error && <p>{error}</p>}
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+        </Form.Group>
+        <Button variant="secondary" type="submit" className="w-100">
+          Sign Up
+        </Button>
+        {error && (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        )}
+      </Form>
+    </Container>
   );
 };
-
 export default SignUp;

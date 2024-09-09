@@ -6,7 +6,7 @@
       "esModuleInterop": true,
       "outDir": "./dist"
     },
-    "include": ["src/**/*.ts", "server.js"],
+    "include": ["src/**/*.ts", "server.js", "src/routes/openai.js", "src/controllers/openaiController.js"],
     "exclude": ["node_modules"]
   }
   

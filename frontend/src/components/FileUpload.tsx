@@ -3,6 +3,7 @@ import { extractTextFromPDF } from '../utils/pdfUtils';
 import { countWordFrequency, getTopWords, allWords } from '../utils/wordUtils';
 import generateMnemonicsAndWords from '../utils/FlashGenerator'; // Import the mnemonic generation function
 import FlashcardComponent from './FlashCard'; // Import the FlashcardComponent
+import { Button, Container, Row, Col, Spinner } from 'react-bootstrap'; // Using Bootstrap for layout and buttons
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -34,7 +35,7 @@ const FileUpload: React.FC = () => {
       console.log('Top 5 words:', top5Words);
 
       // Step 3: Generate mnemonics and additional words using the top 5 words
-      const {originalWords, relatedWords} = await generateMnemonicsAndWords(top5Words);
+      const { originalWords, relatedWords } = await generateMnemonicsAndWords(top5Words);
 
       console.log('original array', originalWords);
       console.log('new word array:', relatedWords);
@@ -44,9 +45,7 @@ const FileUpload: React.FC = () => {
 
       // Step 4: Set the flashcards state
       setFlashcards(finalCards);
-   
-      
-      console.log('Flashcards:', flashcards);
+      console.log('Flashcards:', finalCards);
     } catch (error) {
       console.error('Error processing file:', error);
       setError('Failed to process the PDF.');
@@ -56,21 +55,28 @@ const FileUpload: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Upload a PDF</h2>
-      <input type="file" accept=".pdf" onChange={handleChange} />
-      <button onClick={handleUpload} disabled={loading}>
-        {loading ? 'Processing...' : 'Upload and Process'}
-      </button>
+    <Container className="my-5">
+      <h2 className="text-center mb-4">Upload a PDF</h2>
+      <Row className="justify-content-center">
+        <Col md={6} className="text-center">
+          <input type="file" accept=".pdf" onChange={handleChange} className="form-control mb-3" />
+          <Button onClick={handleUpload} disabled={loading} variant="primary">
+            {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Upload and Process'}
+          </Button>
 
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+          {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+        </Col>
+      </Row>
 
+      {/* Flashcards Display */}
       {flashcards.length > 0 && (
-        <FlashcardComponent flashcards={flashcards} />
+        <div className="mt-5">
+          <h3 className="text-center mb-4">Generated Flashcards</h3>
+          <FlashcardComponent flashcards={flashcards} />
+        </div>
       )}
-    </div>
+    </Container>
   );
 };
 
 export default FileUpload;
-
