@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'react-bootstrap'; // Import Bootstrap's Button
+import ReviewSection from '../components/ReviewSection';
 
 const GradientWrapper = styled.div`
   background: #F5F7F8;
@@ -87,6 +88,8 @@ const UserDash: React.FC = () => {
           </SubTitle>
 
           <FileUpload />
+
+          <ReviewSection></ReviewSection>
 
           {/* Add button to toggle flashcard display */}
           <div className="text-center mt-4">

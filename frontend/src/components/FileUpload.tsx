@@ -73,20 +73,6 @@ const FileUpload: React.FC = () => {
             onChange={handleChange}
             className="form-control mb-3"
           />
-          <Button onClick={handleUpload} disabled={loading} variant="primary">
-            {loading ? (
-              <Spinner
-                as="span"
-                animation="border"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-            ) : (
-              'Upload and Process'
-            )}
-          </Button>
-
           {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
         </Col>
       </Row>
@@ -122,6 +108,26 @@ const FileUpload: React.FC = () => {
           </Form.Group>
         </Col>
       </Row>
+
+      <Row className="justify-content-center mt-4">
+        <Col md={6} className="text-center">
+          <Button
+            variant="primary"
+            onClick={handleUpload}
+            disabled={!file || loading}
+          >
+            {loading ? (
+              <>
+                <Spinner animation="border" size="sm" />
+                <span className="ms-2">Processing...</span>
+              </>
+            ) : (
+              'Generate Flashcards'
+            )}
+          </Button>
+        </Col>
+      </Row>
+      
 
       {/* Flashcards Display */}
       {flashcards.length > 0 && (

@@ -87,12 +87,12 @@ const HowItWorksSection = () => (
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faFileUpload} size="3x" className="mb-3" />
                     <h4>1. Upload a Japanese PDF</h4>
-                    <p>Upload a Japanese PDF file, and we’ll extract the top 5 words based on your chosen JLPT level (N1-N5).</p>
+                    <p>Upload a Japanese PDF file, and we’ll extract the top words based on your chosen JLPT level (N1-N5).</p>
                 </Col>
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faBolt} size="3x" className="mb-3" />
                     <h4>2. Generate Flashcards</h4>
-                    <p>We generate flashcards for the top 5 words and store them in Firebase for future reference.</p>
+                    <p>We generate flashcards for with your top words and store them in Firebase for future reference.</p>
                 </Col>
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faBrain} size="3x" className="mb-3" />
@@ -102,7 +102,7 @@ const HowItWorksSection = () => (
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faChartLine} size="3x" className="mb-3" />
                     <h4>4. Access Your Dashboard</h4>
-                    <p>All flashcards are stored in your user dashboard. Coming soon: A spaced repetition mini-game to reinforce your learning!</p>
+                    <p>All flashcards are stored in your user dashboard. And have Access to our spaced repetition system to help reinforce your learning!</p>
                 </Col>
             </Row>
         </Container>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { getFirestore, collection, query, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, query, getDocs, orderBy, limit } from 'firebase/firestore';
 import FlashcardComponent from '../components/FlashCard'; // Import the flashcard component
 
 interface Flashcard {
@@ -26,8 +26,15 @@ const FlashcardList: React.FC = () => {
 
     try {
       const db = getFirestore();
-      console.log('Fetching flashcards from Firestore...');
-      const q = query(collection(db, 'users', uid, 'mnemonics')); // Ensure uid is passed as string
+      console.log('Fetching the last 100 flashcards from Firestore...');
+      
+      // Query Firestore to get the last 100 flashcards, ordered by `createdAt` timestamp
+      const q = query(
+        collection(db, 'users', uid, 'mnemonics'), 
+        orderBy('createdAt', 'desc'),  // Order by timestamp to get the most recent flashcards
+        limit(100)  // Limit to the last 100 flashcards
+      );
+
       const querySnapshot = await getDocs(q);
 
       const fetchedFlashcards: Flashcard[] = [];
