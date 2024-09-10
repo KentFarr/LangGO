@@ -89,12 +89,10 @@ const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ flashcards }) =
                 {/* Front side of the card */}
                 <CardFace front>
                   <CardTitle>{flashcard.word}</CardTitle>
-                  <CardText>Tap to see mnemonic</CardText>
                 </CardFace>
 
                 {/* Back side of the card */}
                 <CardFace>
-                  <CardTitle>Mnemonic</CardTitle>
                   <CardText>{flashcard.mnemonic}</CardText>
                 </CardFace>
               </div>

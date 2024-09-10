@@ -3,7 +3,7 @@ import { extractTextFromPDF } from '../utils/pdfUtils';
 import { countWordFrequency, getTopWords, allWords } from '../utils/wordUtils';
 import generateMnemonicsAndWords from '../utils/FlashGenerator'; // Import the mnemonic generation function
 import FlashcardComponent from './FlashCard'; // Import the FlashcardComponent
-import { Button, Container, Row, Col, Spinner } from 'react-bootstrap'; // Using Bootstrap for layout and buttons
+import { Button, Container, Row, Col, Spinner, Form } from 'react-bootstrap'; // Using Bootstrap for layout and buttons
 
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -21,36 +21,36 @@ const FileUpload: React.FC = () => {
 
   const handleUpload = async () => {
     if (!file) return;
-  
+
     setLoading(true); // Set loading to true
-    setError(null);   // Reset any previous errors
-  
+    setError(null); // Reset any previous errors
+
     try {
       // Step 1: Extract text from PDF
       const text = await extractTextFromPDF(file);
       console.log('Extracted text:', text);
-  
+
       // Step 2: Count word frequency based on selected difficulty level
       const wordCounts = countWordFrequency(text, allWords, difficultyLevel);
       console.log('Word counts:', wordCounts);
       const topWords = getTopWords(wordCounts, topWordsCount); // Pass user-selected top words count
       console.log(`Top ${topWordsCount} words:`, topWords);
-  
+
       // Step 3: Generate mnemonics and additional words using the top words
       const { originalWords, relatedWords } = await generateMnemonicsAndWords(topWords);
-  
+
       console.log('original array', originalWords);
       console.log('new word array:', relatedWords);
-  
+
       // Combine the original words with the related words
       const combinedWords = [...originalWords, ...relatedWords];
-  
+
       // Step 4: Remove duplicates (based on the word property)
       const uniqueFlashcards = combinedWords.filter(
         (flashcard, index, self) =>
           index === self.findIndex((f) => f.word === flashcard.word)
       );
-  
+
       // Step 5: Set the flashcards state
       setFlashcards(uniqueFlashcards);
       console.log('Unique flashcards:', uniqueFlashcards);
@@ -67,9 +67,24 @@ const FileUpload: React.FC = () => {
       <h2 className="text-center mb-4">Upload a PDF</h2>
       <Row className="justify-content-center">
         <Col md={6} className="text-center">
-          <input type="file" accept=".pdf" onChange={handleChange} className="form-control mb-3" />
+          <input
+            type="file"
+            accept=".pdf"
+            onChange={handleChange}
+            className="form-control mb-3"
+          />
           <Button onClick={handleUpload} disabled={loading} variant="primary">
-            {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Upload and Process'}
+            {loading ? (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              'Upload and Process'
+            )}
           </Button>
 
           {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
@@ -77,34 +92,34 @@ const FileUpload: React.FC = () => {
       </Row>
 
       <Row className="justify-content-center mt-4">
-        <Col md={6} className="text-center">
-          <label htmlFor="difficulty">Select Difficulty Level (1-5):</label>
-          <select
-            id="difficulty"
-            value={difficultyLevel}
-            onChange={(e) => setDifficultyLevel(parseInt(e.target.value, 10))}
-            className="form-select mb-3"
-          >
-            <option value={1}>N1</option>
-            <option value={2}>N2</option>
-            <option value={3}>N3</option>
-            <option value={4}>N4</option>
-            <option value={5}>N5</option>
-          </select>
+        <Col md={6}>
+          <Form.Group className="mb-3">
+            <Form.Label>Select Difficulty Level (N1-N5):</Form.Label>
+            <Form.Select
+              value={difficultyLevel}
+              onChange={(e) => setDifficultyLevel(parseInt(e.target.value, 10))}
+            >
+              <option value={1}>N1</option>
+              <option value={2}>N2</option>
+              <option value={3}>N3</option>
+              <option value={4}>N4</option>
+              <option value={5}>N5</option>
+            </Form.Select>
+          </Form.Group>
         </Col>
       </Row>
 
       <Row className="justify-content-center mt-4">
-        <Col md={6} className="text-center">
-          <label htmlFor="topWordsCount">Select Number of Top Words:</label>
-          <input
-            type="number"
-            id="topWordsCount"
-            value={topWordsCount}
-            onChange={(e) => setTopWordsCount(parseInt(e.target.value, 10))}
-            className="form-control mb-3"
-            min="1"
-          />
+        <Col md={6}>
+          <Form.Group className="mb-3">
+            <Form.Label>Select Number of Top Words:</Form.Label>
+            <Form.Control
+              type="number"
+              value={topWordsCount}
+              onChange={(e) => setTopWordsCount(parseInt(e.target.value, 10))}
+              min="1"
+            />
+          </Form.Group>
         </Col>
       </Row>
 
