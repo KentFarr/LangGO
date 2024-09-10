@@ -33,7 +33,7 @@ const generateMnemonics = async (req, res) => {
   Make sure the additional words are just as difficult as the original words.
   Respond with a JSON format where each flashcard has the word and its mnemonic.
   Name the additional words "relatedWords" and provide the word and mnemonic for each.
-  Make sure the mnemonics are easy to remember and have the english meaning of the word in them.`;
+  Make sure the mnemonics are easy to remember and have the english meaning and spelling of the word in them.`;
 
   console.log("Received request from frontend:", topWords);
 

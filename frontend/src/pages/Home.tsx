@@ -56,7 +56,7 @@ const TechnologiesSection = () => (
                 <Col md={3} className="text-center">
                     <FontAwesomeIcon icon={faReact} size="3x" className="mb-3" />
                     <h4>React</h4>
-                    <p>Our frontend is built with React, ensuring a fast and responsive user experience.</p>
+                    <p>Our frontend is built with React and Typescript, ensuring a fast and responsive user experience.</p>
                 </Col>
                 <Col md={3} className="text-center">
                     <FontAwesomeIcon icon={faNodeJs} size="3x" className="mb-3" />
