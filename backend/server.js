@@ -14,23 +14,19 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Use OpenAI routes
+// Serve the static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// API Routes
 app.use('/openai', openaiRoutes);
+app.use('/api', reviewRoutes);
 
-// Middleware for logging API requests
-app.use('/api', (req, res, next) => {
-  console.log(`Request made to: ${req.path}`);
-  next();
-}, reviewRoutes);
-
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'frontend/build')));
-
-// Catch-all handler: Send index.html for any other request
+// All remaining requests should be redirected to the React frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
