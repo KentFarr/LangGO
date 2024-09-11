@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../firebaseConfig'; // Adjust the path to your firebaseConfig file
 import { useNavigate } from 'react-router-dom';
@@ -79,9 +79,18 @@ const Login: React.FC = () => {
     setSuccessMessage(null);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Handle successful login (e.g., redirect to profile page)
-      navigate('/userdashboard');
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Check if the user's email is verified
+      if (user.emailVerified) {
+        // If verified, redirect to dashboard
+        navigate('/userdashboard');
+      } else {
+        // If not verified, sign out the user and show an error message
+        await signOut(auth);
+        setError("Your email is not verified. Please verify your email before logging in.");
+      }
     } catch (error: any) {
       setError(error.message);
     }
@@ -147,10 +156,7 @@ const Login: React.FC = () => {
             </Alert>
           )}
 
-          <div
-            className="forgot-password"
-            onClick={handleResetPassword}
-          >
+          <div className="forgot-password" onClick={handleResetPassword}>
             Forgot Password?
           </div>
         </Form>

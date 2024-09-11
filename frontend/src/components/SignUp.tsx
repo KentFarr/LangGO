@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
@@ -59,20 +59,30 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [emailSentMessage, setEmailSentMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
     setSuccessMessage(null);
+    setEmailSentMessage(null);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Send verification email
+      await sendEmailVerification(user);
+
       // Handle successful sign-up
       setSuccessMessage("Account created successfully! Redirecting to login...");
+      setEmailSentMessage("A verification email has been sent to your email address. Please verify your email before logging in.");
+      
+      // Redirect to login after a delay
       setTimeout(() => {
         navigate('/login'); // Redirect to login after a short delay
-      }, 3000); // 3 seconds delay before redirecting
+      }, 5000); // 5 seconds delay before redirecting
     } catch (error: any) {
       setError(error.message);
     }
@@ -118,6 +128,12 @@ const SignUp: React.FC = () => {
           {successMessage && (
             <Alert variant="success" className="mt-3">
               {successMessage}
+            </Alert>
+          )}
+
+          {emailSentMessage && (
+            <Alert variant="info" className="mt-3">
+              {emailSentMessage}
             </Alert>
           )}
         </Form>
