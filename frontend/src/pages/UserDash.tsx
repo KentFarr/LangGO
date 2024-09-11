@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'react-bootstrap'; // Import Bootstrap's Button
 import ReviewSection from '../components/ReviewSection';
-import { Helmet } from 'react-helmet'; // Import Helmet for SEO
 
-// Styled Components
 const GradientWrapper = styled.div`
   background: #F5F7F8;
   min-height: 100vh;
@@ -75,14 +73,6 @@ const UserDash: React.FC = () => {
 
   return (
     <>
-      {/* SEO-related meta tags using react-helmet */}
-      <Helmet>
-        <title>User Dashboard - LangGo</title>
-        <meta name="description" content="Access your personalized dashboard to upload Japanese PDFs and review flashcards. Start improving your Japanese vocabulary today." />
-        <meta name="keywords" content="Japanese learning, JLPT, dashboard, flashcards, language learning, vocabulary review" />
-        <meta name="robots" content="index, follow" />
-      </Helmet>
-
       {/* NavBar is separated and not affected by GradientWrapper styles */}
       <NavBarWrapper>
         <NavBar brand="LangGo" links={[{ name: 'Sign Up', href: '/signup' }, { name: 'Log In', href: '/login' }]} />
@@ -97,11 +87,9 @@ const UserDash: React.FC = () => {
             <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> Welcome, {user.email}
           </SubTitle>
 
-          {/* File Upload Section */}
           <FileUpload />
 
-          {/* Review Section */}
-          <ReviewSection />
+          <ReviewSection></ReviewSection>
 
           {/* Add button to toggle flashcard display */}
           <div className="text-center mt-4">
@@ -114,7 +102,7 @@ const UserDash: React.FC = () => {
           {showFlashcards && <FlashcardList />}
         </DashboardContainer>
 
-        <Footer>&copy; {new Date().getFullYear()} LangGo. All rights reserved.</Footer>
+        <Footer>&copy; {new Date().getFullYear()} LangGo. All rights reserved</Footer>
       </GradientWrapper>
     </>
   );
