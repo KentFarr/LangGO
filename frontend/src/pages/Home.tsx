@@ -125,7 +125,7 @@ const CTASection = () => (
 // Footer Section
 const Footer = () => (
     <FooterSection>
-        <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved. Created by Kent Farabaugh Kentfarabaugh@gmail.com</p>
         <a href="/privacy" className="text-light">Privacy Policy</a>
     </FooterSection>
 );

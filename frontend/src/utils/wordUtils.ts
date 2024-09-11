@@ -36,6 +36,16 @@ export const countWordFrequency = (
   return wordCounts;
 };
 
+export const getRandomWords = (
+  words: Array<{ word: string; difficulty: number }>,
+  topN: number = 5
+) => {
+  return words
+    .sort(() => 0.5 - Math.random())
+    .slice(0, topN)
+    .map(({ word }) => word);
+};
+
 export const getTopWords = (
   wordCounts: { [key: string]: { count: number; difficulty: number } },
   topN: number = 5
