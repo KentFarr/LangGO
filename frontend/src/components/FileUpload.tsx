@@ -141,7 +141,7 @@ const FileUpload: React.FC = () => {
           <Button
             variant="primary"
             onClick={handleUpload}
-            disabled={!file && !randomSelection || loading}
+            disabled={(!file && !randomSelection) || loading}
           >
             {loading ? (
               <>

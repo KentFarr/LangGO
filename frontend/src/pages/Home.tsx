@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faNodeJs, faGoogle, faBootstrap } from '@fortawesome/free-brands-svg-icons';
 import { faFileUpload, faBrain, faChartLine, faBolt } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 // Gradient Styled Components
-
 const GradientHeroSection = styled.section`
     background: linear-gradient(90deg, #495E57, #F4CE14);
     color: white;
@@ -36,7 +36,7 @@ const FooterSection = styled.footer`
 const HeroSection = () => (
     <GradientHeroSection>
         <Container>
-            <h1 className="mb-4">Master Japanese Vocabulary with Ease</h1>
+            <h1 className="mb-4">Master Japanese Vocabulary with Ease</h1> {/* Main header (h1) */}
             <p className="lead mb-4">
                 Upload your Japanese PDF, and let our app help you find and learn the most important words based on your proficiency level.
             </p>
@@ -51,7 +51,7 @@ const HeroSection = () => (
 const TechnologiesSection = () => (
     <GradientTechnologiesSection>
         <Container>
-            <h2 className="text-center mb-5">Powered by Cutting-Edge Technologies</h2>
+            <h2 className="text-center mb-5">Powered by Cutting-Edge Technologies</h2> {/* h2 for section header */}
             <Row className="gy-4">
                 <Col md={3} className="text-center">
                     <FontAwesomeIcon icon={faReact} size="3x" className="mb-3" />
@@ -82,7 +82,7 @@ const TechnologiesSection = () => (
 const HowItWorksSection = () => (
     <GradientHowItWorksSection>
         <Container>
-            <h2 className="text-center mb-5">How It Works</h2>
+            <h2 className="text-center mb-5">How It Works</h2> {/* h2 for section header */}
             <Row className="gy-4">
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faFileUpload} size="3x" className="mb-3" />
@@ -92,7 +92,7 @@ const HowItWorksSection = () => (
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faBolt} size="3x" className="mb-3" />
                     <h4>2. Generate Flashcards</h4>
-                    <p>We generate flashcards for with your top words and store them in Firebase for future reference.</p>
+                    <p>We generate flashcards for your top words and store them in Firebase for future reference.</p>
                 </Col>
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faBrain} size="3x" className="mb-3" />
@@ -102,7 +102,7 @@ const HowItWorksSection = () => (
                 <Col md={6} className="text-center">
                     <FontAwesomeIcon icon={faChartLine} size="3x" className="mb-3" />
                     <h4>4. Access Your Dashboard</h4>
-                    <p>All flashcards are stored in your user dashboard. And have Access to our spaced repetition system to help reinforce your learning!</p>
+                    <p>All flashcards are stored in your user dashboard. You also have access to our spaced repetition system to help reinforce your learning!</p>
                 </Col>
             </Row>
         </Container>
@@ -112,12 +112,12 @@ const HowItWorksSection = () => (
 // CTA Section
 const CTASection = () => (
     <Container className="text-center py-5 my-5">
-        <h2 className="mb-4">Ready to Boost Your Japanese?</h2>
+        <h2 className="mb-4">Ready to Boost Your Japanese?</h2> {/* h2 for section header */}
         <p className="lead mb-4">
             Sign up now and start learning Japanese vocabulary more effectively with personalized flashcards.
         </p>
         <Button variant="success" href="/signup" size="lg">
-            Sign Up
+            Sign Up to Master Japanese Vocabulary
         </Button>
     </Container>
 );
@@ -125,7 +125,7 @@ const CTASection = () => (
 // Footer Section
 const Footer = () => (
     <FooterSection>
-        <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved. Created by Kent Farabaugh Kentfarabaugh@gmail.com</p>
+        <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved. Created by Kent Farabaugh kentfarabaugh@gmail.com</p>
         <a href="/privacy" className="text-light">Privacy Policy</a>
     </FooterSection>
 );
@@ -134,6 +134,13 @@ const Footer = () => (
 const Home: React.FC = () => {
     return (
         <div className='container-fluid p-0'>
+            <Helmet>
+                <title>LangGo - Master Japanese Vocabulary with AI-Powered Flashcards</title>
+                <meta name="description" content="Learn Japanese vocabulary easily by uploading PDFs and generating personalized flashcards using AI and spaced repetition. Sign up now!" />
+                <meta name="keywords" content="learn Japanese, JLPT, flashcards, Japanese vocabulary, spaced repetition, OpenAI, language learning" />
+                <meta name="robots" content="index, follow" />
+            </Helmet>
+
             <NavBar brand="LangGo" links={[{ name: 'Sign Up', href: '/signup' }, { name: 'Log In', href: '/login' }]} />
 
             {/* Hero Section */}

@@ -25,6 +25,7 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
     "react-pdf": "^9.1.0",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
@@ -58,7 +59,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/pdf-parse": "^1.1.4",
-    "@types/pdfjs-dist": "^2.10.378"
+    "@types/pdfjs-dist": "^2.10.378",
+    "@types/react-helmet": "^6.1.11"
   }
 }
