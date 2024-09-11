@@ -26,14 +26,15 @@ const FileUpload: React.FC = () => {
   
     setLoading(true); // Set loading to true
     setError(null); // Reset any previous errors
-    const selecedFile = file as File;
 
-    if (selecedFile.type !== 'application/pdf') {
-      setError('Invalid file type. Please upload a PDF file.');
-      setLoading(false); // Set loading to false
-      return;
+    if (file && !randomSelection) {
+      const selectedFile = file as File;
+      if (selectedFile.type !== 'application/pdf') {
+        setError('Invalid file type. Please upload a PDF file.');
+        setLoading(false); // Set loading to false
+        return;
+      }
     }
-  
     try {
       let topWords: string[] = [];
   
