@@ -2,11 +2,13 @@
     "name": "webapp",
     "version": "1.0.0",
     "scripts": {
-      "start": "node backend/server.js",
-      "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install"
+        "start": "node backend/server.js",
+        "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install"
     },
     "engines": {
-      "node": "16.x"
+        "node": "16.x"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
     }
-  }
-  
+}
