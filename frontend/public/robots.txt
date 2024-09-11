@@ -1,0 +1,13 @@
+# Allow all bots to crawl the entire site
+User-agent: *
+Disallow:
+
+# Block the admin and login pages from being crawled
+Disallow: /login
+Disallow: /signup
+
+# Block unnecessary JavaScript and CSS files (optional)
+Disallow: /static/js/
+Disallow: /static/css/
+
+
