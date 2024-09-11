@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faNodeJs, faGoogle, faBootstrap } from '@fortawesome/free-brands-svg-icons';
 import { faFileUpload, faBrain, faChartLine, faBolt } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import Footer from '../components/Footer';   
 
 // Gradient Styled Components
 
@@ -25,12 +26,6 @@ const GradientHowItWorksSection = styled.section`
     padding: 80px 0;
 `;
 
-const FooterSection = styled.footer`
-    background: linear-gradient(90deg, #495E57, #2d2f33);
-    color: #F5F7F8;
-    padding: 20px 0;
-    text-align: center;
-`;
 
 // Hero Section
 const HeroSection = () => (
@@ -122,13 +117,7 @@ const CTASection = () => (
     </Container>
 );
 
-// Footer Section
-const Footer = () => (
-    <FooterSection>
-        <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved. Created by Kent Farabaugh Kentfarabaugh@gmail.com</p>
-        <a href="/privacy" className="text-light">Privacy Policy</a>
-    </FooterSection>
-);
+
 
 // Home Page
 const Home: React.FC = () => {

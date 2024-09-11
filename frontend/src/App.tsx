@@ -7,6 +7,7 @@ import FileUpload from './components/FileUpload';
 import LogIn from './components/LogIn';
 import UserDash from './pages/UserDash';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import Privacy from './pages/Privacy';
 
 // Create a styled component that will act as a wrapper for the entire app
 const AppWrapper = styled.div`
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<LogIn />} />
           <Route path="/upload" element={<FileUpload />} />
           <Route path="/userdashboard" element={<UserDash />} />
+          <Route path="/privacy" element={<Privacy />} />
           
         </Routes>
       </Router>

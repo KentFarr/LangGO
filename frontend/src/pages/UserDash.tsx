@@ -102,7 +102,7 @@ const UserDash: React.FC = () => {
           {showFlashcards && <FlashcardList />}
         </DashboardContainer>
 
-        <Footer>&copy; {new Date().getFullYear()} LangGo. All rights reserved</Footer>
+       <Footer>&copy; {new Date().getFullYear()} LangGo. All rights reserved</Footer>
       </GradientWrapper>
     </>
   );
