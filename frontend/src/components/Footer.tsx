@@ -45,7 +45,7 @@ const Footer: React.FC = () => (
       </p>
       <CreatorCredit>
         Created by
-        <FooterLink href="mailto:kentfarabaugh@gmail.com">
+        <FooterLink href="https://kentfarabaugh.com">
         Kent Farabaugh
         </FooterLink>
       </CreatorCredit>

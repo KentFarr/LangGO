@@ -114,7 +114,7 @@ const ButtonWrapper = styled.div`
 
 const ReviewSection: React.FC = () => {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
-  const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
+  const [flippedIndices, setFlippedIndices] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const auth = getAuth();
@@ -211,13 +211,14 @@ const ReviewSection: React.FC = () => {
     }
   };
 
-  const handleFlip = (index: number) => {
-    setFlippedIndices((prevFlipped) =>
-      prevFlipped.includes(index)
-        ? prevFlipped.filter((i) => i !== index)
-        : [...prevFlipped, index]
-    );
-  };
+const handleFlip = (cardId: string) => {
+  setFlippedIndices((prevFlipped) =>
+    prevFlipped.includes(cardId)
+      ? prevFlipped.filter((id) => id !== cardId)
+      : [...prevFlipped, cardId]
+  );
+};
+
 
   if (loading) return <div className="text-center mt-5">Loading flashcards for review...</div>;
   if (error) return <div className="alert alert-danger text-center">{error}</div>;
@@ -226,12 +227,11 @@ const ReviewSection: React.FC = () => {
   return (
     <div className="container mt-4">
       <h3 className="text-center mb-4">Flashcards for Review</h3>
-  
       <div className="row">
         {flashcards.map((flashcard, index) => (
           <div key={flashcard.word} className="col-md-6 mb-4">
-            <CardWrapper onClick={() => handleFlip(index)}>
-              <div className={`inner-card ${flippedIndices.includes(index) ? 'flipped' : ''}`}>
+            <CardWrapper onClick={() => handleFlip(flashcard.id)}>
+            <div className={`inner-card ${flippedIndices.includes(flashcard.id) ? 'flipped' : ''}`}>
                 {/* Front side of the card */}
                 <CardFace front>
                   <CardTitle>{flashcard.word}</CardTitle>
