@@ -4,17 +4,17 @@ console.log('openaiController.js is loaded');
 const OpenAI = require('openai');
 const dotenv = require('dotenv');
 const admin = require('../../config/firebaseConfig');
-// Adjusted import statement for 'uuid'
+
 const uuid = require('uuid');
 
 dotenv.config();
 
-// Initialize OpenAI with API key
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Helper function to calculate the next review date based on the current review interval
+
 const calculateNextReviewDate = (currentInterval) => {
   const nextReviewDate = new Date();
   nextReviewDate.setDate(nextReviewDate.getDate() + currentInterval); // Add days to current date
@@ -25,9 +25,9 @@ const calculateNextReviewDate = (currentInterval) => {
 const generateMnemonics = async (req, res) => {
   const { topWords } = req.body;
 
-  console.log("generateMnemonics called"); // Log that the function was called
+  console.log("generateMnemonics called"); 
 
-  console.log('Top words received from frontend:', topWords); // Log the topWords received
+  console.log('Top words received from frontend:', topWords); 
 
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -36,7 +36,7 @@ const generateMnemonics = async (req, res) => {
   }
 
   const token = authHeader.split('Bearer ')[1];
-  console.log('Extracted token from header:', token); // Log the token
+  console.log('Extracted token from header:', token); 
 
   const prompt = `
   Make five flashcards with mnemonics for the following words: ${topWords.join(', ')}. 
@@ -60,15 +60,14 @@ const generateMnemonics = async (req, res) => {
   Ensure the response is valid JSON without any additional text.
   `;
 
-  console.log('Prompt sent to OpenAI:', prompt); // Log the prompt
+  console.log('Prompt sent to OpenAI:', prompt); 
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(token);
     const uid = decodedToken.uid;
 
-    console.log('Decoded token UID:', uid); // Log the user ID
+    console.log('Decoded token UID:', uid); 
 
-    // Generate mnemonics using OpenAI's GPT-4 model
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -90,7 +89,7 @@ const generateMnemonics = async (req, res) => {
     }
 
     let responseContent = completion.choices[0].message.content.trim();
-    console.log('Raw response content from OpenAI:', responseContent); // Log the raw response content
+    console.log('Raw response content from OpenAI:', responseContent); 
 
     // Extract JSON content
     const jsonStartIndex = responseContent.indexOf('{');
@@ -102,7 +101,7 @@ const generateMnemonics = async (req, res) => {
       return res.status(500).send('Invalid response format from OpenAI.');
     }
 
-    console.log('Extracted JSON content:', responseContent); // Log the extracted JSON content
+    console.log('Extracted JSON content:', responseContent); 
 
     let jsonResponse;
     try {
@@ -112,7 +111,7 @@ const generateMnemonics = async (req, res) => {
       return res.status(500).send('Failed to parse response from OpenAI.');
     }
 
-    console.log('Parsed jsonResponse:', JSON.stringify(jsonResponse, null, 2)); // Log the parsed JSON object
+    console.log('Parsed jsonResponse:', JSON.stringify(jsonResponse, null, 2)); 
 
     // Validate the structure of jsonResponse
     if (
@@ -123,14 +122,12 @@ const generateMnemonics = async (req, res) => {
       return res.status(500).send('Invalid structure in OpenAI response.');
     }
 
-    // Function to initialize next review date and interval
     const initializeReviewData = (flashcard, index, type) => {
       const initialReviewInterval = 1;
       const nextReviewDate = calculateNextReviewDate(initialReviewInterval);
-      // Use 'uuid.v4()' to generate the id
-      const id = uuid.v4(); // Generate unique id
+      const id = uuid.v4(); 
 
-      console.log(`Generated id for ${type} [${index}]:`, id); // Log the generated id
+      console.log(`Generated id for ${type} [${index}]:`, id); 
 
       const newFlashcard = {
         ...flashcard,
@@ -139,12 +136,11 @@ const generateMnemonics = async (req, res) => {
         reviewInterval: initialReviewInterval,
       };
 
-      console.log(`New ${type} flashcard with id [${index}]:`, newFlashcard); // Log the new flashcard
+      console.log(`New ${type} flashcard with id [${index}]:`, newFlashcard); 
 
       return newFlashcard;
     };
 
-    // Initialize each flashcard with its own review date, interval, and unique ID
     const flashcards = jsonResponse.flashcards.map((flashcard, index) =>
       initializeReviewData(flashcard, index, 'flashcard')
     );
@@ -152,8 +148,8 @@ const generateMnemonics = async (req, res) => {
       initializeReviewData(flashcard, index, 'relatedWord')
     );
 
-    console.log('Final flashcards to be sent:', JSON.stringify(flashcards, null, 2)); // Log final flashcards
-    console.log('Final relatedWords to be sent:', JSON.stringify(relatedWords, null, 2)); // Log final relatedWords
+    console.log('Final flashcards to be sent:', JSON.stringify(flashcards, null, 2)); 
+    console.log('Final relatedWords to be sent:', JSON.stringify(relatedWords, null, 2)); 
 
     const mnemonicsData = {
       flashcards,
@@ -164,7 +160,7 @@ const generateMnemonics = async (req, res) => {
     const db = admin.firestore();
     await db.collection('users').doc(uid).collection('mnemonics').add(mnemonicsData);
 
-    console.log('Data saved to Firestore for user:', uid); // Confirm data saved
+    console.log('Data saved to Firestore for user:', uid); 
 
     res.json({ flashcards, relatedWords });
   } catch (error) {
