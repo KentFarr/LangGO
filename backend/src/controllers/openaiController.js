@@ -39,8 +39,11 @@ const generateMnemonics = async (req, res) => {
   console.log('Extracted token from header:', token); // Log the token
 
   const prompt = `
-  Create five flashcards with mnemonics for the following words: ${topWords.join(', ')}.
-  Also, provide 5 additional related words with mnemonics.
+  Make five flashcards with mnemonics for the following words: ${topWords.join(', ')}. 
+  Also, provide 5 additional words related to the content with mnemonics.
+  Make sure the additional words are just as difficult as the original words.
+  Name the additional words "relatedWords" and provide the word and mnemonic for each.
+  Make sure the mnemonics are easy to remember and have the english meaning and spelling of the word in them.
   Respond in the following JSON format:
   {
     "flashcards": [
