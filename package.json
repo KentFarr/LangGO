@@ -10,5 +10,8 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    },
+    "dependencies": {
+        "uuid": "^10.0.0"
     }
 }

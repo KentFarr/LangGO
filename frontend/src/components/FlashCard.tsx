@@ -1,26 +1,31 @@
+// FlashCard.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
+import { FaTrash } from 'react-icons/fa';
 
-// Flashcard interface
+// Updated Flashcard interface with optional properties
 interface Flashcard {
+  id?: string;
+  docId?: string;
   word: string;
   mnemonic: string;
+  type?: string;
 }
 
-// Flashcard component props
 interface FlashcardComponentProps {
   flashcards: Flashcard[];
+  handleRemove?: (id: string, docId: string, type: string) => void;
 }
 
-// Styled Components for Flashcard with Flip Animation
 const CardWrapper = styled.div`
   perspective: 1000px;
   width: 100%;
-  height: 300px; /* Set a fixed height to prevent cards from overlapping */
-  display: flex; /* Ensure the card takes up the full column space */
-  justify-content: center; /* Center the card horizontally */
-  align-items: center; /* Center the card vertically */
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
   .inner-card {
     position: relative;
@@ -30,7 +35,7 @@ const CardWrapper = styled.div`
     transition: transform 0.6s;
   }
 
-  .flipped {
+  .inner-card.flipped {
     transform: rotateY(180deg);
   }
 `;
@@ -47,7 +52,6 @@ const CardFace = styled.div<{ front?: boolean }>`
   border-radius: 15px;
   background-color: ${({ front }) => (front ? '#ffffff' : '#f4f4f4')};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
   ${({ front }) =>
     !front &&
     `
@@ -68,37 +72,78 @@ const CardText = styled.p`
   text-align: center;
 `;
 
-const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ flashcards }) => {
-  const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
+const RemoveButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-size: 1.5rem;
 
-  const handleFlip = (index: number) => {
-    setFlippedIndices((prevFlipped) =>
-      prevFlipped.includes(index)
-        ? prevFlipped.filter((i) => i !== index)
-        : [...prevFlipped, index]
+  &:hover {
+    color: #ff1a1a;
+  }
+`;
+
+const FlashcardComponent: React.FC<FlashcardComponentProps> = ({ flashcards, handleRemove }) => {
+  const [flippedIds, setFlippedIds] = useState<string[]>([]);
+
+  const handleFlip = (id: string | undefined, index: number) => {
+    const cardId = id || index.toString();
+    setFlippedIds((prevFlipped) =>
+      prevFlipped.includes(cardId)
+        ? prevFlipped.filter((flippedId) => flippedId !== cardId)
+        : [...prevFlipped, cardId]
     );
   };
 
   return (
     <Container>
       <Row>
-        {flashcards.map((flashcard, index) => (
-          <Col key={index} md={4} sm={6} xs={12} className="mb-4 d-flex justify-content-center">
-            <CardWrapper onClick={() => handleFlip(index)}>
-              <div className={`inner-card ${flippedIndices.includes(index) ? 'flipped' : ''}`}>
-                {/* Front side of the card */}
-                <CardFace front>
-                  <CardTitle>{flashcard.word}</CardTitle>
-                </CardFace>
+        {flashcards.map((flashcard, index) => {
+          const cardId = flashcard.id || index.toString();
+          return (
+            <Col
+              key={cardId}
+              md={4}
+              sm={6}
+              xs={12}
+              className="mb-4 d-flex justify-content-center"
+            >
+              <CardWrapper onClick={() => handleFlip(flashcard.id, index)}>
+                <div
+                  className={`inner-card ${
+                    flippedIds.includes(cardId) ? 'flipped' : ''
+                  }`}
+                >
+                  {/* Front side of the card */}
+                  <CardFace front>
+                    <CardTitle>{flashcard.word}</CardTitle>
+                  </CardFace>
 
-                {/* Back side of the card */}
-                <CardFace>
-                  <CardText>{flashcard.mnemonic}</CardText>
-                </CardFace>
-              </div>
-            </CardWrapper>
-          </Col>
-        ))}
+                  {/* Back side of the card */}
+                  <CardFace>
+                    {/* Conditionally render the Remove button */}
+                    {handleRemove && flashcard.id && flashcard.docId && flashcard.type && (
+                      <RemoveButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemove(flashcard.id!, flashcard.docId!, flashcard.type!);
+                        }}
+                      >
+                        <FaTrash />
+                      </RemoveButton>
+                    )}
+                    <CardText>{flashcard.mnemonic}</CardText>
+                  </CardFace>
+                </div>
+              </CardWrapper>
+            </Col>
+          );
+        })}
       </Row>
     </Container>
   );
