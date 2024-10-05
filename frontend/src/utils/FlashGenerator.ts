@@ -15,7 +15,7 @@ const generateMnemonicsAndWords = async (topWords: string[]) => {
 
     console.log('Top words being sent to backend:', topWords); // Added log
 
-    const response = await fetch(`${apiUrl}/openai/generate-mnemonics`, {
+    const response = await fetch(`${apiUrl}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
