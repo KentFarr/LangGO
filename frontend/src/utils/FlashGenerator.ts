@@ -4,8 +4,8 @@ const generateMnemonicsAndWords = async (topWords: string[]) => {
   try {
     const auth = getAuth();
     const user = auth.currentUser;
-    
-    // heroku does not like this url
+
+    // heroku does not like this url still
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     if (!user) {
       console.error('User is not authenticated');
