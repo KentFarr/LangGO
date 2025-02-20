@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve the static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.use('/openai', openaiRoutes);
@@ -23,7 +23,7 @@ app.use('/api', reviewRoutes);
 
 // All remaining requests should be redirected to the React frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
