@@ -44,6 +44,7 @@ const generateMnemonics = async (req, res) => {
   Make sure the additional words are just as difficult as the original words.
   Name the additional words "relatedWords" and provide the word and mnemonic for each.
   Make sure the mnemonics are easy to remember and have the english meaning and spelling of the word in them.
+  Important, needs to have hiragana with mnemonic.
   Respond in the following JSON format:
   {
     "flashcards": [
@@ -69,7 +70,7 @@ const generateMnemonics = async (req, res) => {
     console.log('Decoded token UID:', uid); 
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'gpt-4o',
       messages: [
         {
           role: 'system',
