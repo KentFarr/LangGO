@@ -36,7 +36,6 @@ const generateMnemonics = async (req, res) => {
   }
 
   const token = authHeader.split('Bearer ')[1];
-  console.log('Extracted token from header:', token); 
 
   const prompt = `
   Make five flashcards with mnemonics for the following words: ${topWords.join(', ')}. 
@@ -68,6 +67,11 @@ const generateMnemonics = async (req, res) => {
     const uid = decodedToken.uid;
 
     console.log('Decoded token UID:', uid); 
+
+    if (!process.env.OPENAI_API_KEY) {
+      console.error('OPENAI_API_KEY is not configured');
+      return res.status(500).json({ error: 'OpenAI configuration error.' });
+    }
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
@@ -166,7 +170,7 @@ const generateMnemonics = async (req, res) => {
     res.json({ flashcards, relatedWords });
   } catch (error) {
     console.error('Error generating mnemonics:', error);
-    res.status(500).send('Failed to generate mnemonics.');
+    res.status(500).json({ error: 'Failed to generate mnemonics.' });
   }
 };
 

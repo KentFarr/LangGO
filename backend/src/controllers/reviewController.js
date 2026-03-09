@@ -35,49 +35,67 @@ const getFlashcardsForReview = async (req, res) => {
 
 // Function to update flashcard review status
 const updateFlashcardReview = async (req, res) => {
-    const { uid, flashcardId } = req.params;
-    const { word, type, success } = req.body; // Extract word, type, and success from the request body
-  
-    console.log(`Updating review for word: ${word}, type: ${type}, success: ${success}`);
-  
-    try {
-      const db = admin.firestore();
-      const flashcardRef = db.collection('users').doc(uid).collection('mnemonics').doc(flashcardId);
-      const flashcardDoc = await flashcardRef.get();
-  
-      if (!flashcardDoc.exists) {
-        return res.status(404).json({ error: 'Flashcard not found' });
-      }
-  
-      const flashcardData = flashcardDoc.data();
-      let targetArray = flashcardData[type]; // Either flashcards or relatedWords
-  
-      // Find the word within the target array
-      const wordIndex = targetArray.findIndex(item => item.word === word);
-      if (wordIndex === -1) {
-        return res.status(404).json({ error: 'Word not found in the specified array.' });
-      }
-  
-      // Update the reviewInterval and nextReviewDate for the word
-      const currentInterval = targetArray[wordIndex].reviewInterval;
-      const newInterval = success ? currentInterval * 2 : Math.max(1, currentInterval / 2);
-      const nextReviewDate = new Date();
-      nextReviewDate.setDate(nextReviewDate.getDate() + newInterval);
-  
-      // Update the word with the new reviewInterval and nextReviewDate
-      targetArray[wordIndex].reviewInterval = newInterval;
-      targetArray[wordIndex].nextReviewDate = nextReviewDate.toISOString();
-  
-      // Update the document in Firestore
-      await flashcardRef.update({
-        [type]: targetArray // Update the specific array (flashcards or relatedWords)
-      });
-  
-      return res.status(200).json({ success: true });
-    } catch (error) {
-      console.error('Error updating flashcard review:', error);
-      return res.status(500).send('Failed to update flashcard review.');
+  const { uid, flashcardId } = req.params;
+  const { word, type, success } = req.body;
+
+  if (!uid || !flashcardId || !word || !type) {
+    return res.status(400).json({ error: 'Missing required fields.' });
+  }
+
+  if (type !== 'flashcards' && type !== 'relatedWords') {
+    return res.status(400).json({ error: 'Invalid flashcard type.' });
+  }
+
+  if (typeof success !== 'boolean') {
+    return res.status(400).json({ error: '`success` must be a boolean.' });
+  }
+
+  console.log(`Updating review for word: ${word}, type: ${type}, success: ${success}`);
+
+  try {
+    const db = admin.firestore();
+    const flashcardRef = db
+      .collection('users')
+      .doc(uid)
+      .collection('mnemonics')
+      .doc(flashcardId);
+    const flashcardDoc = await flashcardRef.get();
+
+    if (!flashcardDoc.exists) {
+      return res.status(404).json({ error: 'Flashcard not found' });
     }
-  };
-  
+
+    const flashcardData = flashcardDoc.data();
+    let targetArray = flashcardData[type]; // Either flashcards or relatedWords
+
+    if (!Array.isArray(targetArray)) {
+      return res.status(500).json({ error: 'Invalid flashcard data structure.' });
+    }
+
+    const wordIndex = targetArray.findIndex((item) => item.word === word);
+    if (wordIndex === -1) {
+      return res
+        .status(404)
+        .json({ error: 'Word not found in the specified array.' });
+    }
+
+    const currentInterval = targetArray[wordIndex].reviewInterval || 1;
+    const newInterval = success ? currentInterval * 2 : Math.max(1, currentInterval / 2);
+    const nextReviewDate = new Date();
+    nextReviewDate.setDate(nextReviewDate.getDate() + newInterval);
+
+    targetArray[wordIndex].reviewInterval = newInterval;
+    targetArray[wordIndex].nextReviewDate = nextReviewDate.toISOString();
+
+    await flashcardRef.update({
+      [type]: targetArray,
+    });
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error updating flashcard review:', error);
+    return res.status(500).json({ error: 'Failed to update flashcard review.' });
+  }
+};
+
 module.exports = { getFlashcardsForReview, updateFlashcardReview };

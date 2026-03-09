@@ -3,19 +3,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
-
-// Updated Flashcard interface with optional properties
-interface Flashcard {
-  id?: string;
-  docId?: string;
-  word: string;
-  mnemonic: string;
-  type?: string;
-}
+import { FlashcardType, UiFlashcard } from '../types/flashcards';
 
 interface FlashcardComponentProps {
-  flashcards: Flashcard[];
-  handleRemove?: (id: string, docId: string, type: string) => void;
+  flashcards: UiFlashcard[];
+  handleRemove?: (id: string, docId: string, type: FlashcardType) => void;
 }
 
 const CardWrapper = styled.div`

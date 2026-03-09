@@ -11,16 +11,8 @@ import {
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-
-interface Flashcard {
-  id: string;
-  word: string;
-  mnemonic: string;
-  nextReviewDate: string;
-  reviewInterval: number;
-  type: string; // To identify if it's from 'flashcards' or 'relatedWords'
-  docId: string; // Add docId to identify the Firestore document
-}
+import { FlashcardType, StoredFlashcard } from '../types/flashcards';
+import { getNextReviewSchedule } from '../utils/spacedRepetition';
 
 const CardWrapper = styled.div`
   perspective: 1000px;
@@ -121,7 +113,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const ReviewSection: React.FC = () => {
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+  const [flashcards, setFlashcards] = useState<StoredFlashcard[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -142,13 +134,16 @@ const ReviewSection: React.FC = () => {
         );
 
         const now = new Date();
-        const fetchedFlashcards: Flashcard[] = [];
+        const fetchedFlashcards: StoredFlashcard[] = [];
 
         querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const flashcardsArray = data.flashcards || [];
+          const data = doc.data() as
+            | { flashcards?: StoredFlashcard[]; relatedWords?: StoredFlashcard[] }
+            | undefined;
 
-          flashcardsArray.forEach((flashcard: any) => {
+          const flashcardsArray = data?.flashcards ?? [];
+
+          flashcardsArray.forEach((flashcard) => {
             const nextReviewDate = new Date(flashcard.nextReviewDate);
 
             if (nextReviewDate <= now) {
@@ -161,9 +156,9 @@ const ReviewSection: React.FC = () => {
           });
 
           // If you also have relatedWords, include them here
-          const relatedWordsArray = data.relatedWords || [];
+          const relatedWordsArray = data?.relatedWords ?? [];
 
-          relatedWordsArray.forEach((flashcard: any) => {
+          relatedWordsArray.forEach((flashcard) => {
             const nextReviewDate = new Date(flashcard.nextReviewDate);
 
             if (nextReviewDate <= now) {
@@ -191,7 +186,7 @@ const ReviewSection: React.FC = () => {
   const handleReview = async (
     flashcardId: string,
     docId: string,
-    type: string,
+    type: FlashcardType,
     success: boolean
   ) => {
     try {
@@ -201,50 +196,39 @@ const ReviewSection: React.FC = () => {
       const db = getFirestore();
       const docRef = doc(db, 'users', user.uid, 'mnemonics', docId);
       const docSnapshot = await getDoc(docRef);
-      const data = docSnapshot.data();
+      const data = docSnapshot.data() as
+        | { flashcards?: StoredFlashcard[]; relatedWords?: StoredFlashcard[] }
+        | undefined;
 
       if (!data) throw new Error('Document does not exist');
 
-      let flashcardsArray = data.flashcards || [];
-      let relatedWordsArray = data.relatedWords || [];
+      let flashcardsArray = data.flashcards ?? [];
+      let relatedWordsArray = data.relatedWords ?? [];
 
-      // Determine which array to update
       if (type === 'flashcards') {
-        flashcardsArray = flashcardsArray.map((flashcard: any) => {
+        flashcardsArray = flashcardsArray.map((flashcard) => {
           if (flashcard.id === flashcardId) {
-            // Adjust the reviewInterval and nextReviewDate based on the result
-            const newReviewInterval = success
-              ? flashcard.reviewInterval * 2
-              : Math.max(flashcard.reviewInterval / 2, 1);
-            const nextReviewDate = new Date();
-            nextReviewDate.setDate(
-              nextReviewDate.getDate() + newReviewInterval
+            const update = getNextReviewSchedule(
+              { reviewInterval: flashcard.reviewInterval },
+              success
             );
-
             return {
               ...flashcard,
-              reviewInterval: newReviewInterval,
-              nextReviewDate: nextReviewDate.toISOString(),
+              ...update,
             };
           }
           return flashcard;
         });
       } else if (type === 'relatedWords') {
-        relatedWordsArray = relatedWordsArray.map((flashcard: any) => {
+        relatedWordsArray = relatedWordsArray.map((flashcard) => {
           if (flashcard.id === flashcardId) {
-            // Adjust the reviewInterval and nextReviewDate based on the result
-            const newReviewInterval = success
-              ? flashcard.reviewInterval * 2
-              : Math.max(flashcard.reviewInterval / 2, 1);
-            const nextReviewDate = new Date();
-            nextReviewDate.setDate(
-              nextReviewDate.getDate() + newReviewInterval
+            const update = getNextReviewSchedule(
+              { reviewInterval: flashcard.reviewInterval },
+              success
             );
-
             return {
               ...flashcard,
-              reviewInterval: newReviewInterval,
-              nextReviewDate: nextReviewDate.toISOString(),
+              ...update,
             };
           }
           return flashcard;

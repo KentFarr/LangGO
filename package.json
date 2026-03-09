@@ -3,16 +3,22 @@
     "version": "1.0.0",
     "scripts": {
         "start": "node backend/server.js",
-        "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install"
+        "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install",
+        "lint": "eslint \"frontend/src/**/*.{ts,tsx,js,jsx}\" \"backend/**/*.js\"",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\""
     },
     "engines": {
         "node": "16.x"
     },
     "devDependencies": {
-        "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@typescript-eslint/eslint-plugin": "^8.0.0",
+        "@typescript-eslint/parser": "^8.0.0",
+        "eslint": "^9.0.0",
+        "eslint-plugin-react": "^7.34.0",
+        "prettier": "^3.3.0"
     },
     "dependencies": {
-        "uuid": "^10.0.0",
-        "webapp": "file:"
+        "uuid": "^10.0.0"
     }
 }

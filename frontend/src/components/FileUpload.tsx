@@ -1,96 +1,32 @@
 // FileUpload.tsx
-import React, { useState } from 'react';
-import { extractTextFromPDF } from '../utils/pdfUtils';
-import { countWordFrequency, getTopWords, allWords, getRandomWords } from '../utils/wordUtils';
-import generateMnemonicsAndWords from '../utils/FlashGenerator';
+import React from 'react';
 import FlashcardComponent from './FlashCard'; // Import the FlashcardComponent
 import { Button, Container, Row, Col, Spinner, Form } from 'react-bootstrap';
-
-// Updated Flashcard interface with optional properties
-interface Flashcard {
-  id?: string;
-  docId?: string;
-  word: string;
-  mnemonic: string;
-  type?: string;
-}
+import { useFlashcardGeneration } from '../hooks/useFlashcardGeneration';
 
 const FileUpload: React.FC = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [difficultyLevel, setDifficultyLevel] = useState<number>(5); // Default to level N5
-  const [topWordsCount, setTopWordsCount] = useState<number>(5); // Default to top 5 words
-  const [randomSelection, setRandomSelection] = useState<boolean>(false);
+  const {
+    flashcards,
+    loading,
+    error,
+    difficultyLevel,
+    topWordsCount,
+    randomSelection,
+    setDifficultyLevel,
+    setTopWordsCount,
+    setRandomSelection,
+    handleFileChange,
+    generateFromCurrentSelection,
+  } = useFlashcardGeneration();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+      handleFileChange(e.target.files[0]);
     }
   };
 
   const handleUpload = async () => {
-    // Prevent action if neither a file is uploaded nor random selection is checked
-    if (!file && !randomSelection) return;
-
-    setLoading(true); // Set loading to true
-    setError(null); // Reset any previous errors
-
-    if (file && !randomSelection) {
-      const selectedFile = file as File;
-      if (selectedFile.type !== 'application/pdf') {
-        setError('Invalid file type. Please upload a PDF file.');
-        setLoading(false); // Set loading to false
-        return;
-      }
-    }
-    try {
-      let topWords: string[] = [];
-
-      if (randomSelection) {
-        // Randomly select words based on difficulty level
-        const wordsByDifficulty = allWords.filter((word) => word.difficulty === difficultyLevel);
-        topWords = getRandomWords(wordsByDifficulty, topWordsCount);
-      } else if (file) {
-        // Step 1: Extract text from PDF
-        const text = await extractTextFromPDF(file);
-        console.log('Extracted text:', text);
-
-        // Step 2: Count word frequency based on selected difficulty level
-        const wordCounts = countWordFrequency(text, allWords, difficultyLevel);
-        console.log('Word counts:', wordCounts);
-
-        // Get top words based on word frequency
-        topWords = getTopWords(wordCounts, topWordsCount);
-      }
-
-      console.log(`Top ${topWordsCount} words:`, topWords);
-
-      // Step 3: Generate mnemonics and additional words using the top words
-      const { originalWords, relatedWords } = await generateMnemonicsAndWords(topWords);
-
-      console.log('original array', originalWords);
-      console.log('new word array:', relatedWords);
-
-      // Combine the original words with the related words
-      const combinedWords = [...originalWords, ...relatedWords];
-
-      // Step 4: Remove duplicates (based on the word property)
-      const uniqueFlashcards = combinedWords.filter(
-        (flashcard, index, self) =>
-          index === self.findIndex((f) => f.word === flashcard.word)
-      );
-
-      // Step 5: Set the flashcards state
-      setFlashcards(uniqueFlashcards);
-      console.log('Unique flashcards:', uniqueFlashcards);
-    } catch (error) {
-      console.error('Error processing:', error);
-      setError('Failed to process the file or generate words.');
-    } finally {
-      setLoading(false); // Set loading to false
-    }
+    await generateFromCurrentSelection();
   };
 
   return (
@@ -159,7 +95,7 @@ const FileUpload: React.FC = () => {
           <Button
             variant="primary"
             onClick={handleUpload}
-            disabled={(!file && !randomSelection) || loading}
+            disabled={loading}
           >
             {loading ? (
               <>
