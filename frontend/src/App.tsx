@@ -1,40 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components'; // Import styled-components
+import { lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router';
+import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
-import SignUp from './components/SignUp';
-import FileUpload from './components/FileUpload';
-import LogIn from './components/LogIn';
-import UserDash from './pages/UserDash';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Privacy from './pages/Privacy';
+import SignUp from './pages/SignUp';
 
-// Create a styled component that will act as a wrapper for the entire app
-const AppWrapper = styled.div`
-  background-color: #F5F7F8; /* Set your desired background color */
-  color: #495E57;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
-  display: flex;
-  flex-direction: column;
-`;
+// The dashboard pulls in Firestore, the word lists, and the PDF reader, so load it on demand.
+const Dashboard = lazy(() => import('./pages/Dashboard'));
 
-// Main App component
-const App: React.FC = () => {
+export default function App() {
   return (
-    <AppWrapper>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/upload" element={<FileUpload />} />
-          <Route path="/userdashboard" element={<UserDash />} />
-          <Route path="/privacy" element={<Privacy />} />
-          
-        </Routes>
-      </Router>
-    </AppWrapper>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        {/* Old URL kept working for existing bookmarks. */}
+        <Route path="userdashboard" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
-};
-
-export default App;
+}

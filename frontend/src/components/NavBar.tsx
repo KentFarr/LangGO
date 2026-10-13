@@ -1,70 +1,83 @@
-import React from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { signOut } from 'firebase/auth';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import { FaBook } from 'react-icons/fa6';
+import { Link, NavLink, useNavigate } from 'react-router';
+import styled, { css } from 'styled-components';
+import { useAuth } from '../auth/useAuth';
+import { auth } from '../lib/firebase';
+import { colors } from '../theme';
 
-
-// Styled component for the Navbar
 const StyledNavbar = styled(Navbar)`
-  background-color: #F5F7F8; /* Optional: Set background color */
-  
+  background-color: ${colors.background};
+
   .navbar-brand {
-    color: #495E57 !important; /* Brand text color */
+    color: ${colors.primary};
+    font-weight: 600;
   }
 `;
 
-// Custom styled button for Nav.Link
-const NavButton = styled(Nav.Link)`
-  background-color: transparent; /* No background initially */
-  color: #495E57 !important; /* Default text color */
-  padding: 5px 10px;
-  border: 2px solid #495E57; /* Initial border */
+const navButton = css`
+  margin: 5px 0 5px 10px;
+  padding: 5px 12px;
+  border: 2px solid ${colors.primary};
   border-radius: 5px;
+  background-color: transparent;
+  color: ${colors.primary};
   text-align: center;
-  display: inline-block;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-  margin-left: 10px; /* Add custom margin for separation */
-  margin-right: 10px; /* Add custom margin for separation */
-  margin-top: 5px;
-  margin-bottom: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
 
-  &:hover {
-    background-color: #F4CE14; /* Change background on hover */
-    border-color: #F4CE14; /* Change border color on hover */
-    color: #495E57 !important; /* Change text color on hover */
+  &:hover,
+  &.active {
+    border-color: ${colors.accent};
+    background-color: ${colors.accent};
+    color: ${colors.primary};
   }
 `;
 
-interface NavBarProps {
-  brand: string;
-  links: { name: string; href: string }[];
-}
+const NavButton = styled(NavLink)`
+  ${navButton}
+`;
 
-const NavBar: React.FC<NavBarProps> = ({ brand, links }) => {
+const NavActionButton = styled.button`
+  ${navButton}
+`;
+
+export default function NavBar() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    navigate('/');
+  };
+
   return (
-    <StyledNavbar expand="lg">
+    <StyledNavbar expand="md">
       <Container>
-        {/* Brand on the left */}
-        <Navbar.Brand href="/">
-        <FontAwesomeIcon icon={faBook}/> {brand} 
+        <Navbar.Brand as={Link} to="/">
+          <FaBook aria-hidden className="me-2" />
+          LangGo
         </Navbar.Brand>
-
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-        <Navbar.Collapse id="basic-navbar-nav">
-          {/* Empty space on the left to push buttons to the right */}
-          <Nav className="ms-auto"> {/* 'ms-auto' pushes buttons to the right */}
-            {links.map((link, index) => (
-              <NavButton key={index} href={link.href}>
-                {link.name}
-              </NavButton>
-            ))}
+        <Navbar.Toggle aria-controls="main-nav" />
+        <Navbar.Collapse id="main-nav">
+          <Nav className="ms-auto">
+            {user?.emailVerified ? (
+              <>
+                <NavButton to="/dashboard">Dashboard</NavButton>
+                <NavActionButton type="button" onClick={handleSignOut}>
+                  Log out
+                </NavActionButton>
+              </>
+            ) : (
+              <>
+                <NavButton to="/signup">Sign up</NavButton>
+                <NavButton to="/login">Log in</NavButton>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </StyledNavbar>
   );
-};
-
-export default NavBar;
+}

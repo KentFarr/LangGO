@@ -1,48 +1,44 @@
-# -------- Stage 1: Build Frontend --------
-FROM node:18-alpine AS frontend-builder
+# syntax=docker/dockerfile:1
 
+# ---------- Build the React frontend ----------
+FROM node:24-alpine AS frontend
 WORKDIR /app/frontend
 
-COPY frontend/package*.json ./
-RUN npm install
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
 
 COPY frontend/ ./
 
-ARG REACT_APP_API_KEY
-ARG REACT_APP_AUTH_DOMAIN
-ARG REACT_APP_PROJECT_ID
-ARG REACT_APP_STORAGE_BUCKET
-ARG REACT_APP_MESSAGING_SENDER_ID
-ARG REACT_APP_APP_ID
-ARG REACT_APP_MEASUREMENT_ID
-ARG REACT_APP_API_URL
-ARG REACT_APP_OPEN_API_KEY
-
-ENV REACT_APP_API_KEY=$REACT_APP_API_KEY
-ENV REACT_APP_AUTH_DOMAIN=$REACT_APP_AUTH_DOMAIN
-ENV REACT_APP_PROJECT_ID=$REACT_APP_PROJECT_ID
-ENV REACT_APP_STORAGE_BUCKET=$REACT_APP_STORAGE_BUCKET
-ENV REACT_APP_MESSAGING_SENDER_ID=$REACT_APP_MESSAGING_SENDER_ID
-ENV REACT_APP_APP_ID=$REACT_APP_APP_ID
-ENV REACT_APP_MEASUREMENT_ID=$REACT_APP_MEASUREMENT_ID
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
-ENV REACT_APP_OPENAI_API_KEY=$REACT_APP_OPENAI_API_KEY
-
+# Firebase web config is inlined into the bundle at build time.
+ARG VITE_FIREBASE_API_KEY
+ARG VITE_FIREBASE_AUTH_DOMAIN
+ARG VITE_FIREBASE_PROJECT_ID
+ARG VITE_FIREBASE_STORAGE_BUCKET
+ARG VITE_FIREBASE_MESSAGING_SENDER_ID
+ARG VITE_FIREBASE_APP_ID
 RUN npm run build
 
-
-# -------- Stage 2: Serve Frontend + Backend --------
-FROM node:18-alpine AS backend
-
+# ---------- Build the API ----------
+FROM node:24-alpine AS backend
 WORKDIR /app/backend
 
-COPY backend/package*.json ./
-RUN npm install
+COPY backend/package.json backend/package-lock.json ./
+RUN npm ci
 
 COPY backend/ ./
+RUN npm run build && npm prune --omit=dev
 
-COPY --from=frontend-builder /app/frontend/build ./public
+# ---------- Runtime image ----------
+FROM node:24-alpine
+ENV NODE_ENV=production
+WORKDIR /app
 
+COPY --from=backend /app/backend/package.json ./
+COPY --from=backend /app/backend/node_modules ./node_modules
+COPY --from=backend /app/backend/dist ./dist
+COPY --from=frontend /app/frontend/dist ./public
+
+USER node
 EXPOSE 5000
-
-CMD ["npm", "start"]
+HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://localhost:5000/healthz || exit 1
+CMD ["node", "dist/server.js"]

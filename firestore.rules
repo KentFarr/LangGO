@@ -1,0 +1,14 @@
+rules_version = '2';
+
+// The web client reads and updates flashcards directly, so these rules are the only thing
+// stopping one user from reading or editing another user's data. The API writes with the
+// Admin SDK, which bypasses rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true;
+    }
+  }
+}

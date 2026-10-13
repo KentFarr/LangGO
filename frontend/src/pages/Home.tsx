@@ -1,146 +1,152 @@
-import React from 'react';
-import NavBar from '../components/NavBar';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReact, faNodeJs, faGoogle, faBootstrap } from '@fortawesome/free-brands-svg-icons';
-import { faFileUpload, faBrain, faChartLine, faBolt } from '@fortawesome/free-solid-svg-icons';
+import type { IconType } from 'react-icons';
+import { Col, Container, Row } from 'react-bootstrap';
+import {
+  FaBolt,
+  FaBootstrap,
+  FaBrain,
+  FaChartLine,
+  FaFileArrowUp,
+  FaGoogle,
+  FaNodeJs,
+  FaReact,
+} from 'react-icons/fa6';
+import { Link } from 'react-router';
 import styled from 'styled-components';
-import Footer from '../components/Footer';   
+import { useAuth } from '../auth/useAuth';
+import { colors } from '../theme';
 
-// Gradient Styled Components
-
-const GradientHeroSection = styled.section`
-    background: linear-gradient(90deg, #495E57, #F4CE14);
-    color: white;
-    padding: 100px 0;
-    text-align: center;
+const Hero = styled.section`
+  padding: 100px 0;
+  background: linear-gradient(90deg, ${colors.primary}, ${colors.accent});
+  color: white;
+  text-align: center;
 `;
 
-const GradientTechnologiesSection = styled.section`
-    background: linear-gradient(135deg, #f0f4f8, #ffffff);
-    padding: 80px 0;
+const Band = styled.section<{ $reverse?: boolean }>`
+  padding: 80px 0;
+  background: linear-gradient(
+    135deg,
+    ${({ $reverse }) => ($reverse ? '#ffffff, #f0f4f8' : '#f0f4f8, #ffffff')}
+  );
 `;
 
-const GradientHowItWorksSection = styled.section`
-    background: linear-gradient(135deg, #ffffff, #f0f4f8);
-    padding: 80px 0;
-`;
+interface Feature {
+  icon: IconType;
+  title: string;
+  description: string;
+}
 
+const TECHNOLOGIES: Feature[] = [
+  {
+    icon: FaReact,
+    title: 'React + TypeScript',
+    description: 'A fast, type-safe single-page app built with React and Vite.',
+  },
+  {
+    icon: FaNodeJs,
+    title: 'Node.js + Express',
+    description: 'A TypeScript API that verifies your session and talks to OpenAI.',
+  },
+  {
+    icon: FaGoogle,
+    title: 'Firebase',
+    description: 'Secure sign-in and per-user flashcard storage in Firestore.',
+  },
+  {
+    icon: FaBootstrap,
+    title: 'Bootstrap',
+    description: 'A clean, responsive design that works well on any device.',
+  },
+];
 
-// Hero Section
-const HeroSection = () => (
-    <GradientHeroSection>
+const STEPS: Feature[] = [
+  {
+    icon: FaFileArrowUp,
+    title: '1. Upload a Japanese PDF',
+    description:
+      'Pick a JLPT level (N5–N1) and we find the most frequent words from that level in your PDF. ' +
+      'The file is read in your browser and never uploaded.',
+  },
+  {
+    icon: FaBolt,
+    title: '2. Generate flashcards',
+    description:
+      'Each word gets a flashcard with its reading, meaning, and a memorable mnemonic.',
+  },
+  {
+    icon: FaBrain,
+    title: '3. Discover related words',
+    description: 'AI suggests five more words related to your text to grow your vocabulary.',
+  },
+  {
+    icon: FaChartLine,
+    title: '4. Review with spaced repetition',
+    description:
+      'Cards come back for review just as you are about to forget them, so learning sticks.',
+  },
+];
+
+function FeatureGrid({ features, columns }: { features: Feature[]; columns: number }) {
+  return (
+    <Row className="gy-4">
+      {features.map(({ icon: Icon, title, description }) => (
+        <Col key={title} md={12 / columns} className="text-center">
+          <Icon size={48} className="mb-3" aria-hidden color={colors.primary} />
+          <h3 className="h4">{title}</h3>
+          <p>{description}</p>
+        </Col>
+      ))}
+    </Row>
+  );
+}
+
+export default function Home() {
+  const { user } = useAuth();
+  const signedIn = Boolean(user?.emailVerified);
+  const cta = signedIn
+    ? { to: '/dashboard', label: 'Go to your dashboard' }
+    : { to: '/signup', label: 'Get started' };
+
+  return (
+    <>
+      <Hero>
         <Container>
-            <h1 className="mb-4">Master Japanese Vocabulary with Ease</h1>
-            <p className="lead mb-4">
-                Upload your Japanese PDF, and let our app help you find and learn the most important words based on your proficiency level.
-            </p>
-            <Button variant="light" href="/signup" size="lg">
-                Get Started
-            </Button>
+          <h1 className="mb-4">Master Japanese vocabulary with ease</h1>
+          <p className="lead mb-4">
+            Upload a Japanese PDF and learn its most important words for your JLPT level, with
+            AI-generated mnemonics and spaced repetition.
+          </p>
+          <Link to={cta.to} className="btn btn-light btn-lg">
+            {cta.label}
+          </Link>
         </Container>
-    </GradientHeroSection>
-);
+      </Hero>
 
-// Technologies Section
-const TechnologiesSection = () => (
-    <GradientTechnologiesSection>
+      <Band>
         <Container>
-            <h2 className="text-center mb-5">Powered by Cutting-Edge Technologies</h2>
-            <Row className="gy-4">
-                <Col md={3} className="text-center">
-                    <FontAwesomeIcon icon={faReact} size="3x" className="mb-3" />
-                    <h4>React</h4>
-                    <p>Our frontend is built with React and Typescript, ensuring a fast and responsive user experience.</p>
-                </Col>
-                <Col md={3} className="text-center">
-                    <FontAwesomeIcon icon={faNodeJs} size="3x" className="mb-3" />
-                    <h4>Node.js</h4>
-                    <p>Node.js powers our backend, handling file processing and communication with Firebase.</p>
-                </Col>
-                <Col md={3} className="text-center">
-                    <FontAwesomeIcon icon={faGoogle} size="3x" className="mb-3" />
-                    <h4>Firebase</h4>
-                    <p>Flashcards are securely stored in Firebase, so you can access them anytime through your user dashboard.</p>
-                </Col>
-                <Col md={3} className="text-center">
-                    <FontAwesomeIcon icon={faBootstrap} size="3x" className="mb-3" />
-                    <h4>Bootstrap</h4>
-                    <p>We use Bootstrap to provide a clean, responsive design that works well on any device.</p>
-                </Col>
-            </Row>
+          <h2 className="text-center mb-5">How it works</h2>
+          <FeatureGrid features={STEPS} columns={2} />
         </Container>
-    </GradientTechnologiesSection>
-);
+      </Band>
 
-// How It Works Section
-const HowItWorksSection = () => (
-    <GradientHowItWorksSection>
+      <Band $reverse>
         <Container>
-            <h2 className="text-center mb-5">How It Works</h2>
-            <Row className="gy-4">
-                <Col md={6} className="text-center">
-                    <FontAwesomeIcon icon={faFileUpload} size="3x" className="mb-3" />
-                    <h4>1. Upload a Japanese PDF</h4>
-                    <p>Upload a Japanese PDF file, and we’ll extract the top words based on your chosen JLPT level (N1-N5).</p>
-                </Col>
-                <Col md={6} className="text-center">
-                    <FontAwesomeIcon icon={faBolt} size="3x" className="mb-3" />
-                    <h4>2. Generate Flashcards</h4>
-                    <p>We generate flashcards for with your top words and store them in Firebase for future reference.</p>
-                </Col>
-                <Col md={6} className="text-center">
-                    <FontAwesomeIcon icon={faBrain} size="3x" className="mb-3" />
-                    <h4>3. Get AI Suggestions</h4>
-                    <p>Using OpenAI, we suggest 5 additional words related to your text, giving you more vocabulary to explore.</p>
-                </Col>
-                <Col md={6} className="text-center">
-                    <FontAwesomeIcon icon={faChartLine} size="3x" className="mb-3" />
-                    <h4>4. Access Your Dashboard</h4>
-                    <p>All flashcards are stored in your user dashboard. And have Access to our spaced repetition system to help reinforce your learning!</p>
-                </Col>
-            </Row>
+          <h2 className="text-center mb-5">Built with</h2>
+          <FeatureGrid features={TECHNOLOGIES} columns={4} />
         </Container>
-    </GradientHowItWorksSection>
-);
+      </Band>
 
-// CTA Section
-const CTASection = () => (
-    <Container className="text-center py-5 my-5">
-        <h2 className="mb-4">Ready to Boost Your Japanese?</h2>
-        <p className="lead mb-4">
-            Sign up now and start learning Japanese vocabulary more effectively with personalized flashcards.
-        </p>
-        <Button variant="success" href="/signup" size="lg">
-            Sign Up
-        </Button>
-    </Container>
-);
-
-
-
-// Home Page
-const Home: React.FC = () => {
-    return (
-        <div className='container-fluid p-0'>
-            <NavBar brand="LangGo" links={[{ name: 'Sign Up', href: '/signup' }, { name: 'Log In', href: '/login' }]} />
-
-            {/* Hero Section */}
-            <HeroSection />
-
-            {/* Technologies Section */}
-            <TechnologiesSection />
-
-            {/* How It Works Section */}
-            <HowItWorksSection />
-
-            {/* Call to Action Section */}
-            <CTASection />
-
-            {/* Footer */}
-            <Footer />
-        </div>
-    );
-};
-
-export default Home;
+      {!signedIn && (
+        <Container className="text-center py-5 my-5">
+          <h2 className="mb-4">Ready to boost your Japanese?</h2>
+          <p className="lead mb-4">
+            Sign up for free and start building personalized flashcards today.
+          </p>
+          <Link to="/signup" className="btn btn-primary btn-lg">
+            Sign up
+          </Link>
+        </Container>
+      )}
+    </>
+  );
+}

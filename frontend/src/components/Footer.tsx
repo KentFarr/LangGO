@@ -1,57 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
+import { Link } from 'react-router';
+import styled, { css } from 'styled-components';
+import { colors } from '../theme';
 
 const FooterSection = styled.footer`
-  background: linear-gradient(90deg, #495e57, #2d2f33);
-  color: #f5f7f8;
   padding: 20px 0;
+  background: linear-gradient(90deg, ${colors.primary}, #2d2f33);
+  color: ${colors.background};
   text-align: center;
-  position: relative;
-  width: 100%;
-  bottom: 0;
+
+  p {
+    margin: 0.5rem 0;
+  }
 `;
 
-const FooterLink = styled.a`
-  color: #f5f7f8; /* Changed link color to match text but can distinguish with hover */
-  font-weight: bold; /* Make links bold to stand out */
+const linkStyle = css`
   margin: 0 10px;
+  color: ${colors.background};
+  font-weight: bold;
   text-decoration: none;
+
   &:hover {
-    color: #f4ce14; /* On hover, change to an accent color */
+    color: ${colors.accent};
     text-decoration: underline;
   }
 `;
 
-const FooterWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+const ExternalLink = styled.a`
+  ${linkStyle}
 `;
 
-const CreatorCredit = styled.p`
-  margin: 10px 0;
+const InternalLink = styled(Link)`
+  ${linkStyle}
+`;
+
+const Credit = styled.p`
   font-size: 0.9rem;
-  color: #f5f7f8;
-  text-align: center;
-  opacity: 0.8; /* Lighten the text slightly for subtle emphasis */
+  opacity: 0.8;
 `;
 
-const Footer: React.FC = () => (
-  <FooterSection>
-    <FooterWrapper>
-      <p>
-        &copy; {new Date().getFullYear()} LangGo. All rights reserved.
-      </p>
-      <CreatorCredit>
+export default function Footer() {
+  return (
+    <FooterSection>
+      <p>&copy; {new Date().getFullYear()} LangGo. All rights reserved.</p>
+      <Credit>
         Created by
-        <FooterLink href="https://kentfarabaugh.com">
-        Kent Farabaugh
-        </FooterLink>
-      </CreatorCredit>
-      <FooterLink href="/privacy">Privacy Policy</FooterLink>
-    </FooterWrapper>
-  </FooterSection>
-);
-
-export default Footer;
+        <ExternalLink href="https://kentfarabaugh.com" target="_blank" rel="noreferrer">
+          Kent Farabaugh
+        </ExternalLink>
+      </Credit>
+      <InternalLink to="/privacy">Privacy Policy</InternalLink>
+    </FooterSection>
+  );
+}
