@@ -96,7 +96,13 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative">
-        <Photo name="torii-fuji" priority vivid overlay="dark" sizes="100vw" className="h-[92svh] min-h-140" />
+        <Photo
+          name="torii-fuji"
+          priority
+          overlay="dark"
+          sizes="max(100vw, 123vh)"
+          className="h-[92svh] min-h-140"
+        />
         <div className="absolute inset-0 flex flex-col justify-end text-[#fffefa]">
           <div className="mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-24">
             <p className="font-display text-xs font-medium tracking-label uppercase opacity-85">
@@ -175,6 +181,7 @@ export default function Home() {
                   name={step.photo}
                   decorative
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  frameRatio={4 / 5}
                   className="aspect-4/5"
                 />
                 <p className="label mt-5">
@@ -196,7 +203,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-24 sm:px-8 md:grid-cols-[1.25fr_1fr]">
           <div className="grid grid-cols-[1.3fr_1fr] gap-4">
             <Photo name="shinjuku-neon" sizes="(min-width: 768px) 35vw, 60vw" className="aspect-4/5 self-end" />
-            <Photo name="doves" sizes="(min-width: 768px) 25vw, 40vw" className="aspect-3/4" />
+            <Photo name="doves" sizes="(min-width: 768px) 25vw, 40vw" frameRatio={3 / 4} className="aspect-3/4" />
           </div>
           <div>
             <p className="label">Everyday Japanese · 身近な日本語</p>
@@ -242,7 +249,7 @@ export default function Home() {
 
       {/* Banner */}
       <section className="relative">
-        <Photo name="tokyo-skyline" overlay="darker" sizes="100vw" className="h-[60vh] min-h-96" />
+        <Photo name="tokyo-skyline" overlay="darker" sizes="max(100vw, 80vh)" className="h-[60vh] min-h-96" />
         <div className="absolute inset-0 flex items-center justify-center px-5 text-center text-[#fffefa]">
           <div>
             <p lang="ja" className="font-jp text-sm tracking-[0.3em] opacity-85">

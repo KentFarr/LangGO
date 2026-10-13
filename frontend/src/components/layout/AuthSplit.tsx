@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { PhotoName } from '../../lib/photos';
+import { photo as photoSource, type PhotoName } from '../../lib/photos';
 import ThemeToggle from '../ThemeToggle';
 import { Photo } from '../ui/Photo';
 import Logo from './Logo';
@@ -22,7 +22,8 @@ export default function AuthSplit({
         name={photo}
         priority
         overlay="frame"
-        sizes="(min-width: 768px) 52vw, 100vw"
+        // Full-height panel on desktop: a wide photo renders as wide as the screen is tall × ratio.
+        sizes={`(min-width: 768px) max(52vw, ${Math.round(photoSource(photo).ratio * 100)}vh), 100vw`}
         className="h-56 md:sticky md:top-0 md:h-screen"
       >
         <div className="flex h-full flex-col justify-between p-6 text-[#fffefa] sm:p-10">

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import { photo, type PhotoName } from '../../lib/photos';
+import { coverSizes, photo, type PhotoName } from '../../lib/photos';
 
 type Overlay = 'none' | 'soft' | 'frame' | 'dark' | 'darker' | 'wash';
 
@@ -17,15 +17,18 @@ const overlays: Record<Exclude<Overlay, 'none'>, string> = {
 
 interface PhotoProps {
   name: PhotoName;
-  /** Rendered size hint for the browser, e.g. "(min-width: 768px) 50vw, 100vw". */
+  /**
+   * Width of the frame for the browser's size choice, e.g. "(min-width: 768px) 50vw, 100vw".
+   * For fixed-height frames, include the height-driven width, e.g. "max(100vw, 123vh)".
+   */
   sizes?: string;
+  /** Frame aspect ratio (width / height) when it differs from the photo's, e.g. 4 / 5. */
+  frameRatio?: number;
   /** Above-the-fold images load eagerly with high priority. */
   priority?: boolean;
   overlay?: Overlay;
   /** Decorative photos next to text that already says the same thing. */
   decorative?: boolean;
-  /** Keep full color saturation (photos are slightly softened by default for a calmer palette). */
-  vivid?: boolean;
   className?: string;
   imgClassName?: string;
   children?: ReactNode;
@@ -34,10 +37,10 @@ interface PhotoProps {
 export function Photo({
   name,
   sizes = '100vw',
+  frameRatio,
   priority = false,
   overlay = 'none',
   decorative = false,
-  vivid = false,
   className,
   imgClassName,
   children,
@@ -46,7 +49,11 @@ export function Photo({
   return (
     <div className={clsx('relative overflow-hidden bg-raised', className)}>
       <picture>
-        <source type="image/avif" srcSet={source.avifSrcSet} sizes={sizes} />
+        <source
+          type="image/avif"
+          srcSet={source.avifSrcSet}
+          sizes={frameRatio ? coverSizes(sizes, source.ratio, frameRatio) : sizes}
+        />
         <img
           src={source.fallback}
           alt={decorative ? '' : source.alt}
@@ -55,7 +62,7 @@ export function Photo({
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : undefined}
           decoding="async"
-          className={clsx('h-full w-full object-cover', !vivid && 'saturate-[.82] brightness-[1.03]', 'dark:brightness-[.85]', imgClassName)}
+          className={clsx('h-full w-full object-cover dark:brightness-[.9]', imgClassName)}
           style={{ objectPosition: source.position }}
         />
       </picture>
