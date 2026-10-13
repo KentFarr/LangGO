@@ -161,15 +161,14 @@ curl -fsS http://127.0.0.1:8082/healthz # {"status":"ok"}
 sudo cp deploy/nginx-langgo.conf /etc/nginx/sites-available/langgo.co
 sudo ln -s /etc/nginx/sites-available/langgo.co /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
+sudo certbot --nginx -d langgo.co -d www.langgo.co   # adds HTTPS + redirects
 ```
 
-TLS for the nginx site:
-
-- **Cloudflare proxy (orange cloud):** create an Origin Certificate for the domain's zone and save
-  it under `/etc/ssl/cloudflare/<domain>/origin.crt` and `origin.key` (keep other zones'
-  certificates separate). Set SSL/TLS mode to **Full (strict)** and `TRUST_PROXY_HOPS=2` in `.env`.
-- **No Cloudflare:** `sudo certbot --nginx -d your-domain -d www.your-domain`, and
-  `TRUST_PROXY_HOPS=1`.
+`deploy/nginx-langgo.conf` is HTTP-only on purpose: certbot adds the HTTPS server blocks and
+redirects (`TRUST_PROXY_HOPS=1`). If the domain is proxied by Cloudflare (orange cloud), use
+`deploy/nginx-langgo-cloudflare.conf` with a Cloudflare Origin Certificate stored under
+`/etc/ssl/cloudflare/<domain>/` (keep other zones' certificates separate), SSL/TLS mode
+**Full (strict)**, and `TRUST_PROXY_HOPS=2`.
 
 ## Operating it
 
