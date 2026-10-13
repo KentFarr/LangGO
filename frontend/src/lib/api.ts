@@ -77,3 +77,31 @@ export interface ExtractedPage {
 export function extractUrl(url: string): Promise<ExtractedPage> {
   return request<ExtractedPage>('/api/extract-url', { method: 'POST', body: JSON.stringify({ url }) });
 }
+
+export type ExportFormat = 'apkg' | 'csv';
+
+/** Downloads cards as an Anki package or CSV; exports all cards when `ids` is omitted. */
+export async function exportFlashcards(format: ExportFormat, ids?: string[]): Promise<void> {
+  const response = await fetch('/api/flashcards/export', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ format, ids }),
+  });
+  if (!response.ok) {
+    const body: unknown = await response.json().catch(() => null);
+    const message =
+      body && typeof body === 'object' && 'error' in body && typeof body.error === 'string'
+        ? body.error
+        : 'Export failed. Please try again.';
+    throw new ApiError(message, response.status);
+  }
+
+  const filename =
+    /filename="?([^";]+)"?/.exec(response.headers.get('content-disposition') ?? '')?.[1] ?? `langgo.${format}`;
+  const url = URL.createObjectURL(await response.blob());
+  const link = Object.assign(document.createElement('a'), { href: url, download: filename });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}

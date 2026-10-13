@@ -28,6 +28,9 @@ words, and schedules everything for review with spaced repetition.
   validated before it is stored.
 - **Focused reviews.** One card at a time: Space flips, 1 and 2 grade; a dashboard shows what's due
   and your cards by JLPT level.
+- **Anki export.** Download your deck, or the cards matching your library filters, as a real Anki
+  package (`.apkg`, with level subdecks and tags; re-exporting updates notes instead of duplicating
+  them) or as CSV for Anki's Basic note type.
 - **Spaced repetition.** Review intervals double when you remember a card and halve when you
   don't.
 - **Light and dark themes.** A calm, bilingual (English/日本語) design that follows your system
@@ -174,6 +177,8 @@ flashcard routes require the session cookie.
 | `GET`    | `/api/flashcards`             |                          | `200 { flashcards }`         |
 | `POST`   | `/api/flashcards`             | `{ "words": ["勉強"] }`   | `201 { flashcards }` (new)   |
 | `POST`   | `/api/flashcards/:id/review`  | `{ "remembered": true }` | `200 { flashcard }`          |
+| `POST`   | `/api/flashcards/export`      | `{ "format": "apkg" }`   | file download (`apkg`/`csv`) |
+| `POST`   | `/api/extract-url`            | `{ "url": "https://…" }` | `200 { url, title, text }`   |
 | `DELETE` | `/api/flashcards/:id`         |                          | `204`                        |
 | `GET`    | `/api/meta` (public)          |                          | `200 { demoMode, sampleWords }` |
 | `GET`    | `/healthz`                    |                          | `200 { "status": "ok" }`     |

@@ -238,3 +238,49 @@ describe('POST /api/extract-url', () => {
     expect((await as('user-1').post('/api/extract-url').send({ url: 'https://example.com' })).status).toBe(404);
   });
 });
+
+describe('POST /api/flashcards/export', () => {
+  async function withCards() {
+    const ctx = setup();
+    const created = await ctx.as('user-1').post('/api/flashcards').send({ words: ['勉強', '学校'], level: 5 });
+    return { ...ctx, ids: created.body.flashcards.map((c: Flashcard) => c.id) as string[] };
+  }
+
+  it('downloads an Anki package', async () => {
+    const { as } = await withCards();
+    const res = await as('user-1')
+      .post('/api/flashcards/export')
+      .send({ format: 'apkg' })
+      .buffer(true)
+      .parse((r, done) => {
+        const chunks: Buffer[] = [];
+        r.on('data', (c: Buffer) => chunks.push(c));
+        r.on('end', () => done(null, Buffer.concat(chunks)));
+      });
+
+    expect(res.status).toBe(200);
+    expect(res.headers['content-disposition']).toMatch(/attachment; filename="?langgo-\d{4}-\d{2}-\d{2}\.apkg"?/);
+    // Zip files start with "PK".
+    expect((res.body as Buffer).subarray(0, 2).toString()).toBe('PK');
+  });
+
+  it('exports only the requested cards as CSV', async () => {
+    const { as, ids } = await withCards();
+    const res = await as('user-1').post('/api/flashcards/export').send({ format: 'csv', ids: [ids[0]] });
+
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(/text\/csv/);
+    const rows = res.text.split('\r\n').filter((line) => line && !line.startsWith('#') && !line.startsWith('﻿#'));
+    expect(rows).toHaveLength(1);
+  });
+
+  it('rejects bad formats, foreign ids and empty exports', async () => {
+    const { as } = await withCards();
+    expect((await as('user-1').post('/api/flashcards/export').send({ format: 'pdf' })).status).toBe(400);
+    expect((await as('user-2').post('/api/flashcards/export').send({ format: 'csv' })).status).toBe(400);
+    const foreign = await as('user-2')
+      .post('/api/flashcards/export')
+      .send({ format: 'csv', ids: ['11111111-1111-4111-8111-111111111111'] });
+    expect(foreign.status).toBe(400);
+  });
+});

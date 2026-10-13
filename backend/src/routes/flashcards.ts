@@ -1,5 +1,6 @@
 import { Router, type RequestHandler } from 'express';
 import { z } from 'zod';
+import { buildApkg, buildCsv } from '../services/ankiExport.js';
 import type { FlashcardRepository } from '../services/flashcardRepository.js';
 import type { MnemonicGenerator } from '../services/mnemonicGenerator.js';
 
@@ -14,6 +15,12 @@ const generateRequestSchema = z.object({
 const reviewRequestSchema = z.object({ remembered: z.boolean() });
 
 const cardIdSchema = z.uuid();
+
+const exportRequestSchema = z.object({
+  format: z.enum(['apkg', 'csv']),
+  /** Export only these cards (e.g. the library's current filter); all cards when omitted. */
+  ids: z.array(z.uuid()).max(10_000).optional(),
+});
 
 function invalid(error: z.ZodError) {
   return {
@@ -50,6 +57,30 @@ export function flashcardsRouter({ generator, repository, generateLimiter }: Fla
       ...generated.relatedWords.map((card) => ({ ...card, level, source: 'related' as const })),
     ]);
     res.status(201).json({ flashcards });
+  });
+
+  router.post('/export', async (req, res) => {
+    const parsed = exportRequestSchema.safeParse(req.body);
+    if (!parsed.success) {
+      res.status(400).json(invalid(parsed.error));
+      return;
+    }
+    const { format, ids } = parsed.data;
+    const wanted = ids && new Set(ids);
+    const cards = (await repository.listForUser(res.locals.userId)).filter((card) => !wanted || wanted.has(card.id));
+    if (cards.length === 0) {
+      res.status(400).json({ error: 'There are no flashcards to export.' });
+      return;
+    }
+
+    const filename = `langgo-${new Date().toISOString().slice(0, 10)}.${format}`;
+    res.attachment(filename);
+    if (format === 'apkg') {
+      res.type('application/octet-stream').send(Buffer.from(buildApkg(cards)));
+    } else {
+      // BOM so spreadsheet apps detect UTF-8 (Anki ignores it).
+      res.type('text/csv; charset=utf-8').send('\uFEFF' + buildCsv(cards));
+    }
   });
 
   router.post('/:id/review', async (req, res) => {
