@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/noto-sans-jp";
+@import "@fontsource/fragment-mono";
+
+/* Dark mode is class-based so the toggle can override the system setting (see lib/theme.ts). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens. Light values follow nossara.com's palette (warm off-white, sand, indigo);
+ * the pastels are muted to sit alongside sand. Utilities such as `bg-paper` read these
+ * variables, so `.dark` below only needs to redefine them.
+ */
+@theme {
+  --color-paper: #f1f0e9;
+  --color-surface: #fffefa;
+  --color-raised: #e9e7dd;
+  --color-sand: #ebe2be;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #3d3b3b;
+  --color-ink-muted: #5f5d58;
+  --color-line: #d9d7ce;
+  --color-ai: #3a4885;
+  --color-on-ai: #fffefa;
+  --color-shu: #b8452a;
+
+  /* JLPT levels, easiest to hardest. */
+  --color-sage: #d5e3d1;
+  --color-sky: #d3e1ec;
+  --color-lavender: #dedaec;
+  --color-peach: #f2ddcb;
+  --color-sakura: #f2d5da;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-jp: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-mono: "Fragment Mono", ui-monospace, monospace;
+
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.14em;
+}
+
+.dark {
+  --color-paper: #141414;
+  --color-surface: #1c1c1c;
+  --color-raised: #262624;
+  --color-sand: #3a3528;
+  --color-ink: #f1f0e9;
+  --color-ink-soft: #d6d3c9;
+  --color-ink-muted: #a3a19a;
+  --color-line: #2e2e2c;
+  --color-ai: #a4afe4;
+  --color-on-ai: #141414;
+  --color-shu: #e8836b;
+
+  --color-sage: #2c3a2b;
+  --color-sky: #263340;
+  --color-lavender: #312d42;
+  --color-peach: #3f3125;
+  --color-sakura: #40292e;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-paper font-sans text-[15px] leading-relaxed text-ink antialiased;
+    /* Japanese text inherits the JP font automatically via the fallback chain. */
+    font-family: var(--font-sans), var(--font-jp);
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-light tracking-tight text-balance;
+  }
+
+  :lang(ja) {
+    font-family: var(--font-jp);
+  }
+
+  ::selection {
+    @apply bg-sand text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ai;
+  }
+
+  #root {
+    @apply flex min-h-screen flex-col;
+  }
+}
+
+@layer components {
+  /* Small uppercase section label, as on nossara.com. */
+  .label {
+    @apply font-display text-xs font-medium tracking-label text-ink-muted uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

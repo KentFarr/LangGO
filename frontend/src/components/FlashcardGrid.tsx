@@ -1,71 +1,33 @@
+import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import styled from 'styled-components';
-import { colors } from '../theme';
 import type { Flashcard } from '../types/flashcard';
+import { CardBack, CardFront } from './FlashcardFaces';
 import FlipCard from './FlipCard';
-
-const Word = styled.p`
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 600;
-  color: ${colors.primary};
-`;
-
-const Hint = styled.p`
-  margin: 0;
-  font-size: 0.8rem;
-  opacity: 0.6;
-`;
-
-const Reading = styled.p`
-  margin: 0;
-  font-size: 1.25rem;
-  color: ${colors.primary};
-`;
-
-const Meaning = styled.p`
-  margin: 0;
-  font-weight: 600;
-`;
-
-const Mnemonic = styled.p`
-  margin: 0;
-  font-size: 1rem;
-`;
 
 interface FlashcardGridProps<T extends Flashcard> {
   cards: readonly T[];
   renderActions?: (card: T, flipped: boolean) => ReactNode;
+  /** Maximum columns on wide screens. */
+  columns?: 2 | 3;
 }
 
 export default function FlashcardGrid<T extends Flashcard>({
   cards,
   renderActions,
+  columns = 3,
 }: FlashcardGridProps<T>) {
   return (
-    <Row className="g-4">
+    <ul className={clsx('grid gap-5 sm:grid-cols-2', columns === 3 && 'lg:grid-cols-3')}>
       {cards.map((card) => (
-        <Col key={card.id} xs={12} sm={6} lg={4}>
+        <li key={card.id}>
           <FlipCard
             label={card.word}
-            front={
-              <>
-                <Word lang="ja">{card.word}</Word>
-                <Hint>Click to reveal</Hint>
-              </>
-            }
-            back={
-              <>
-                {card.reading && <Reading lang="ja">{card.reading}</Reading>}
-                {card.meaning && <Meaning>{card.meaning}</Meaning>}
-                <Mnemonic>{card.mnemonic}</Mnemonic>
-              </>
-            }
+            front={<CardFront card={card} />}
+            back={<CardBack card={card} />}
             actions={renderActions && ((flipped) => renderActions(card, flipped))}
           />
-        </Col>
+        </li>
       ))}
-    </Row>
+    </ul>
   );
 }

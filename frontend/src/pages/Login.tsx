@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from 'react';
-import { Alert, Button, Form } from 'react-bootstrap';
 import { Link, Navigate, useLocation, useNavigate, type Location } from 'react-router';
 import { useAuth } from '../auth/useAuth';
-import AuthCard from '../components/AuthCard';
+import AuthSplit from '../components/layout/AuthSplit';
+import { Bilingual, Button } from '../components/ui/Button';
+import { Alert } from '../components/ui/Feedback';
+import { TextField } from '../components/ui/Form';
 import { authClient } from '../lib/authClient';
 import { authErrorMessage } from '../lib/authErrors';
 
@@ -34,44 +36,38 @@ export default function Login() {
   };
 
   return (
-    <AuthCard title="Log in">
-      <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="login-email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
+    <AuthSplit photo="doves" title="Welcome back" ja="ログイン">
+      <form onSubmit={handleLogin} className="space-y-7">
+        <TextField
+          label="Email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <TextField
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-        <Form.Group className="mb-3" controlId="login-password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
+        {error && <Alert tone="error">{error}</Alert>}
 
-        <Button type="submit" variant="primary" className="w-100" disabled={submitting}>
-          {submitting ? 'Logging in…' : 'Log in'}
+        <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+          {submitting ? 'Logging in…' : <Bilingual en="Log in" ja="ログイン" />}
         </Button>
 
-        {error && (
-          <Alert variant="danger" className="mt-3 mb-0">
-            {error}
-          </Alert>
-        )}
-
-        <p className="text-center mt-3 mb-0">
-          New to LangGo? <Link to="/signup">Create an account</Link>
+        <p className="text-center text-sm text-ink-muted">
+          New to LangGo?{' '}
+          <Link to="/signup" className="text-ai underline-offset-4 hover:underline">
+            Create an account
+          </Link>
         </p>
-      </Form>
-    </AuthCard>
+      </form>
+    </AuthSplit>
   );
 }

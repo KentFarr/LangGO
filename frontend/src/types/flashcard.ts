@@ -11,6 +11,8 @@ export interface Flashcard {
   meaning: string;
   mnemonic: string;
   source: FlashcardSource;
+  /** JLPT level the card was created for (5 = N5 … 1 = N1); null for older cards. */
+  level: number | null;
   /** Days until the next review. */
   reviewInterval: number;
   /** ISO-8601 timestamp of the next scheduled review. */

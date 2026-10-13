@@ -7,6 +7,8 @@ export const MAX_WORDS_PER_REQUEST = 20;
 
 const generateRequestSchema = z.object({
   words: z.array(z.string().trim().min(1).max(32)).min(1).max(MAX_WORDS_PER_REQUEST),
+  /** JLPT level the words were picked for (5 = N5 … 1 = N1). */
+  level: z.number().int().min(1).max(5).optional(),
 });
 
 const reviewRequestSchema = z.object({ remembered: z.boolean() });
@@ -41,10 +43,11 @@ export function flashcardsRouter({ generator, repository, generateLimiter }: Fla
       return;
     }
 
-    const generated = await generator.generate([...new Set(parsed.data.words)]);
+    const { words, level } = parsed.data;
+    const generated = await generator.generate([...new Set(words)]);
     const flashcards = await repository.insertMany(res.locals.userId, [
-      ...generated.flashcards.map((card) => ({ ...card, source: 'requested' as const })),
-      ...generated.relatedWords.map((card) => ({ ...card, source: 'related' as const })),
+      ...generated.flashcards.map((card) => ({ ...card, level, source: 'requested' as const })),
+      ...generated.relatedWords.map((card) => ({ ...card, level, source: 'related' as const })),
     ]);
     res.status(201).json({ flashcards });
   });

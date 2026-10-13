@@ -7,6 +7,14 @@ JLPT level (N5–N1), and LangGo finds the most frequent words from that level, 
 flashcard for each one (reading, meaning, and a memorable mnemonic) with OpenAI, suggests related
 words, and schedules everything for review with spaced repetition.
 
+![LangGo landing page](docs/screenshots/home.jpg)
+
+| Dashboard | Review session (dark mode) |
+| --- | --- |
+| ![Dashboard with reviews due, stats and cards by JLPT level](docs/screenshots/dashboard.jpg) | ![Focused review session showing a flipped card with keyboard shortcuts](docs/screenshots/review-dark.jpg) |
+| **Create** | **Mobile** |
+| ![Create page with PDF drop zone and JLPT level chips](docs/screenshots/create.jpg) | ![Landing page on a phone](docs/screenshots/mobile.jpg) |
+
 ## Features
 
 - **PDF vocabulary mining.** PDFs are parsed in the browser with pdf.js and matched against JLPT
@@ -15,8 +23,12 @@ words, and schedules everything for review with spaced repetition.
   httpOnly session cookies, and brute-force rate limiting, all stored in your own Postgres.
 - **AI mnemonics.** The API uses OpenAI structured outputs with a Zod schema, so every response is
   validated before it is stored.
+- **Focused reviews.** One card at a time: Space flips, 1 and 2 grade; a dashboard shows what's due
+  and your cards by JLPT level.
 - **Spaced repetition.** Review intervals double when you remember a card and halve when you
   don't.
+- **Light and dark themes.** A calm, bilingual (English/日本語) design that follows your system
+  setting; every text color pair meets WCAG AA contrast.
 - **Demo mode.** With no OpenAI key configured, the app serves hand-written sample cards, so
   anyone can try it end to end for free.
 - **One-command setup.** `docker compose up` runs the app and PostgreSQL; migrations apply on
@@ -26,7 +38,7 @@ words, and schedules everything for review with spaced repetition.
 
 | Layer    | Technologies                                                                  |
 | -------- | ----------------------------------------------------------------------------- |
-| Frontend | React 19, TypeScript, Vite, React Router, React Bootstrap, styled-components  |
+| Frontend | React 19, TypeScript, Vite, React Router 8, Tailwind CSS 4, lucide icons      |
 | Backend  | Node.js, Express 5, TypeScript, Zod, Better Auth, OpenAI SDK                  |
 | Data     | PostgreSQL 18, Drizzle ORM + drizzle-kit migrations                           |
 | Tooling  | Vitest, Testing Library, Supertest, PGlite, ESLint, GitHub Actions, Docker    |
@@ -76,10 +88,12 @@ flowchart LR
 │   └── test/                Route, domain, and Postgres integration tests
 ├── frontend/                React SPA (Vite + TypeScript)
 │   └── src/
-│       ├── pages/           Route components
-│       ├── components/      UI components
+│       ├── pages/           Landing, auth, dashboard, review, create, library
+│       ├── components/      UI primitives (ui/), layouts, flip cards
+│       ├── flashcards/      Shared deck context for signed-in pages
 │       ├── hooks/           Data hooks
-│       ├── lib/             API and auth clients, PDF parsing, word matching
+│       ├── lib/             API/auth clients, PDF parsing, word matching, stats, theme
+│       ├── assets/photos/   Optimized photos (scripts/optimize-photos.sh)
 │       └── data/            JLPT word lists
 ├── deploy/                  Caddyfile and backup script for production
 ├── docs/DEPLOYMENT.md       VPS deployment guide

@@ -13,6 +13,7 @@ const card = (id: string, overrides: Partial<Flashcard> = {}): Flashcard => ({
   meaning: 'meaning',
   mnemonic: 'mnemonic',
   source: 'requested',
+  level: 5,
   reviewInterval: 1,
   nextReviewDate: '2026-01-01T00:00:00.000Z',
   createdAt: '2026-01-01T00:00:00.000Z',

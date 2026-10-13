@@ -1,81 +1,81 @@
-import { Container } from 'react-bootstrap';
-import styled from 'styled-components';
-import { colors } from '../theme';
+import type { ReactNode } from 'react';
 
-const Article = styled.article`
-  max-width: 800px;
-  line-height: 1.6;
-
-  h1 {
-    margin-bottom: 2rem;
-    color: ${colors.primary};
-    text-align: center;
-  }
-
-  h2 {
-    margin-top: 2rem;
-    font-size: 1.25rem;
-    color: ${colors.primary};
-  }
-
-  a {
-    color: ${colors.primary};
-    font-weight: 600;
-  }
-`;
+function Section({ title, ja, children }: { title: string; ja: string; children: ReactNode }) {
+  return (
+    <section className="grid gap-3 border-t border-line py-10 md:grid-cols-[220px_1fr] md:gap-10">
+      <div>
+        <h2 className="text-xl">{title}</h2>
+        <p lang="ja" className="label mt-1 tracking-normal normal-case">
+          {ja}
+        </p>
+      </div>
+      <div className="space-y-4 text-ink-soft [&_a]:text-ai [&_a]:underline-offset-4 [&_a:hover]:underline">
+        {children}
+      </div>
+    </section>
+  );
+}
 
 export default function Privacy() {
   return (
-    <Container className="py-5">
-      <Article className="mx-auto">
-        <h1>Privacy Policy</h1>
+    <article className="mx-auto max-w-4xl px-5 pt-32 pb-24 sm:px-8">
+      <p lang="ja" className="label">
+        プライバシーポリシー
+      </p>
+      <h1 className="mt-3 text-4xl sm:text-5xl">Privacy policy</h1>
+      <p className="mt-6 max-w-2xl text-lg text-ink-muted">
+        Your privacy is important to us. This policy explains what information LangGo (
+        <a href="https://langgo.co" className="text-ai underline-offset-4 hover:underline">
+          langgo.co
+        </a>
+        ) collects and how it is used.
+      </p>
 
-        <p>
-          Your privacy is important to us. This policy explains what information LangGo (
-          <a href="https://langgo.co">langgo.co</a>) collects and how it is used.
-        </p>
+      <div className="mt-14">
+        <Section title="What we collect" ja="収集する情報">
+          <p>
+            To create an account we store your name, email address, and a securely hashed password; we never store your
+            password in plain text. The flashcards you generate, along with your review progress, are stored in our
+            database so you can come back to them at any time. A session cookie keeps you signed in.
+          </p>
+        </Section>
 
-        <h2>What we collect</h2>
-        <p>
-          To create an account we store your name, email address, and a securely hashed
-          password; we never store your password in plain text. The flashcards you generate,
-          along with your review progress, are stored in our database so you can come back to
-          them at any time. A session cookie keeps you signed in.
-        </p>
+        <Section title="Your documents" ja="文書の取り扱い">
+          <p>
+            PDFs you choose are read entirely in your browser and are never uploaded. Only the short list of vocabulary
+            words selected from the PDF is sent to our server, which forwards those words to OpenAI to generate
+            mnemonics.
+          </p>
+        </Section>
 
-        <h2>How your documents are handled</h2>
-        <p>
-          PDFs you choose are read entirely in your browser and are never uploaded. Only the
-          short list of vocabulary words selected from the PDF is sent to our server, which
-          forwards those words to OpenAI to generate mnemonics.
-        </p>
+        <Section title="Sharing" ja="第三者への提供">
+          <p>
+            We do not sell your information or share personally identifying information with third parties, except for
+            OpenAI as described above, or when required by law.
+          </p>
+        </Section>
 
-        <h2>Sharing</h2>
-        <p>
-          We do not sell your information or share personally identifying information with
-          third parties, except for OpenAI as described above, or when required by law.
-        </p>
+        <Section title="Retention" ja="保存期間">
+          <p>
+            We keep your data only as long as your account is active. You can delete individual flashcards from your
+            library at any time, and you can contact us to have your account and all of its data removed.
+          </p>
+        </Section>
 
-        <h2>Retention</h2>
-        <p>
-          We keep your data only as long as your account is active. You can delete individual
-          flashcards from your dashboard at any time, and you can contact us to have your
-          account and all of its data removed.
-        </p>
+        <Section title="Contact" ja="お問い合わせ">
+          <p>
+            Questions or feedback are always welcome. Reach me at{' '}
+            <a href="mailto:kentfarabaugh@gmail.com">kentfarabaugh@gmail.com</a>, and if you enjoy LangGo, check out my
+            other projects on{' '}
+            <a href="https://github.com/KentFarr" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            . Thank you for using LangGo!
+          </p>
+        </Section>
+      </div>
 
-        <h2>Contact</h2>
-        <p>
-          Questions or feedback are always welcome. Reach me at{' '}
-          <a href="mailto:kentfarabaugh@gmail.com">kentfarabaugh@gmail.com</a>, and if you enjoy
-          LangGo, check out my other projects on{' '}
-          <a href="https://github.com/KentFarr" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          . Thank you for using LangGo!
-        </p>
-
-        <p className="text-muted mt-5 mb-0">Last updated: October 2026</p>
-      </Article>
-    </Container>
+      <p className="mt-6 font-mono text-xs text-ink-muted">Last updated: October 2026</p>
+    </article>
   );
 }

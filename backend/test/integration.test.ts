@@ -62,9 +62,10 @@ describe('flashcards with real auth and Postgres', () => {
   it('runs the full create → list → review → delete flow', async () => {
     const alice = await signUp('alice@example.com');
 
-    const created = await alice.post('/api/flashcards').send({ words: ['勉強', '学校'] });
+    const created = await alice.post('/api/flashcards').send({ words: ['勉強', '学校'], level: 5 });
     expect(created.status).toBe(201);
     expect(created.body.flashcards).toHaveLength(3);
+    expect(created.body.flashcards.map((c: Flashcard) => c.level)).toEqual([5, 5, 5]);
 
     const listed = await alice.get('/api/flashcards');
     expect(listed.status).toBe(200);
@@ -92,6 +93,7 @@ describe('flashcards with real auth and Postgres', () => {
     const mallory = await signUp('mallory@example.com');
 
     const [card] = (await bob.post('/api/flashcards').send({ words: ['勉強'] })).body.flashcards;
+    expect(card.level).toBeNull();
 
     expect((await mallory.get('/api/flashcards')).body.flashcards).toEqual([]);
     expect(

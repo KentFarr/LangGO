@@ -11,6 +11,7 @@ import {
 
 export interface NewCard extends GeneratedCard {
   source: FlashcardSource;
+  level?: number | null;
 }
 
 /** Every method is scoped to `userId`, so callers can never touch another user's cards. */
@@ -31,6 +32,7 @@ function toFlashcard(row: FlashcardRow): Flashcard {
     meaning: row.meaning,
     mnemonic: row.mnemonic,
     source: row.source,
+    level: row.jlptLevel,
     reviewInterval: row.reviewInterval,
     nextReviewDate: row.nextReviewAt.toISOString(),
     createdAt: row.createdAt.toISOString(),
@@ -47,7 +49,9 @@ export function createFlashcardRepository(db: Database): FlashcardRepository {
       const schedule = initialSchedule();
       const rows = await db
         .insert(flashcard)
-        .values(cards.map((card) => ({ ...card, ...schedule, userId })))
+        .values(
+          cards.map(({ level, ...card }) => ({ ...card, ...schedule, jlptLevel: level ?? null, userId })),
+        )
         .returning();
       return rows.map(toFlashcard);
     },

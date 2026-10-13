@@ -1,57 +1,5 @@
+import clsx from 'clsx';
 import { useState, type KeyboardEvent, type ReactNode } from 'react';
-import styled from 'styled-components';
-import { colors } from '../theme';
-
-const Scene = styled.div`
-  perspective: 1000px;
-  width: 100%;
-  height: 300px;
-`;
-
-const Inner = styled.div<{ $flipped: boolean }>`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-  transform: ${({ $flipped }) => ($flipped ? 'rotateY(180deg)' : 'none')};
-
-  &:focus-visible {
-    outline: 3px solid ${colors.accent};
-    outline-offset: 4px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-`;
-
-const Face = styled.div<{ $back?: boolean }>`
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: safe center;
-  gap: 0.5rem;
-  padding: 20px;
-  overflow-y: auto;
-  border-radius: 15px;
-  text-align: center;
-  backface-visibility: hidden;
-  background-color: ${({ $back }) => ($back ? colors.surfaceMuted : colors.surface)};
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  ${({ $back }) => $back && 'transform: rotateY(180deg);'}
-`;
-
-const Actions = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-`;
 
 interface FlipCardProps {
   front: ReactNode;
@@ -60,11 +8,29 @@ interface FlipCardProps {
   label: string;
   /** Rendered below the card; receives whether the back is currently showing. */
   actions?: (flipped: boolean) => ReactNode;
+  /** Controlled mode: the parent owns the flipped state (used by the review session). */
+  flipped?: boolean;
+  onFlip?: () => void;
+  size?: 'md' | 'lg';
+  className?: string;
 }
 
-export default function FlipCard({ front, back, label, actions }: FlipCardProps) {
-  const [flipped, setFlipped] = useState(false);
-  const toggle = () => setFlipped((value) => !value);
+const face =
+  'absolute inset-0 flex flex-col overflow-y-auto rounded-[28px] border border-line p-6 backface-hidden';
+
+export default function FlipCard({
+  front,
+  back,
+  label,
+  actions,
+  flipped: controlledFlipped,
+  onFlip,
+  size = 'md',
+  className,
+}: FlipCardProps) {
+  const [internalFlipped, setInternalFlipped] = useState(false);
+  const flipped = controlledFlipped ?? internalFlipped;
+  const toggle = () => (onFlip ? onFlip() : setInternalFlipped((value) => !value));
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -74,24 +40,29 @@ export default function FlipCard({ front, back, label, actions }: FlipCardProps)
   };
 
   return (
-    <div className="w-100">
-      <Scene>
-        <Inner
-          $flipped={flipped}
+    <div className={clsx('w-full', className)}>
+      <div className={clsx('perspective-distant', size === 'lg' ? 'h-88 sm:h-104' : 'h-72')}>
+        <div
           role="button"
           tabIndex={0}
           aria-pressed={flipped}
           aria-label={`${label}: ${flipped ? 'showing answer' : 'showing word'}. Activate to flip.`}
           onClick={toggle}
           onKeyDown={handleKeyDown}
+          className={clsx(
+            'relative h-full w-full cursor-pointer rounded-[28px] transition-transform duration-500 transform-3d',
+            flipped && 'rotate-y-180',
+          )}
         >
-          <Face aria-hidden={flipped}>{front}</Face>
-          <Face $back aria-hidden={!flipped}>
+          <div aria-hidden={flipped} className={clsx(face, 'bg-surface')}>
+            {front}
+          </div>
+          <div aria-hidden={!flipped} className={clsx(face, 'bg-raised rotate-y-180')}>
             {back}
-          </Face>
-        </Inner>
-      </Scene>
-      {actions && <Actions>{actions(flipped)}</Actions>}
+          </div>
+        </div>
+      </div>
+      {actions && <div className="mt-4 flex justify-center gap-2">{actions(flipped)}</div>}
     </div>
   );
 }

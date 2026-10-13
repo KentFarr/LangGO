@@ -12,6 +12,8 @@ export type FlashcardSource = 'requested' | 'related';
 export interface Flashcard extends GeneratedCard {
   id: string;
   source: FlashcardSource;
+  /** JLPT level (5 = N5 … 1 = N1), or null if unknown. */
+  level: number | null;
   /** Days until the next review. */
   reviewInterval: number;
   /** ISO-8601 timestamp of the next scheduled review. */

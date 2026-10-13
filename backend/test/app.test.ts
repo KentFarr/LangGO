@@ -15,6 +15,7 @@ function fakeRepository() {
     insertMany: vi.fn(async (userId: string, newCards: Parameters<FlashcardRepository['insertMany']>[1]) => {
       const created = newCards.map((c) => ({
         ...c,
+        level: c.level ?? null,
         id: randomUUID(),
         reviewInterval: 1,
         nextReviewDate: new Date().toISOString(),
@@ -80,6 +81,8 @@ describe('POST /api/flashcards', () => {
     ['empty list', { words: [] }],
     ['non-string entries', { words: [1, 2] }],
     ['too many words', { words: Array.from({ length: 21 }, (_, i) => `w${i}`) }],
+    ['an out-of-range level', { words: ['勉強'], level: 7 }],
+    ['a non-integer level', { words: ['勉強'], level: 2.5 }],
   ])('returns 400 for %s', async (_label, body) => {
     const { as, deps } = setup();
     const res = await as('user-1').post('/api/flashcards').send(body);
@@ -99,6 +102,18 @@ describe('POST /api/flashcards', () => {
       ['学校', 'requested'],
       ['先生', 'related'],
     ]);
+  });
+
+  it('stores the JLPT level on every generated card', async () => {
+    const { as, deps } = setup();
+    const res = await as('user-1').post('/api/flashcards').send({ words: ['勉強'], level: 3 });
+
+    expect(res.status).toBe(201);
+    expect(res.body.flashcards.every((c: Flashcard) => c.level === 3)).toBe(true);
+    expect(deps.repository.insertMany).toHaveBeenCalledWith(
+      'user-1',
+      expect.arrayContaining([expect.objectContaining({ word: '先生', level: 3, source: 'related' })]),
+    );
   });
 
   it('returns a generic 500 when generation fails', async () => {

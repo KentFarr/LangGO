@@ -46,10 +46,10 @@ export async function fetchFlashcards(): Promise<Flashcard[]> {
 }
 
 /** Generates mnemonic flashcards for the words; the API saves them and returns the new cards. */
-export async function generateFlashcards(words: string[]): Promise<Flashcard[]> {
+export async function generateFlashcards(words: string[], level?: JlptLevel): Promise<Flashcard[]> {
   const body = await request<{ flashcards: Flashcard[] }>('/api/flashcards', {
     method: 'POST',
-    body: JSON.stringify({ words }),
+    body: JSON.stringify({ words, level }),
   });
   return body.flashcards;
 }
