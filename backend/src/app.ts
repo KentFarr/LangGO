@@ -7,9 +7,11 @@ import { CLIENT_IP_HEADER } from './auth.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { requireAuth, type GetUserId } from './middleware/requireAuth.js';
 import { requireTrustedOrigin } from './middleware/requireTrustedOrigin.js';
+import { extractRouter } from './routes/extract.js';
 import { flashcardsRouter } from './routes/flashcards.js';
 import type { JlptLevel } from './services/demoGenerator.js';
 import type { FlashcardRepository } from './services/flashcardRepository.js';
+import type { PageFetcher } from './services/pageFetcher.js';
 import type { MnemonicGenerator } from './services/mnemonicGenerator.js';
 
 export interface AppDependencies {
@@ -28,6 +30,8 @@ export interface AppDependencies {
   staticDir?: string;
   /** Set in demo mode: the words that have complete sample cards, by JLPT level. */
   demoSampleWords?: Record<JlptLevel, string[]>;
+  /** Fetches web pages for the "from a website" source; the route is disabled when absent. */
+  fetchPage?: PageFetcher;
 }
 
 export function createApp({
@@ -40,6 +44,7 @@ export function createApp({
   trustProxyHops = 0,
   staticDir,
   demoSampleWords,
+  fetchPage,
 }: AppDependencies): Express {
   const app = express();
   app.set('trust proxy', trustProxyHops);
@@ -97,6 +102,23 @@ export function createApp({
     requireAuth(getUserId),
     flashcardsRouter({ generator, repository, generateLimiter }),
   );
+  if (fetchPage) {
+    app.use(
+      '/api/extract-url',
+      requireTrustedOrigin(allowedOrigins),
+      requireAuth(getUserId),
+      rateLimit({
+        windowMs: 15 * 60 * 1000,
+        limit: 30,
+        standardHeaders: 'draft-8',
+        legacyHeaders: false,
+        keyGenerator: (_req, res) => res.locals.userId,
+        message: { error: 'Too many pages fetched. Please try again later.' },
+      }),
+      extractRouter(fetchPage),
+    );
+  }
+
   app.use('/api', (_req, res) => {
     res.status(404).json({ error: 'Not found' });
   });

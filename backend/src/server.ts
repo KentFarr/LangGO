@@ -9,6 +9,7 @@ import { connectDatabase } from './db/client.js';
 import { createFlashcardRepository } from './services/flashcardRepository.js';
 import { createDemoMnemonicGenerator, SAMPLE_WORDS_BY_LEVEL } from './services/demoGenerator.js';
 import { createOpenAIMnemonicGenerator } from './services/mnemonicGenerator.js';
+import { createPageFetcher } from './services/pageFetcher.js';
 
 const config = loadConfig();
 const origins = allowedOrigins(config);
@@ -43,6 +44,7 @@ const app = createApp({
   trustProxyHops: config.TRUST_PROXY_HOPS,
   staticDir: existsSync(staticDir) ? staticDir : undefined,
   demoSampleWords: demoMode ? SAMPLE_WORDS_BY_LEVEL : undefined,
+  fetchPage: createPageFetcher(),
 });
 
 const server = app.listen(config.PORT, () => {

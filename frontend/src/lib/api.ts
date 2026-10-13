@@ -46,10 +46,10 @@ export async function fetchFlashcards(): Promise<Flashcard[]> {
 }
 
 /** Generates mnemonic flashcards for the words; the API saves them and returns the new cards. */
-export async function generateFlashcards(words: string[], level?: JlptLevel): Promise<Flashcard[]> {
+export async function generateFlashcards(words: string[], level?: JlptLevel | null): Promise<Flashcard[]> {
   const body = await request<{ flashcards: Flashcard[] }>('/api/flashcards', {
     method: 'POST',
-    body: JSON.stringify({ words, level }),
+    body: JSON.stringify({ words, level: level ?? undefined }),
   });
   return body.flashcards;
 }
@@ -65,4 +65,15 @@ export async function reviewFlashcard(id: string, remembered: boolean): Promise<
 
 export function deleteFlashcard(id: string): Promise<void> {
   return request(`/api/flashcards/${encodeURIComponent(id)}`, { method: 'DELETE' });
+}
+
+export interface ExtractedPage {
+  url: string;
+  title: string;
+  text: string;
+}
+
+/** Fetches a web page through the API (browsers can't read other sites directly). */
+export function extractUrl(url: string): Promise<ExtractedPage> {
+  return request<ExtractedPage>('/api/extract-url', { method: 'POST', body: JSON.stringify({ url }) });
 }

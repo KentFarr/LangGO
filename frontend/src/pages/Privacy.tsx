@@ -42,9 +42,9 @@ export default function Privacy() {
 
         <Section title="Your documents" ja="文書の取り扱い">
           <p>
-            PDFs you choose are read entirely in your browser and are never uploaded. Only the short list of vocabulary
-            words selected from the PDF is sent to our server, which forwards those words to OpenAI to generate
-            mnemonics.
+            Files you choose (PDFs, e-books, documents, subtitles) are read entirely in your browser and are never
+            uploaded. If you enter a web page address, our server fetches that page once to read its text and does not
+            keep a copy. Only the short list of vocabulary words you confirm is sent to OpenAI to generate mnemonics.
           </p>
         </Section>
 

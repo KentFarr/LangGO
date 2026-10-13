@@ -27,7 +27,8 @@ export async function loadWordsForLevel(level: JlptLevel): Promise<string[]> {
  *
  * Japanese has no spaces between words, so this does substring matching rather than
  * tokenizing. Whitespace is stripped first because PDF text extraction inserts breaks
- * in the middle of words.
+ * in the middle of words. (One `indexOf` scan per word is fast: ~100 ms for the N3 list
+ * over 700k characters, so even whole books are fine.)
  */
 export function countOccurrences(text: string, words: readonly string[]): Map<string, number> {
   const haystack = text.replace(/\s+/g, '');
@@ -41,6 +42,18 @@ export function countOccurrences(text: string, words: readonly string[]): Map<st
     if (count > 0) counts.set(word, count);
   }
   return counts;
+}
+
+/**
+ * Maps every word in the JLPT lists to its level. A word listed at several levels gets the
+ * easiest one, since that's when learners meet it.
+ */
+export async function loadLevelIndex(): Promise<Map<string, JlptLevel>> {
+  const index = new Map<string, JlptLevel>();
+  for (const level of [1, 2, 3, 4, 5] as const) {
+    for (const word of await loadWordsForLevel(level)) index.set(word, level);
+  }
+  return index;
 }
 
 /** Most frequent words first; ties go to the longer (more specific) word. */

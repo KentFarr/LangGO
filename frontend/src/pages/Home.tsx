@@ -10,7 +10,7 @@ import { LEVELS } from '../lib/levels';
 import type { PhotoName } from '../lib/photos';
 
 const KEYWORDS = [
-  { ja: 'PDFから単語を抽出', en: 'Words pulled from your PDFs' },
+  { ja: 'PDF・電子書籍・ウェブから単語を抽出', en: 'Words from PDFs, e-books and the web' },
   { ja: 'AIによる語呂合わせ', en: 'Mnemonics written by AI' },
   { ja: '間隔反復で復習', en: 'Spaced-repetition reviews' },
   { ja: 'JLPT N5〜N1', en: 'Every JLPT level' },
@@ -45,7 +45,7 @@ const STEPS: { label: string; ja: string; title: string; body: string; photo: Ph
     label: '01 · Upload',
     ja: '読み込む',
     title: 'Start from real text',
-    body: 'Choose a Japanese PDF (an article, a menu, a story). It is read in your browser and never uploaded.',
+    body: 'Drop in a PDF, EPUB, Word document or subtitles, paste a link to an article, or type your own word list.',
     photo: 'kanji-shutters',
   },
   {

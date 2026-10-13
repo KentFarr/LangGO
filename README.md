@@ -17,8 +17,11 @@ words, and schedules everything for review with spaced repetition.
 
 ## Features
 
-- **PDF vocabulary mining.** PDFs are parsed in the browser with pdf.js and matched against JLPT
-  word lists, so documents are never uploaded.
+- **Vocabulary from anything you read.** Find words in PDFs, EPUBs, Word documents, text and
+  subtitle files (great for YouTube videos), or a web page link, or paste your own word list.
+  Files are read in the browser and never uploaded; web pages are fetched by the server through
+  an SSRF-hardened fetcher. Words are matched against JLPT lists and you review them before any
+  cards are made.
 - **Self-hosted accounts.** Email/password auth with Better Auth: hashed passwords,
   httpOnly session cookies, and brute-force rate limiting, all stored in your own Postgres.
 - **AI mnemonics.** The API uses OpenAI structured outputs with a Zod schema, so every response is

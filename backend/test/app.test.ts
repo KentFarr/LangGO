@@ -3,6 +3,7 @@ import request from 'supertest';
 import { describe, expect, it, vi } from 'vitest';
 import { createApp, type AppDependencies } from '../src/app.js';
 import type { Flashcard } from '../src/domain/flashcard.js';
+import { HttpError } from '../src/errors.js';
 import type { FlashcardRepository } from '../src/services/flashcardRepository.js';
 import { generated } from './helpers.js';
 
@@ -197,5 +198,43 @@ describe('other routes', () => {
       .set('Content-Type', 'application/json')
       .send('{not json');
     expect(res.status).toBe(400);
+  });
+});
+
+describe('POST /api/extract-url', () => {
+  const page = { url: 'https://example.com/a', title: 'Example', text: '勉強します' };
+
+  it('requires a session', async () => {
+    const { app } = setup({ fetchPage: vi.fn(async () => page) });
+    const res = await request(app).post('/api/extract-url').send({ url: 'https://example.com/a' });
+    expect(res.status).toBe(401);
+  });
+
+  it('returns the extracted page', async () => {
+    const fetchPage = vi.fn(async () => page);
+    const { as } = setup({ fetchPage });
+    const res = await as('user-1').post('/api/extract-url').send({ url: ' https://example.com/a ' });
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(page);
+    expect(fetchPage).toHaveBeenCalledWith('https://example.com/a');
+  });
+
+  it('validates the body and passes safe fetch errors through', async () => {
+    const { as } = setup({
+      fetchPage: vi.fn(async () => {
+        throw new HttpError(400, "That address can't be fetched.");
+      }),
+    });
+    expect((await as('user-1').post('/api/extract-url').send({})).status).toBe(400);
+
+    const blocked = await as('user-1').post('/api/extract-url').send({ url: 'http://10.0.0.1/' });
+    expect(blocked.status).toBe(400);
+    expect(blocked.body).toEqual({ error: "That address can't be fetched." });
+  });
+
+  it('is not mounted without a page fetcher', async () => {
+    const { as } = setup();
+    expect((await as('user-1').post('/api/extract-url').send({ url: 'https://example.com' })).status).toBe(404);
   });
 });
