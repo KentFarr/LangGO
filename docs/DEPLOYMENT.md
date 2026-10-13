@@ -1,12 +1,21 @@
 # Deploying LangGo to an OVHcloud VPS
 
-This guide takes a fresh OVHcloud VPS to a running LangGo instance at `https://your-domain`, with
-automatic HTTPS and daily database backups. Everything runs in Docker Compose:
+This guide takes an OVHcloud VPS to a running LangGo instance at `https://your-domain`, with
+HTTPS and daily database backups. Everything runs in Docker Compose. There are two ways to serve
+HTTPS:
+
+- **The VPS already runs nginx for other sites** (the usual case): the app listens on
+  `127.0.0.1:8082` and you add one nginx site for your domain. See
+  [Existing nginx](#existing-nginx-shared-vps).
+- **A dedicated VPS**: start the bundled Caddy with `--profile caddy` and it obtains Let's Encrypt
+  certificates automatically (the steps below).
+
+The services:
 
 | Service  | Role                                                              | Public?        |
 | -------- | ----------------------------------------------------------------- | -------------- |
-| `caddy`  | HTTPS termination (automatic Let's Encrypt), reverse proxy        | ports 80, 443  |
-| `app`    | Express API + built React frontend                                | no             |
+| `caddy`  | HTTPS + reverse proxy (only with `--profile caddy`)               | ports 80, 443  |
+| `app`    | Express API + built React frontend                                | 127.0.0.1:8082 |
 | `db`     | PostgreSQL 18 (data in the `pgdata` volume)                       | no             |
 | `backup` | Daily `pg_dump` into `./backups`                                  | no             |
 
@@ -116,13 +125,15 @@ generations per 15 minutes.
 ## 7. Start
 
 ```sh
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile caddy up -d --build
 ```
 
-Tip: put the file list in `.env` so plain `docker compose` commands use production settings:
+Tip: put the file list in `.env` so plain `docker compose` commands use production settings
+(on a dedicated server, also enable the bundled Caddy):
 
 ```sh
 echo 'COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml' >> .env
+echo 'COMPOSE_PROFILES=caddy' >> .env   # dedicated server only; omit when nginx is already running
 docker compose up -d --build
 ```
 
@@ -138,6 +149,27 @@ curl -I https://your-domain       # HTTP/2 200
 
 Then open `https://your-domain`, sign up, and generate some flashcards. Database migrations run
 automatically when the app starts.
+
+## Existing nginx (shared VPS)
+
+If nginx already serves other sites on ports 80/443, don't start Caddy. Bring up the app and
+database only (the default, since Caddy is behind a profile), then add an nginx site:
+
+```sh
+docker compose up -d --build            # app on 127.0.0.1:8082, db, backups
+curl -fsS http://127.0.0.1:8082/healthz # {"status":"ok"}
+sudo cp deploy/nginx-langgo.conf /etc/nginx/sites-available/langgo.co
+sudo ln -s /etc/nginx/sites-available/langgo.co /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+TLS for the nginx site:
+
+- **Cloudflare proxy (orange cloud):** create an Origin Certificate for the domain's zone and save
+  it under `/etc/ssl/cloudflare/<domain>/origin.crt` and `origin.key` (keep other zones'
+  certificates separate). Set SSL/TLS mode to **Full (strict)** and `TRUST_PROXY_HOPS=2` in `.env`.
+- **No Cloudflare:** `sudo certbot --nginx -d your-domain -d www.your-domain`, and
+  `TRUST_PROXY_HOPS=1`.
 
 ## Operating it
 

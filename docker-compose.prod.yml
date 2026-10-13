@@ -2,10 +2,16 @@
 #
 #   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 #
-# Differences from development:
-#   - Caddy terminates HTTPS (automatic Let's Encrypt certificates) and is the only public service.
-#   - The app and database publish no ports. Docker-published ports bypass host firewalls
-#     such as ufw, so nothing but Caddy is reachable from the internet.
+# Two ways to serve HTTPS:
+#   - Host already has a reverse proxy (nginx serving other sites): the app listens on
+#     127.0.0.1:${APP_PORT:-8082} only, and the host's nginx proxies your domain to it
+#     (deploy/nginx-langgo.conf). This is the default.
+#   - Dedicated server: also start the bundled Caddy (automatic Let's Encrypt) with
+#     `--profile caddy`; it takes ports 80/443.
+#
+# Other differences from development:
+#   - The database publishes no ports, and the app only on localhost. Docker-published ports
+#     bypass host firewalls such as ufw, so nothing else is reachable from the internet.
 #   - A strong database password is required, logs are rotated, and the database is backed up daily.
 #
 # Compose variables (DOMAIN, ACME_EMAIL, POSTGRES_PASSWORD, ...) come from the repo-root .env;
@@ -25,17 +31,22 @@ services:
     logging: *logging
 
   app:
-    ports: !reset []
+    # Localhost only, for a host-side reverse proxy; never exposed publicly.
+    ports: !override
+      - "127.0.0.1:${APP_PORT:-8082}:5000"
     environment:
       NODE_ENV: production
       DATABASE_URL: postgres://langgo:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/langgo
       BETTER_AUTH_URL: https://${DOMAIN:?Set DOMAIN in .env}
-      # Caddy is the one proxy in front of the app; needed for per-client rate limiting.
-      TRUST_PROXY_HOPS: "1"
+      # Number of proxies in front of the app, so rate limits see real client IPs:
+      # 1 = nginx or Caddy only; 2 = Cloudflare (orange cloud) + nginx/Caddy.
+      TRUST_PROXY_HOPS: ${TRUST_PROXY_HOPS:-1}
     logging: *logging
 
+  # Only for a dedicated server with nothing else on ports 80/443: `--profile caddy`.
   caddy:
     image: caddy:2-alpine
+    profiles: ["caddy"]
     depends_on:
       app:
         condition: service_healthy
@@ -45,7 +56,8 @@ services:
       - "443:443/udp" # HTTP/3
     environment:
       DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
-      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env}
+      # Required when using this profile (Let's Encrypt account email).
+      ACME_EMAIL: ${ACME_EMAIL:-}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data # certificates; keep this volume
