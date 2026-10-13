@@ -1,32 +1,26 @@
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 
-export type VerifyIdToken = (token: string) => Promise<{ uid: string }>;
+/** Resolves the signed-in user's id from the request's session cookie, or null. */
+export type GetUserId = (req: Request) => Promise<string | null>;
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Locals {
-      /** Firebase uid of the authenticated caller, set by `requireAuth`. */
-      uid: string;
+      /** Id of the authenticated user, set by `requireAuth`. */
+      userId: string;
     }
   }
 }
 
-/** Verifies the Firebase ID token in `Authorization: Bearer <token>` and exposes the uid. */
-export function requireAuth(verifyIdToken: VerifyIdToken): RequestHandler {
+export function requireAuth(getUserId: GetUserId): RequestHandler {
   return async (req, res, next) => {
-    const [scheme, token] = (req.get('authorization') ?? '').split(' ');
-    if (scheme !== 'Bearer' || !token) {
-      res.status(401).json({ error: 'Missing bearer token' });
+    const userId = await getUserId(req);
+    if (!userId) {
+      res.status(401).json({ error: 'Not signed in' });
       return;
     }
-
-    try {
-      res.locals.uid = (await verifyIdToken(token)).uid;
-    } catch {
-      res.status(401).json({ error: 'Invalid or expired token' });
-      return;
-    }
+    res.locals.userId = userId;
     next();
   };
 }

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import type { User } from 'firebase/auth';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, it } from 'vitest';
 import { AuthContext, type AuthState } from '../auth/useAuth';
+import type { SessionUser } from '../lib/authClient';
 import ProtectedRoute from './ProtectedRoute';
 
 function renderAt(auth: AuthState) {
@@ -25,7 +25,7 @@ function renderAt(auth: AuthState) {
   );
 }
 
-const userWith = (emailVerified: boolean) => ({ emailVerified }) as User;
+const user = { id: 'user-1', email: 'a@example.com', name: 'A' } as SessionUser;
 
 describe('ProtectedRoute', () => {
   it('shows a spinner while auth is loading', () => {
@@ -38,13 +38,8 @@ describe('ProtectedRoute', () => {
     expect(screen.getByText('login page')).toBeInTheDocument();
   });
 
-  it('redirects users whose email is not verified', () => {
-    renderAt({ user: userWith(false), loading: false });
-    expect(screen.getByText('login page')).toBeInTheDocument();
-  });
-
-  it('renders the page for verified users', () => {
-    renderAt({ user: userWith(true), loading: false });
+  it('renders the page for signed-in users', () => {
+    renderAt({ user, loading: false });
     expect(screen.getByText('secret dashboard')).toBeInTheDocument();
   });
 });

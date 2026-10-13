@@ -4,8 +4,8 @@ import { describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { AuthContext } from './auth/useAuth';
 
-// Avoid initializing a real Firebase app (it requires valid config).
-vi.mock('./lib/firebase', () => ({ auth: {}, firebaseApp: {} }));
+// Pages only reference the auth client in event handlers; rendering never calls it.
+vi.mock('./lib/authClient', () => ({ authClient: {} }));
 
 function renderAt(path: string) {
   render(

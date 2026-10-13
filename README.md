@@ -11,21 +11,25 @@ words, and schedules everything for review with spaced repetition.
 
 - **PDF vocabulary mining.** PDFs are parsed in the browser with pdf.js and matched against JLPT
   word lists, so documents are never uploaded.
+- **Self-hosted accounts.** Email/password auth with Better Auth: hashed passwords,
+  httpOnly session cookies, and brute-force rate limiting, all stored in your own Postgres.
 - **AI mnemonics.** The API uses OpenAI structured outputs with a Zod schema, so every response is
   validated before it is stored.
 - **Spaced repetition.** Review intervals double when you remember a card and halve when you
   don't.
-- **Accounts.** Firebase Authentication with email verification and password reset.
-- **Per-user storage.** Cards live in Firestore and are protected by security rules.
+- **Demo mode.** With no OpenAI key configured, the app serves hand-written sample cards, so
+  anyone can try it end to end for free.
+- **One-command setup.** `docker compose up` runs the app and PostgreSQL; migrations apply on
+  startup.
 
 ## Tech stack
 
 | Layer    | Technologies                                                                  |
 | -------- | ----------------------------------------------------------------------------- |
 | Frontend | React 19, TypeScript, Vite, React Router, React Bootstrap, styled-components  |
-| Backend  | Node.js, Express 5, TypeScript, Zod, OpenAI SDK, Firebase Admin SDK           |
-| Data     | Firebase Authentication, Cloud Firestore                                      |
-| Tooling  | Vitest, Testing Library, Supertest, ESLint, GitHub Actions, Docker            |
+| Backend  | Node.js, Express 5, TypeScript, Zod, Better Auth, OpenAI SDK                  |
+| Data     | PostgreSQL 18, Drizzle ORM + drizzle-kit migrations                           |
+| Tooling  | Vitest, Testing Library, Supertest, PGlite, ESLint, GitHub Actions, Docker    |
 
 ## Architecture
 
@@ -34,84 +38,96 @@ flowchart LR
     subgraph Browser
         UI[React app] -->|pdf.js| PDF[Text extraction<br/>+ JLPT word matching]
     end
-    UI -- "POST /api/flashcards<br/>(Firebase ID token)" --> API[Express API]
-    API -- verify token --> Auth[Firebase Auth]
+    UI -- "/api/auth/*<br/>sign up · sign in · sign out" --> Auth[Better Auth]
+    UI -- "/api/flashcards<br/>(session cookie)" --> API[Express API]
+    subgraph Server["app container"]
+        Auth
+        API
+    end
     API -- structured output --> OpenAI[OpenAI]
-    API -- save batch --> FS[(Firestore)]
-    UI -- "read / review / delete<br/>(security rules)" --> FS
+    Auth --> DB[(PostgreSQL)]
+    API --> DB
 ```
 
-- The **API** does only the work that needs secrets: it verifies the caller's Firebase ID token,
-  generates cards with OpenAI, assigns each card an id and its first review date, and saves the
-  batch. Requests are validated with Zod and rate-limited per user.
-- The **client** reads and updates review state directly in Firestore. Updates run in
-  transactions because each batch document stores its cards in arrays.
-  [`firestore.rules`](firestore.rules) limits every user to their own data.
-- In production, Express also serves the built frontend, so one container runs the whole app.
+- **Auth.** Better Auth is mounted inside the Express app at `/api/auth`. It stores users,
+  hashed passwords, and sessions in Postgres and issues `HttpOnly`, `SameSite=Lax` session
+  cookies. Sign-in attempts are rate-limited per client IP.
+- **API.** Every flashcard route requires a session, and every query is scoped to the signed-in
+  user, so asking for someone else's card returns 404. State-changing requests from untrusted
+  origins are rejected (CSRF defense in depth). Generation is rate-limited per user because each
+  call costs money.
+- **Data.** Each card is a row with its own review schedule, so recording a review is a single
+  row update under a row lock. Spaced-repetition rules live only on the server.
+- In production, Express also serves the built frontend, so the whole app is one container plus
+  Postgres.
 
 ```
 ├── backend/                 Express API (TypeScript)
 │   ├── src/
 │   │   ├── app.ts           App factory (dependencies injected for testing)
-│   │   ├── server.ts        Entry point: config, Firebase Admin, OpenAI wiring
+│   │   ├── server.ts        Entry point: config, migrations, auth, OpenAI wiring
+│   │   ├── auth.ts          Better Auth configuration
+│   │   ├── db/              Drizzle schema and connection
 │   │   ├── routes/          HTTP routes
-│   │   ├── services/        OpenAI generator, Firestore repository
-│   │   ├── middleware/      Auth and error handling
-│   │   └── domain/          Flashcard model and scheduling
-│   └── test/
+│   │   ├── services/        OpenAI generator, flashcard repository
+│   │   ├── middleware/      Session, origin, and error handling
+│   │   └── domain/          Flashcard model and spaced-repetition scheduling
+│   ├── drizzle/             Generated SQL migrations
+│   └── test/                Route, domain, and Postgres integration tests
 ├── frontend/                React SPA (Vite + TypeScript)
 │   └── src/
 │       ├── pages/           Route components
 │       ├── components/      UI components
-│       ├── services/        Firestore data access
-│       ├── lib/             PDF parsing, word matching, spaced repetition, API client
+│       ├── hooks/           Data hooks
+│       ├── lib/             API and auth clients, PDF parsing, word matching
 │       └── data/            JLPT word lists
-├── firestore.rules
+├── deploy/                  Caddyfile and backup script for production
+├── docs/DEPLOYMENT.md       VPS deployment guide
 ├── Dockerfile
-└── docker-compose.yml
+├── docker-compose.yml       App + Postgres (local)
+└── docker-compose.prod.yml  Production overlay: Caddy, backups, no public app/DB ports
 ```
 
 ## Getting started
 
 ### Prerequisites
 
-- Node.js 24 (see [`.nvmrc`](.nvmrc))
-- A Firebase project with **Email/Password** sign-in and **Cloud Firestore** enabled
-- An OpenAI API key
+- Docker (for PostgreSQL, or to run everything)
+- Node.js 24 for local development (see [`.nvmrc`](.nvmrc))
+- An OpenAI API key (optional: without one, the app runs in demo mode)
 
-### 1. Configure
-
-```sh
-cp backend/.env.example backend/.env           # OpenAI key, service-account path
-cp frontend/.env.example frontend/.env.local   # Firebase web config
-```
-
-Download a service-account key from *Firebase console → Project settings → Service accounts*,
-save it outside version control, and point `GOOGLE_APPLICATION_CREDENTIALS` in `backend/.env` at
-it.
-
-Deploy the Firestore security rules:
+### Configure
 
 ```sh
-npx firebase-tools deploy --only firestore:rules
+cp backend/.env.example backend/.env
+# Set BETTER_AUTH_SECRET (openssl rand -base64 32); add OPENAI_API_KEY, or leave it empty for demo mode
 ```
 
-### 2. Run locally
+### Run everything with Docker
 
 ```sh
-cd backend && npm install && npm run dev     # API on http://localhost:5000
-cd frontend && npm install && npm run dev    # App on http://localhost:3000 (proxies /api)
+docker compose up --build
 ```
 
-### 3. Run with Docker
+Open http://localhost:3001. Database migrations run automatically when the app starts, and data
+is kept in the `pgdata` volume.
 
-Put the `VITE_FIREBASE_*` variables in a repo-root `.env`, then run:
+### Local development
 
 ```sh
-FIREBASE_SERVICE_ACCOUNT_FILE=/path/to/service-account.json docker compose up --build
+docker compose up -d db                       # PostgreSQL on localhost:5433 (DB_PORT)
+cd backend && npm install && npm run dev      # API on http://localhost:5000
+cd frontend && npm install && npm run dev     # App on http://localhost:3000 (proxies /api)
 ```
 
-The app is served on http://localhost:3001.
+After changing `backend/src/db/schema.ts`, run `npm run db:generate` in `backend/` to create a new
+migration.
+
+### Deploy to a VPS
+
+[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) walks through deploying to an OVHcloud VPS (or any
+Linux server) with `docker-compose.prod.yml`. It covers automatic HTTPS with Caddy, keeping the
+app and database off the public internet, daily database backups, log rotation, and updates.
 
 ## Scripts
 
@@ -125,35 +141,38 @@ Both `frontend/` and `backend/` provide:
 | `npm run lint`      | ESLint                          |
 | `npm run typecheck` | TypeScript type checking        |
 
-CI runs lint, type checking, tests, and a production build for both packages on every push and
-pull request.
+The backend integration tests run real Better Auth sessions and the real SQL migrations against
+[PGlite](https://pglite.dev) (Postgres compiled to WebAssembly), so the full suite needs no
+database server or Docker. CI runs lint, type checking, tests, and a production build for both
+packages on every push and pull request.
 
 ## API
 
-`POST /api/flashcards`. Requires `Authorization: Bearer <Firebase ID token>`.
+Authentication endpoints are provided by Better Auth under `/api/auth` (for example
+`POST /api/auth/sign-up/email`, `POST /api/auth/sign-in/email`, `POST /api/auth/sign-out`). All
+flashcard routes require the session cookie.
 
-```json
-{ "words": ["勉強", "学校"] }
-```
+| Method   | Path                          | Body                     | Response                     |
+| -------- | ----------------------------- | ------------------------ | ---------------------------- |
+| `GET`    | `/api/flashcards`             |                          | `200 { flashcards }`         |
+| `POST`   | `/api/flashcards`             | `{ "words": ["勉強"] }`   | `201 { flashcards }` (new)   |
+| `POST`   | `/api/flashcards/:id/review`  | `{ "remembered": true }` | `200 { flashcard }`          |
+| `DELETE` | `/api/flashcards/:id`         |                          | `204`                        |
+| `GET`    | `/api/meta` (public)          |                          | `200 { demoMode, sampleWords }` |
+| `GET`    | `/healthz`                    |                          | `200 { "status": "ok" }`     |
 
-It responds with `201` and the saved batch:
+A flashcard looks like this:
 
 ```json
 {
-  "docId": "…",
-  "flashcards": [
-    {
-      "id": "…",
-      "word": "勉強",
-      "reading": "べんきょう",
-      "meaning": "study",
-      "mnemonic": "…",
-      "reviewInterval": 1,
-      "nextReviewDate": "…"
-    }
-  ],
-  "relatedWords": []
+  "id": "4f0c…",
+  "word": "勉強",
+  "reading": "べんきょう",
+  "meaning": "study",
+  "mnemonic": "…",
+  "source": "requested",
+  "reviewInterval": 1,
+  "nextReviewDate": "2026-10-14T21:00:00.000Z",
+  "createdAt": "2026-10-13T21:00:00.000Z"
 }
 ```
-
-`GET /healthz` returns `{ "status": "ok" }`.

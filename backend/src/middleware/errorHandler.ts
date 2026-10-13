@@ -7,9 +7,12 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
     return;
   }
 
-  // Errors from body-parser and friends carry a 4xx `status` that is safe to expose.
+  // Only errors explicitly marked safe (the http-errors convention, used by Express's body
+  // parser and by our HttpError) are shown to the client. Upstream errors such as OpenAI's
+  // also carry a `status`, but their details must stay server-side.
   const status: unknown = err?.status ?? err?.statusCode;
-  if (typeof status === 'number' && status >= 400 && status < 500) {
+  if (err?.expose === true && typeof status === 'number' && status >= 400 && status < 600) {
+    if (status >= 500) console.error(`${status} ${err.message}`);
     res.status(status).json({ error: err.message });
     return;
   }

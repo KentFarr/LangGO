@@ -3,6 +3,7 @@
 **/build
 **/coverage
 backend/public
+backups
 .git
 .github
 

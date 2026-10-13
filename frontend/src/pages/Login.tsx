@@ -1,16 +1,10 @@
-import {
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
 import { useState, type FormEvent } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
 import { Link, Navigate, useLocation, useNavigate, type Location } from 'react-router';
 import { useAuth } from '../auth/useAuth';
 import AuthCard from '../components/AuthCard';
+import { authClient } from '../lib/authClient';
 import { authErrorMessage } from '../lib/authErrors';
-import { auth } from '../lib/firebase';
 
 export default function Login() {
   const { user } = useAuth();
@@ -22,51 +16,21 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
 
-  if (user?.emailVerified && !submitting) return <Navigate to={redirectTo} replace />;
+  if (user && !submitting) return <Navigate to={redirectTo} replace />;
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     setError(null);
-    setNotice(null);
     setSubmitting(true);
 
-    try {
-      const { user: signedIn } = await signInWithEmailAndPassword(auth, email, password);
-      if (signedIn.emailVerified) {
-        navigate(redirectTo, { replace: true });
-        return;
-      }
-
-      await sendEmailVerification(signedIn).catch(() => {
-        // Rate limited or already sent recently; the message below still applies.
-      });
-      await signOut(auth);
-      setError(
-        'Your email address is not verified yet. We sent you a verification link. ' +
-          'Please check your inbox, then log in again.',
-      );
-    } catch (err) {
-      setError(authErrorMessage(err));
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleResetPassword = async () => {
-    setError(null);
-    setNotice(null);
-    if (!email) {
-      setError('Enter your email address above, then choose "Forgot password?" again.');
+    const { error: signInError } = await authClient.signIn.email({ email, password });
+    setSubmitting(false);
+    if (signInError) {
+      setError(authErrorMessage(signInError));
       return;
     }
-    try {
-      await sendPasswordResetEmail(auth, email);
-      setNotice('If an account exists for that email, a password reset link is on its way.');
-    } catch (err) {
-      setError(authErrorMessage(err));
-    }
+    navigate(redirectTo, { replace: true });
   };
 
   return (
@@ -103,18 +67,10 @@ export default function Login() {
             {error}
           </Alert>
         )}
-        {notice && (
-          <Alert variant="success" className="mt-3 mb-0">
-            {notice}
-          </Alert>
-        )}
 
-        <div className="d-flex justify-content-between align-items-center mt-3">
-          <Button variant="link" className="p-0" onClick={handleResetPassword}>
-            Forgot password?
-          </Button>
-          <Link to="/signup">Create an account</Link>
-        </div>
+        <p className="text-center mt-3 mb-0">
+          New to LangGo? <Link to="/signup">Create an account</Link>
+        </p>
       </Form>
     </AuthCard>
   );

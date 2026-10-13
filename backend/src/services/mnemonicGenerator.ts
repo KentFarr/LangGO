@@ -1,6 +1,7 @@
-import type OpenAI from 'openai';
+import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
+import { HttpError } from '../errors.js';
 
 export const RELATED_WORD_COUNT = 5;
 
@@ -39,12 +40,26 @@ export function buildPrompt(words: string[]): string {
 export function createOpenAIMnemonicGenerator(client: OpenAI, model: string): MnemonicGenerator {
   return {
     async generate(words) {
-      const response = await client.responses.parse({
-        model,
-        instructions: INSTRUCTIONS,
-        input: buildPrompt(words),
-        text: { format: zodTextFormat(generationSchema, 'flashcards') },
-      });
+      let response;
+      try {
+        response = await client.responses.parse({
+          model,
+          instructions: INSTRUCTIONS,
+          input: buildPrompt(words),
+          text: { format: zodTextFormat(generationSchema, 'flashcards') },
+        });
+      } catch (error) {
+        // Bad key, exhausted credits, outages, etc.: log the essentials (not the full response
+        // dump) and give the user a message they can act on.
+        if (error instanceof OpenAI.APIError) {
+          console.error(
+            `OpenAI request failed: status=${error.status} code=${error.code} ` +
+              `request_id=${error.requestID} message=${error.message}`,
+          );
+          throw new HttpError(503, 'Flashcard generation is temporarily unavailable. Please try again later.');
+        }
+        throw error;
+      }
 
       if (!response.output_parsed) {
         throw new Error('OpenAI response did not contain structured output');

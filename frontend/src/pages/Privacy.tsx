@@ -37,9 +37,10 @@ export default function Privacy() {
 
         <h2>What we collect</h2>
         <p>
-          To create an account we store your email address with Firebase Authentication. The
-          flashcards you generate, along with your review progress, are stored in your account
-          in Google Cloud Firestore so you can come back to them at any time.
+          To create an account we store your name, email address, and a securely hashed
+          password; we never store your password in plain text. The flashcards you generate,
+          along with your review progress, are stored in our database so you can come back to
+          them at any time. A session cookie keeps you signed in.
         </p>
 
         <h2>How your documents are handled</h2>
@@ -52,8 +53,7 @@ export default function Privacy() {
         <h2>Sharing</h2>
         <p>
           We do not sell your information or share personally identifying information with
-          third parties, except for the service providers above (Google Firebase and OpenAI)
-          that are needed to run LangGo, or when required by law.
+          third parties, except for OpenAI as described above, or when required by law.
         </p>
 
         <h2>Retention</h2>

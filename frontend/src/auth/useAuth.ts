@@ -1,9 +1,9 @@
-import type { User } from 'firebase/auth';
 import { createContext, useContext } from 'react';
+import type { SessionUser } from '../lib/authClient';
 
 export interface AuthState {
-  user: User | null;
-  /** True until Firebase has restored (or ruled out) a persisted session. */
+  user: SessionUser | null;
+  /** True until the current session has been fetched from the server. */
   loading: boolean;
 }
 
@@ -16,7 +16,7 @@ export function useAuth(): AuthState {
 }
 
 /** For pages behind `ProtectedRoute`, where a signed-in user is guaranteed. */
-export function useRequiredUser(): User {
+export function useRequiredUser(): SessionUser {
   const { user } = useAuth();
   if (!user) throw new Error('useRequiredUser must be used inside <ProtectedRoute>');
   return user;

@@ -1,6 +1,5 @@
-import { Router } from 'express';
+import { Router, type RequestHandler } from 'express';
 import { z } from 'zod';
-import { createFlashcard } from '../domain/flashcard.js';
 import type { FlashcardRepository } from '../services/flashcardRepository.js';
 import type { MnemonicGenerator } from '../services/mnemonicGenerator.js';
 
@@ -10,30 +9,70 @@ const generateRequestSchema = z.object({
   words: z.array(z.string().trim().min(1).max(32)).min(1).max(MAX_WORDS_PER_REQUEST),
 });
 
-export function flashcardsRouter(generator: MnemonicGenerator, repository: FlashcardRepository) {
+const reviewRequestSchema = z.object({ remembered: z.boolean() });
+
+const cardIdSchema = z.uuid();
+
+function invalid(error: z.ZodError) {
+  return {
+    error: 'Invalid request',
+    details: error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`),
+  };
+}
+
+interface FlashcardsRouterOptions {
+  generator: MnemonicGenerator;
+  repository: FlashcardRepository;
+  /** Applied to generation only, since that is the endpoint that costs money. */
+  generateLimiter: RequestHandler;
+}
+
+export function flashcardsRouter({ generator, repository, generateLimiter }: FlashcardsRouterOptions) {
   const router = Router();
 
-  router.post('/', async (req, res) => {
+  router.get('/', async (_req, res) => {
+    res.json({ flashcards: await repository.listForUser(res.locals.userId) });
+  });
+
+  router.post('/', generateLimiter, async (req, res) => {
     const parsed = generateRequestSchema.safeParse(req.body);
     if (!parsed.success) {
-      res.status(400).json({
-        error: 'Invalid request',
-        details: parsed.error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`),
-      });
+      res.status(400).json(invalid(parsed.error));
       return;
     }
 
-    const words = [...new Set(parsed.data.words)];
-    const generated = await generator.generate(words);
+    const generated = await generator.generate([...new Set(parsed.data.words)]);
+    const flashcards = await repository.insertMany(res.locals.userId, [
+      ...generated.flashcards.map((card) => ({ ...card, source: 'requested' as const })),
+      ...generated.relatedWords.map((card) => ({ ...card, source: 'related' as const })),
+    ]);
+    res.status(201).json({ flashcards });
+  });
 
-    const now = new Date();
-    const batch = {
-      flashcards: generated.flashcards.map((card) => createFlashcard(card, now)),
-      relatedWords: generated.relatedWords.map((card) => createFlashcard(card, now)),
-    };
-    const docId = await repository.saveBatch(res.locals.uid, batch);
+  router.post('/:id/review', async (req, res) => {
+    const id = cardIdSchema.safeParse(req.params.id);
+    const body = reviewRequestSchema.safeParse(req.body);
+    if (!body.success) {
+      res.status(400).json(invalid(body.error));
+      return;
+    }
 
-    res.status(201).json({ docId, ...batch });
+    const flashcard =
+      id.success && (await repository.recordReview(res.locals.userId, id.data, body.data.remembered));
+    if (!flashcard) {
+      res.status(404).json({ error: 'Flashcard not found' });
+      return;
+    }
+    res.json({ flashcard });
+  });
+
+  router.delete('/:id', async (req, res) => {
+    const id = cardIdSchema.safeParse(req.params.id);
+    if (!id.success || !(await repository.deleteForUser(res.locals.userId, id.data))) {
+      res.status(404).json({ error: 'Flashcard not found' });
+      return;
+    }
+    res.status(204).end();
   });
 
   return router;

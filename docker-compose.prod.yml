@@ -1,0 +1,76 @@
+# Production overrides for a single VPS (see docs/DEPLOYMENT.md). Use together with the base file:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Differences from development:
+#   - Caddy terminates HTTPS (automatic Let's Encrypt certificates) and is the only public service.
+#   - The app and database publish no ports. Docker-published ports bypass host firewalls
+#     such as ufw, so nothing but Caddy is reachable from the internet.
+#   - A strong database password is required, logs are rotated, and the database is backed up daily.
+#
+# Compose variables (DOMAIN, ACME_EMAIL, POSTGRES_PASSWORD, ...) come from the repo-root .env;
+# see .env.example.
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  db:
+    ports: !reset []
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    logging: *logging
+
+  app:
+    ports: !reset []
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://langgo:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/langgo
+      BETTER_AUTH_URL: https://${DOMAIN:?Set DOMAIN in .env}
+      # Caddy is the one proxy in front of the app; needed for per-client rate limiting.
+      TRUST_PROXY_HOPS: "1"
+    logging: *logging
+
+  caddy:
+    image: caddy:2-alpine
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data # certificates; keep this volume
+      - caddy_config:/config
+    restart: unless-stopped
+    logging: *logging
+
+  backup:
+    image: postgres:18-alpine
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "/backup.sh"]
+    environment:
+      PGHOST: db
+      PGUSER: langgo
+      PGDATABASE: langgo
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      BACKUP_KEEP_DAYS: ${BACKUP_KEEP_DAYS:-14}
+    volumes:
+      - ./deploy/backup.sh:/backup.sh:ro
+      - ./backups:/backups
+    restart: unless-stopped
+    logging: *logging
+
+volumes:
+  caddy_data:
+  caddy_config:

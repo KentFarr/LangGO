@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import { FaCircleCheck } from 'react-icons/fa6';
 import styled from 'styled-components';
@@ -7,6 +8,7 @@ import FlashcardLibrary from '../components/FlashcardLibrary';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ReviewSection from '../components/ReviewSection';
 import { useFlashcards } from '../hooks/useFlashcards';
+import { fetchMeta, type AppMeta } from '../lib/api';
 import { colors } from '../theme';
 
 const Panel = styled.div`
@@ -30,7 +32,12 @@ const Divider = styled.hr`
 
 export default function Dashboard() {
   const user = useRequiredUser();
-  const { cards, status, review, remove, addBatch } = useFlashcards(user.uid);
+  const { cards, status, review, remove, addCards } = useFlashcards();
+  const [meta, setMeta] = useState<AppMeta | null>(null);
+
+  useEffect(() => {
+    fetchMeta().then(setMeta, (error: unknown) => console.error('Failed to load app info', error));
+  }, []);
 
   return (
     <div className="px-3">
@@ -38,10 +45,17 @@ export default function Dashboard() {
         <h1 className="text-center mb-2">Dashboard</h1>
         <p className="text-center mb-5" style={{ color: colors.primary }}>
           <FaCircleCheck aria-hidden className="me-2" />
-          Signed in as {user.email}
+          Signed in as {user.name} ({user.email})
         </p>
 
-        <FlashcardGenerator onGenerated={addBatch} />
+        {meta?.demoMode && (
+          <Alert variant="info" className="text-center">
+            <strong>Demo mode.</strong> This server has no OpenAI key, so it serves sample
+            flashcards. Choose <em>Random words</em> to see complete cards for any level.
+          </Alert>
+        )}
+
+        <FlashcardGenerator onGenerated={addCards} demoWords={meta?.sampleWords} />
 
         <Divider />
 

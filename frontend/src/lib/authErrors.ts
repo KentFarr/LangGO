@@ -1,21 +1,23 @@
-import { FirebaseError } from 'firebase/app';
+/** Shape of the `error` returned by Better Auth client calls. */
+export interface AuthClientError {
+  code?: string;
+  message?: string;
+  status: number;
+}
 
 const MESSAGES: Record<string, string> = {
-  'auth/email-already-in-use': 'An account with this email already exists.',
-  'auth/invalid-email': 'Please enter a valid email address.',
-  'auth/invalid-credential': 'Incorrect email or password.',
-  'auth/missing-password': 'Please enter your password.',
-  'auth/too-many-requests': 'Too many attempts. Please wait a moment and try again.',
-  'auth/user-disabled': 'This account has been disabled.',
-  'auth/weak-password': 'Password must be at least 6 characters.',
-  'auth/network-request-failed': 'Network error. Check your connection and try again.',
+  INVALID_EMAIL_OR_PASSWORD: 'Incorrect email or password.',
+  INVALID_EMAIL: 'Please enter a valid email address.',
+  USER_ALREADY_EXISTS: 'An account with this email already exists.',
+  USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: 'An account with this email already exists.',
+  PASSWORD_TOO_SHORT: 'Password must be at least 8 characters.',
+  PASSWORD_TOO_LONG: 'Password is too long.',
 };
 
-/** Turns Firebase Auth errors into messages suitable for end users. */
-export function authErrorMessage(error: unknown): string {
-  if (error instanceof FirebaseError && MESSAGES[error.code]) {
-    return MESSAGES[error.code]!;
-  }
-  console.error(error);
+/** Turns Better Auth errors into messages suitable for end users. */
+export function authErrorMessage(error: AuthClientError): string {
+  if (error.status === 429) return 'Too many attempts. Please wait a moment and try again.';
+  if (error.code && MESSAGES[error.code]) return MESSAGES[error.code]!;
+  console.error('Auth error', error);
   return 'Something went wrong. Please try again.';
 }

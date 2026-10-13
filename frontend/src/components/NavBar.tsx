@@ -1,10 +1,9 @@
-import { signOut } from 'firebase/auth';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { FaBook } from 'react-icons/fa6';
 import { Link, NavLink, useNavigate } from 'react-router';
 import styled, { css } from 'styled-components';
 import { useAuth } from '../auth/useAuth';
-import { auth } from '../lib/firebase';
+import { authClient } from '../lib/authClient';
 import { colors } from '../theme';
 
 const StyledNavbar = styled(Navbar)`
@@ -48,7 +47,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    await signOut(auth);
+    await authClient.signOut();
     navigate('/');
   };
 
@@ -62,7 +61,7 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="main-nav" />
         <Navbar.Collapse id="main-nav">
           <Nav className="ms-auto">
-            {user?.emailVerified ? (
+            {user ? (
               <>
                 <NavButton to="/dashboard">Dashboard</NavButton>
                 <NavActionButton type="button" onClick={handleSignOut}>

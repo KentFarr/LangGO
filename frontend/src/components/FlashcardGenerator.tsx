@@ -9,7 +9,7 @@ import {
   topWords,
   type JlptLevel,
 } from '../lib/words';
-import type { GeneratedBatch, StoredFlashcard } from '../types/flashcard';
+import type { Flashcard } from '../types/flashcard';
 import FlashcardGrid from './FlashcardGrid';
 
 const MAX_WORDS = 20;
@@ -19,26 +19,31 @@ type WordSource = 'pdf' | 'random';
 const isPdf = (file: File) =>
   file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
 
-const uniqueByWord = (cards: StoredFlashcard[]) =>
+const uniqueByWord = (cards: Flashcard[]) =>
   cards.filter((card, index) => cards.findIndex((c) => c.word === card.word) === index);
 
 function errorMessage(error: unknown): string {
-  if (error instanceof ApiError && error.status < 500) return error.message;
+  // 4xx messages and 503 ("temporarily unavailable") are written for users; others aren't.
+  if (error instanceof ApiError && (error.status < 500 || error.status === 503)) {
+    return error.message;
+  }
   return 'Could not generate flashcards. Please try again.';
 }
 
 interface FlashcardGeneratorProps {
-  onGenerated: (batch: GeneratedBatch) => void;
+  onGenerated: (cards: Flashcard[]) => void;
+  /** In demo mode, random words come from these so every card is a complete sample. */
+  demoWords?: Record<JlptLevel, string[]> | null;
 }
 
-export default function FlashcardGenerator({ onGenerated }: FlashcardGeneratorProps) {
+export default function FlashcardGenerator({ onGenerated, demoWords }: FlashcardGeneratorProps) {
   const [source, setSource] = useState<WordSource>('pdf');
   const [file, setFile] = useState<File | null>(null);
   const [level, setLevel] = useState<JlptLevel>(5);
   const [wordCount, setWordCount] = useState(5);
   const [progress, setProgress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [generated, setGenerated] = useState<StoredFlashcard[]>([]);
+  const [generated, setGenerated] = useState<Flashcard[]>([]);
 
   const busy = progress !== null;
   const canSubmit = !busy && (source === 'random' || file !== null);
@@ -55,6 +60,7 @@ export default function FlashcardGenerator({ onGenerated }: FlashcardGeneratorPr
   };
 
   const pickWords = async (): Promise<string[]> => {
+    if (source === 'random' && demoWords) return sampleWords(demoWords[level], wordCount);
     const vocabulary = await loadWordsForLevel(level);
     if (source === 'random' || !file) return sampleWords(vocabulary, wordCount);
 
@@ -78,9 +84,9 @@ export default function FlashcardGenerator({ onGenerated }: FlashcardGeneratorPr
       }
 
       setProgress(`Generating flashcards for ${words.length} words…`);
-      const batch = await generateFlashcards(words);
-      setGenerated(uniqueByWord([...batch.flashcards, ...batch.relatedWords]));
-      onGenerated(batch);
+      const created = await generateFlashcards(words);
+      setGenerated(uniqueByWord(created));
+      onGenerated(created);
     } catch (err) {
       console.error('Flashcard generation failed', err);
       setError(errorMessage(err));

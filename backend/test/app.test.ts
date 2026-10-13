@@ -1,112 +1,164 @@
+import { randomUUID } from 'node:crypto';
 import request from 'supertest';
 import { describe, expect, it, vi } from 'vitest';
 import { createApp, type AppDependencies } from '../src/app.js';
-import type { GenerationResult } from '../src/services/mnemonicGenerator.js';
+import type { Flashcard } from '../src/domain/flashcard.js';
+import type { FlashcardRepository } from '../src/services/flashcardRepository.js';
+import { generated } from './helpers.js';
 
-const card = (word: string) => ({ word, reading: 'よみ', meaning: 'meaning', mnemonic: 'mnemonic' });
+const ORIGIN = 'http://localhost:3000';
 
-const generated: GenerationResult = {
-  flashcards: [card('勉強'), card('学校')],
-  relatedWords: [card('先生')],
-};
+/** Minimal in-memory repository so route behavior can be tested without a database. */
+function fakeRepository() {
+  const cards: Array<Flashcard & { userId: string }> = [];
+  const repository: FlashcardRepository = {
+    insertMany: vi.fn(async (userId: string, newCards: Parameters<FlashcardRepository['insertMany']>[1]) => {
+      const created = newCards.map((c) => ({
+        ...c,
+        id: randomUUID(),
+        reviewInterval: 1,
+        nextReviewDate: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+      }));
+      cards.push(...created.map((c) => ({ ...c, userId })));
+      return created;
+    }),
+    listForUser: vi.fn(async (userId: string) => cards.filter((c) => c.userId === userId)),
+    recordReview: vi.fn(
+      async (userId: string, id: string) =>
+        cards.find((c) => c.userId === userId && c.id === id) ?? null,
+    ),
+    deleteForUser: vi.fn(async (userId: string, id: string) => {
+      const index = cards.findIndex((c) => c.userId === userId && c.id === id);
+      if (index !== -1) cards.splice(index, 1);
+      return index !== -1;
+    }),
+  };
+  return repository;
+}
 
 function setup(overrides: Partial<AppDependencies> = {}) {
   const deps = {
-    verifyIdToken: vi.fn(async (token: string) => {
-      if (token !== 'valid-token') throw new Error('bad token');
-      return { uid: 'user-1' };
-    }),
+    getUserId: vi.fn(async (req: { get(name: string): string | undefined }) =>
+      req.get('x-test-user') ?? null,
+    ),
     generator: { generate: vi.fn(async (_words: string[]) => generated) },
-    repository: { saveBatch: vi.fn(async (_uid: string, _batch: unknown) => 'doc-1') },
+    repository: fakeRepository(),
+    allowedOrigins: [ORIGIN],
   };
-  return { app: createApp({ ...deps, ...overrides }), deps };
+  const app = createApp({ ...deps, ...overrides });
+  const as = (user: string) => ({
+    get: (url: string) => request(app).get(url).set('x-test-user', user),
+    post: (url: string) => request(app).post(url).set('x-test-user', user).set('Origin', ORIGIN),
+    delete: (url: string) => request(app).delete(url).set('x-test-user', user).set('Origin', ORIGIN),
+  });
+  return { app, deps, as };
 }
 
-describe('POST /api/flashcards', () => {
-  it('rejects requests without a bearer token', async () => {
-    const { app, deps } = setup();
-    const res = await request(app).post('/api/flashcards').send({ words: ['勉強'] });
-
-    expect(res.status).toBe(401);
-    expect(deps.generator.generate).not.toHaveBeenCalled();
+describe('authentication and origin checks', () => {
+  it('rejects requests without a session', async () => {
+    const { app } = setup();
+    expect((await request(app).get('/api/flashcards')).status).toBe(401);
   });
 
-  it('rejects an invalid token', async () => {
-    const { app } = setup();
+  it('rejects writes from untrusted origins before touching the session', async () => {
+    const { app, deps } = setup();
     const res = await request(app)
       .post('/api/flashcards')
-      .set('Authorization', 'Bearer nope')
+      .set('Origin', 'https://evil.example')
+      .set('x-test-user', 'user-1')
       .send({ words: ['勉強'] });
 
-    expect(res.status).toBe(401);
+    expect(res.status).toBe(403);
+    expect(deps.getUserId).not.toHaveBeenCalled();
   });
+});
 
+describe('POST /api/flashcards', () => {
   it.each([
     ['missing words', {}],
     ['empty list', { words: [] }],
     ['non-string entries', { words: [1, 2] }],
     ['too many words', { words: Array.from({ length: 21 }, (_, i) => `w${i}`) }],
   ])('returns 400 for %s', async (_label, body) => {
-    const { app, deps } = setup();
-    const res = await request(app)
-      .post('/api/flashcards')
-      .set('Authorization', 'Bearer valid-token')
-      .send(body);
+    const { as, deps } = setup();
+    const res = await as('user-1').post('/api/flashcards').send(body);
 
     expect(res.status).toBe(400);
     expect(deps.generator.generate).not.toHaveBeenCalled();
   });
 
-  it('generates, schedules, and stores a batch for the caller', async () => {
-    const { app, deps } = setup();
-    const res = await request(app)
-      .post('/api/flashcards')
-      .set('Authorization', 'Bearer valid-token')
-      .send({ words: ['勉強', '学校', '勉強'] });
+  it('generates de-duplicated words and stores requested and related cards', async () => {
+    const { as, deps } = setup();
+    const res = await as('user-1').post('/api/flashcards').send({ words: ['勉強', '学校', '勉強'] });
 
     expect(res.status).toBe(201);
     expect(deps.generator.generate).toHaveBeenCalledWith(['勉強', '学校']);
-    expect(res.body.docId).toBe('doc-1');
-    expect(res.body.flashcards).toHaveLength(2);
-    expect(res.body.relatedWords).toHaveLength(1);
-
-    for (const saved of [...res.body.flashcards, ...res.body.relatedWords]) {
-      expect(saved.id).toEqual(expect.any(String));
-      expect(saved.reviewInterval).toBe(1);
-      expect(new Date(saved.nextReviewDate).getTime()).toBeGreaterThan(Date.now());
-    }
-
-    expect(deps.repository.saveBatch).toHaveBeenCalledWith('user-1', {
-      flashcards: res.body.flashcards,
-      relatedWords: res.body.relatedWords,
-    });
+    expect(res.body.flashcards.map((c: Flashcard) => [c.word, c.source])).toEqual([
+      ['勉強', 'requested'],
+      ['学校', 'requested'],
+      ['先生', 'related'],
+    ]);
   });
 
   it('returns a generic 500 when generation fails', async () => {
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const { app } = setup({
+    const { as } = setup({
       generator: { generate: vi.fn(async () => Promise.reject(new Error('secret upstream detail'))) },
     });
-    const res = await request(app)
-      .post('/api/flashcards')
-      .set('Authorization', 'Bearer valid-token')
-      .send({ words: ['勉強'] });
+    const res = await as('user-1').post('/api/flashcards').send({ words: ['勉強'] });
 
     expect(res.status).toBe(500);
     expect(res.body).toEqual({ error: 'Internal server error' });
     consoleError.mockRestore();
   });
 
-  it('rate limits per user', async () => {
-    const { app } = setup({ generateRateLimit: 1 });
-    const send = () =>
-      request(app)
-        .post('/api/flashcards')
-        .set('Authorization', 'Bearer valid-token')
-        .send({ words: ['勉強'] });
+  it('does not leak upstream errors that carry an HTTP status', async () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const upstream = Object.assign(new Error('401 Incorrect API key provided: sk-secret'), {
+      status: 401,
+    });
+    const { as } = setup({ generator: { generate: vi.fn(async () => Promise.reject(upstream)) } });
+    const res = await as('user-1').post('/api/flashcards').send({ words: ['勉強'] });
 
-    expect((await send()).status).toBe(201);
-    expect((await send()).status).toBe(429);
+    expect(res.status).toBe(500);
+    expect(res.body).toEqual({ error: 'Internal server error' });
+    consoleError.mockRestore();
+  });
+
+  it('rate limits generation per user', async () => {
+    const { as } = setup({ generateRateLimit: 1 });
+    const send = (user: string) => as(user).post('/api/flashcards').send({ words: ['勉強'] });
+
+    expect((await send('user-1')).status).toBe(201);
+    expect((await send('user-1')).status).toBe(429);
+    expect((await send('user-2')).status).toBe(201);
+  });
+});
+
+describe('review and delete', () => {
+  it('validates the review body', async () => {
+    const { as } = setup();
+    const res = await as('user-1').post(`/api/flashcards/${randomUUID()}/review`).send({});
+    expect(res.status).toBe(400);
+  });
+
+  it('returns 404 for malformed ids without querying', async () => {
+    const { as, deps } = setup();
+
+    expect((await as('user-1').post('/api/flashcards/nope/review').send({ remembered: true })).status).toBe(404);
+    expect((await as('user-1').delete('/api/flashcards/nope')).status).toBe(404);
+    expect(deps.repository.recordReview).not.toHaveBeenCalled();
+    expect(deps.repository.deleteForUser).not.toHaveBeenCalled();
+  });
+
+  it('deletes only the caller’s own cards', async () => {
+    const { as } = setup();
+    const created = await as('user-1').post('/api/flashcards').send({ words: ['勉強'] });
+    const id = created.body.flashcards[0].id;
+
+    expect((await as('user-2').delete(`/api/flashcards/${id}`)).status).toBe(404);
+    expect((await as('user-1').delete(`/api/flashcards/${id}`)).status).toBe(204);
   });
 });
 
@@ -124,9 +176,9 @@ describe('other routes', () => {
   });
 
   it('returns 400 for malformed JSON', async () => {
-    const res = await request(setup().app)
+    const { as } = setup();
+    const res = await as('user-1')
       .post('/api/flashcards')
-      .set('Authorization', 'Bearer valid-token')
       .set('Content-Type', 'application/json')
       .send('{not json');
     expect(res.status).toBe(400);

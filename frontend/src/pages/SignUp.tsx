@@ -1,20 +1,25 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth';
 import { useState, type FormEvent } from 'react';
 import { Alert, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
+import { useAuth } from '../auth/useAuth';
 import AuthCard from '../components/AuthCard';
+import { authClient } from '../lib/authClient';
 import { authErrorMessage } from '../lib/authErrors';
-import { auth } from '../lib/firebase';
 
-const MIN_PASSWORD_LENGTH = 6;
+const MIN_PASSWORD_LENGTH = 8;
 
 export default function SignUp() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [registeredEmail, setRegisteredEmail] = useState<string | null>(null);
+
+  if (user && !submitting) return <Navigate to="/dashboard" replace />;
 
   const handleSignUp = async (event: FormEvent) => {
     event.preventDefault();
@@ -26,36 +31,30 @@ export default function SignUp() {
     }
 
     setSubmitting(true);
-    try {
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      await sendEmailVerification(user);
-      // Creating an account signs the user in; keep them out until the email is verified.
-      await signOut(auth);
-      setRegisteredEmail(email);
-    } catch (err) {
-      setError(authErrorMessage(err));
-    } finally {
-      setSubmitting(false);
+    // Signing up also signs the user in.
+    const { error: signUpError } = await authClient.signUp.email({ name, email, password });
+    setSubmitting(false);
+    if (signUpError) {
+      setError(authErrorMessage(signUpError));
+      return;
     }
+    navigate('/dashboard', { replace: true });
   };
-
-  if (registeredEmail) {
-    return (
-      <AuthCard title="Check your email">
-        <Alert variant="success">
-          Your account was created. We sent a verification link to{' '}
-          <strong>{registeredEmail}</strong>. Verify your email, then log in.
-        </Alert>
-        <Link to="/login" className="btn btn-primary w-100">
-          Go to log in
-        </Link>
-      </AuthCard>
-    );
-  }
 
   return (
     <AuthCard title="Sign up">
       <Form onSubmit={handleSignUp}>
+        <Form.Group className="mb-3" controlId="signup-name">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="signup-email">
           <Form.Label>Email</Form.Label>
           <Form.Control

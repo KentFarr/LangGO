@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { colors } from '../theme';
-import type { StoredFlashcard } from '../types/flashcard';
+import type { Flashcard } from '../types/flashcard';
 import FlipCard from './FlipCard';
 
 const Word = styled.p`
@@ -34,12 +34,12 @@ const Mnemonic = styled.p`
   font-size: 1rem;
 `;
 
-interface FlashcardGridProps<T extends StoredFlashcard> {
+interface FlashcardGridProps<T extends Flashcard> {
   cards: readonly T[];
   renderActions?: (card: T, flipped: boolean) => ReactNode;
 }
 
-export default function FlashcardGrid<T extends StoredFlashcard>({
+export default function FlashcardGrid<T extends Flashcard>({
   cards,
   renderActions,
 }: FlashcardGridProps<T>) {

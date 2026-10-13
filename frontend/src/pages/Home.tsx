@@ -3,10 +3,10 @@ import { Col, Container, Row } from 'react-bootstrap';
 import {
   FaBolt,
   FaBootstrap,
+  FaDatabase,
   FaBrain,
   FaChartLine,
   FaFileArrowUp,
-  FaGoogle,
   FaNodeJs,
   FaReact,
 } from 'react-icons/fa6';
@@ -45,12 +45,12 @@ const TECHNOLOGIES: Feature[] = [
   {
     icon: FaNodeJs,
     title: 'Node.js + Express',
-    description: 'A TypeScript API that verifies your session and talks to OpenAI.',
+    description: 'A TypeScript API with secure cookie sessions powered by Better Auth.',
   },
   {
-    icon: FaGoogle,
-    title: 'Firebase',
-    description: 'Secure sign-in and per-user flashcard storage in Firestore.',
+    icon: FaDatabase,
+    title: 'PostgreSQL',
+    description: 'Your flashcards and review history, stored with Drizzle ORM.',
   },
   {
     icon: FaBootstrap,
@@ -102,7 +102,7 @@ function FeatureGrid({ features, columns }: { features: Feature[]; columns: numb
 
 export default function Home() {
   const { user } = useAuth();
-  const signedIn = Boolean(user?.emailVerified);
+  const signedIn = Boolean(user);
   const cta = signedIn
     ? { to: '/dashboard', label: 'Go to your dashboard' }
     : { to: '/signup', label: 'Get started' };

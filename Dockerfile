@@ -8,14 +8,6 @@ COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
 
 COPY frontend/ ./
-
-# Firebase web config is inlined into the bundle at build time.
-ARG VITE_FIREBASE_API_KEY
-ARG VITE_FIREBASE_AUTH_DOMAIN
-ARG VITE_FIREBASE_PROJECT_ID
-ARG VITE_FIREBASE_STORAGE_BUCKET
-ARG VITE_FIREBASE_MESSAGING_SENDER_ID
-ARG VITE_FIREBASE_APP_ID
 RUN npm run build
 
 # ---------- Build the API ----------
@@ -36,6 +28,8 @@ WORKDIR /app
 COPY --from=backend /app/backend/package.json ./
 COPY --from=backend /app/backend/node_modules ./node_modules
 COPY --from=backend /app/backend/dist ./dist
+# SQL migrations, applied automatically on startup.
+COPY --from=backend /app/backend/drizzle ./drizzle
 COPY --from=frontend /app/frontend/dist ./public
 
 USER node

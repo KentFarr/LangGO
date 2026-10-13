@@ -1,33 +1,44 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, createFlashcard } from '../src/domain/flashcard.js';
+import { addDays, initialSchedule, nextInterval, scheduleReview } from '../src/domain/flashcard.js';
 import { buildPrompt, RELATED_WORD_COUNT } from '../src/services/mnemonicGenerator.js';
 
-describe('createFlashcard', () => {
-  it('schedules the first review one day out', () => {
-    const now = new Date('2026-01-31T12:00:00.000Z');
-    const card = createFlashcard(
-      { word: '勉強', reading: 'べんきょう', meaning: 'study', mnemonic: 'Ben kyo studies' },
-      now,
-      'card-1',
-    );
+describe('nextInterval', () => {
+  it.each([
+    [1, true, 2],
+    [4, true, 8],
+    [8, false, 4],
+    [1, false, 1],
+    [3, false, 1],
+  ])('interval %i, remembered=%s -> %i', (current, remembered, expected) => {
+    expect(nextInterval(current, remembered)).toBe(expected);
+  });
 
-    expect(card).toEqual({
-      word: '勉強',
-      reading: 'べんきょう',
-      meaning: 'study',
-      mnemonic: 'Ben kyo studies',
-      id: 'card-1',
-      reviewInterval: 1,
-      nextReviewDate: '2026-02-01T12:00:00.000Z',
-    });
+  it('treats invalid intervals as the minimum', () => {
+    expect(nextInterval(Number.NaN, true)).toBe(2);
+    expect(nextInterval(0, false)).toBe(1);
   });
 });
 
-describe('addDays', () => {
-  it('does not mutate its input', () => {
-    const date = new Date('2026-01-01T00:00:00.000Z');
-    addDays(date, 3);
-    expect(date.toISOString()).toBe('2026-01-01T00:00:00.000Z');
+describe('scheduling', () => {
+  const now = new Date('2026-01-31T12:00:00.000Z');
+
+  it('schedules a new card one day out', () => {
+    expect(initialSchedule(now)).toEqual({
+      reviewInterval: 1,
+      nextReviewAt: new Date('2026-02-01T12:00:00.000Z'),
+    });
+  });
+
+  it('moves the next review forward by the new interval', () => {
+    expect(scheduleReview(2, true, now)).toEqual({
+      reviewInterval: 4,
+      nextReviewAt: new Date('2026-02-04T12:00:00.000Z'),
+    });
+  });
+
+  it('addDays does not mutate its input', () => {
+    addDays(now, 3);
+    expect(now.toISOString()).toBe('2026-01-31T12:00:00.000Z');
   });
 });
 
