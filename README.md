@@ -1,19 +1,25 @@
 # LangGo
 
 [![CI](https://github.com/KentFarr/WebApp/actions/workflows/ci.yml/badge.svg)](https://github.com/KentFarr/WebApp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-LangGo turns Japanese reading material into vocabulary flashcards. Upload a Japanese PDF, choose a
-JLPT level (N5–N1), and LangGo finds the most frequent words from that level, generates a
-flashcard for each one (reading, meaning, and a memorable mnemonic) with OpenAI, suggests related
-words, and schedules everything for review with spaced repetition.
+**Live demo: [langgo.co](https://langgo.co)**
+
+LangGo turns Japanese you actually read into vocabulary flashcards. Drop in a PDF, e-book, Word
+document or subtitle file, paste a link to an article, or type your own word list; choose a JLPT
+level (N5–N1); and LangGo finds the words worth learning, writes a flashcard for each one
+(reading, meaning, and a memorable mnemonic) with OpenAI, suggests related words, and schedules
+everything for review with spaced repetition. Decks export straight to Anki.
 
 ![LangGo landing page](docs/screenshots/home.jpg)
 
 | Dashboard | Review session (dark mode) |
 | --- | --- |
 | ![Dashboard with reviews due, stats and cards by JLPT level](docs/screenshots/dashboard.jpg) | ![Focused review session showing a flipped card with keyboard shortcuts](docs/screenshots/review-dark.jpg) |
-| **Create** | **Mobile** |
-| ![Create page with PDF drop zone and JLPT level chips](docs/screenshots/create.jpg) | ![Landing page on a phone](docs/screenshots/mobile.jpg) |
+| **Create from a word list** | **Library with Anki export** |
+| ![Create page: a pasted word list turned into chips tagged with JLPT levels](docs/screenshots/create.jpg) | ![Library filtered to N5 with Anki and CSV export buttons](docs/screenshots/library.jpg) |
+
+<p align="center"><img src="docs/screenshots/mobile.jpg" width="260" alt="LangGo's landing page on a phone"></p>
 
 ## Features
 
@@ -166,6 +172,12 @@ The backend integration tests run real Better Auth sessions and the real SQL mig
 database server or Docker. CI runs lint, type checking, tests, and a production build for both
 packages on every push and pull request.
 
+## Roadmap
+
+Planned next: grammar cards, an AI chat tutor, optional YouTube link support and, once Bunpro
+offers an official API, a Bunpro integration. Details and the pre-launch checklist are in
+[`docs/ROADMAP.md`](docs/ROADMAP.md).
+
 ## API
 
 Authentication endpoints are provided by Better Auth under `/api/auth` (for example
@@ -198,3 +210,12 @@ A flashcard looks like this:
   "createdAt": "2026-10-13T21:00:00.000Z"
 }
 ```
+
+## License
+
+The source code is released under the [MIT License](LICENSE).
+
+The photographs in `frontend/src/assets/photos/` and the screenshots in `docs/screenshots/` are
+© Kent Farabaugh, all rights reserved, and are not covered by the MIT License. The JLPT word lists
+in `frontend/src/data/` are believed to derive from Jonathan Waller's
+[JLPT resources](https://www.tanos.co.uk/jlpt/) (CC BY); see [LICENSE](LICENSE) for details.
