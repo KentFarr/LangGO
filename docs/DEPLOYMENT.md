@@ -90,7 +90,7 @@ cat >> ~/.ssh/config <<'EOF'
 Host github.com
   IdentityFile ~/.ssh/langgo_deploy
 EOF
-git clone git@github.com:KentFarr/WebApp.git langgo
+git clone https://github.com/KentFarr/LangGO.git langgo
 cd langgo
 ```
 
